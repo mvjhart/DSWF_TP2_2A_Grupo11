@@ -2,37 +2,35 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-    ci:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Obtener codigo del repositorio
-              uses: actions/checkout@v4
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener codigo del repositorio
+        uses: actions/checkout@v7
 
-            - name: Configurar Node.js
-              uses: actions/setup-node@v4
-              with:
-                node-version: '22'
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
 
-            - name: Instalar dependencias
-              run: npm ci
-            
-            - name: Ejecutar ESLint
-              run: npm run lint
-            
-            - name: Compilar proyecto
-              run: npm run build
+      - name: Instalar dependencias
+        run: npm ci
 
-            - name: Verificar formato con Prettier
-              run: npm run format:check
-              continue-on-error: true
+      - name: Ejecutar ESLint
+        run: npm run lint
 
-            - name: Auditar dependencias
-              run: npm audit
-              continue-on-error: true
+      - name: Compilar proyecto
+        run: npm run build
 
+      - name: Verificar formato con Prettier
+        run: npm run format:check
+        continue-on-error: true
 
+      - name: Auditar dependencias
+        run: npm audit
+        continue-on-error: true
