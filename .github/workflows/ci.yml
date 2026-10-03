@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Obtener codigo del repositorio
+              uses: actions/checkout@v4
+
+            - name: Configurar Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '22'
+
+            - name: Instalar dependencias
+              run: npm ci
+            
+            - name: Ejecutar ESLint
+              run: npm run lint
+            
+            - name: Compilar proyecto
+              run: npm run build
+
+            - name: Verificar formato con Prettier
+              run: npm run format:check
+              continue-on-error: true
+
+            - name: Auditar dependencias
+              run: npm audit
+              continue-on-error: true
+
+
