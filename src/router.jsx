@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App.jsx";
-import Home from "./Home.jsx";
-import Test from "./Test.jsx";
+import Inicio from "./pages/Inicio/Inicio.jsx";
+import Bitacora from "./pages/Bitacora/Bitacora.jsx";
 
 const router = createBrowserRouter([
   {
@@ -10,11 +10,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        Component: Inicio,
       },
       {
-        path: "test",
-        Component: Test,
+        path: "bitacora",
+        Component: Bitacora,
       },
     ],
   },
