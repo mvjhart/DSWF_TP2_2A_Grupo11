@@ -1,5 +1,4 @@
 import { Outlet, Link } from "react-router";
-import "./App.css";
 
 function App() {
   return (
@@ -7,8 +6,8 @@ function App() {
       <header>
         <h1>Vite + React</h1>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/test">Test</Link>
+          <Link to="/">Inicio</Link>
+          <Link to="/bitacora">Bitacora</Link>
         </nav>
       </header>
       <Outlet />
