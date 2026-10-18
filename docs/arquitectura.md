@@ -22,6 +22,8 @@ src/
 │   │   ├── Home.jsx
 │   │   └── Home.css
 │   └── ...
+├── hooks/
+│   └── useMediaQuery.js
 ├── App.jsx
 ├── router.jsx
 ├── main.jsx
@@ -147,6 +149,19 @@ App
 ```
 
 Cada página es responsable de su propio elemento `<main>`, mientras que `App` mantiene la estructura compartida entre rutas.
+
+## Hooks
+
+Contiene hooks personalizados: funciones que reúnen lógica de React reutilizable y no dibujan interfaz.
+
+Cada hook es un archivo suelto (`useNombre.js`), sin carpeta.
+
+La carpeta se incorpora junto con el primer hook que pase alguna de estas pruebas:
+
+1. Lo usan 2 o más componentes con la misma lógica.
+2. Es lógica con efectos y limpieza delicados (suscripciones, cancelación)
+   que ensuciaría el componente.
+
 
 ## Criterio para ampliar la arquitectura
 
