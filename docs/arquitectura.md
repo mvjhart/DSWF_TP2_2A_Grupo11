@@ -34,6 +34,8 @@ src/
 
 Contiene componentes reutilizables de la interfaz.
 
+**Criterios de creación:** todo bloque visual (lo que se dibuja) que aparezca 2 o más veces con la misma estructura se convierte en componente con `props`.
+
 Cada componente se organiza en su propia carpeta y mantiene sus archivos relacionados juntos.
 
 Ejemplo:
