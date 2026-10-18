@@ -4,9 +4,9 @@ Estas son las pautas generales para contribuir al proyecto y mantener un código
 
 ## Pull Requests
 
-- Todo cambio debe integrarse mediante un Pull Request hacia `main`.
+- Todo cambio debe integrarse mediante un Pull Request.
 - Asociar el PR con el Issue correspondiente cuando aplique.
-- Mantener el PR enfocado en el objetivo de la rama.
+- Mantener el PR enfocado en el Issue que cierre, cuando aplique.
 - Describir brevemente los cambios realizados y cualquier aspecto relevante para la revisión.
 
 ## Verificaciones
