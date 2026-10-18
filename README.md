@@ -26,7 +26,6 @@ npm run lint
 ## Documentación
 
 - [Consigna](./docs/consigna.md)
-- [Rúbrica](./docs/rubrica.md)
 - [Arquitectura](./docs/arquitectura.md)
 - [Flujo de trabajo con Git](./docs/guia-contributing.md)
 - [Pautas para contribuir al proyecto](./CONTRIBUTING.md)
