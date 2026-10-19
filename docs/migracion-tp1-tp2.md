@@ -88,3 +88,4 @@ La documentación histórica podrá consultarse durante la migración, sin neces
 - Adaptar las funcionalidades y los recursos relevantes a la nueva arquitectura.
 - Documentar el motivo de cada descarte.
 - Registrar los cambios relevantes respecto de los destinos previstos.
+
