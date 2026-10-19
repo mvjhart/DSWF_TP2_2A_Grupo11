@@ -159,15 +159,16 @@ Cada página es responsable de su propio elemento `<main>`, mientras que `App` m
 
 ## Hooks
 
-Contiene hooks personalizados: funciones que reúnen lógica de React reutilizable y no dibujan interfaz.
+Contiene hooks personalizados: funciones que encapsulan lógica basada en React, como estado y efectos, para reutilizarla sin duplicar su implementación ni mezclarla innecesariamente con la interfaz.
 
-Cada hook es un archivo suelto (`useNombre.js`), sin carpeta.
+Cada hook se organiza en un archivo propio (`useNombre.js`), sin carpetas individuales por hook.
 
-La carpeta se incorpora junto con el primer hook que pase alguna de estas pruebas:
+La carpeta `hooks/` se incorpora cuando exista al menos un hook que justifique su creación según alguno de estos criterios:
 
-1. Lo usan 2 o más componentes con la misma lógica.
-2. Es lógica con efectos y limpieza delicados (suscripciones, cancelación)
-   que ensuciaría el componente.
+1. **Lógica compartida:** dos o más componentes necesitan la misma lógica y conviene centralizarla.
+2. **Efectos y limpieza:** la lógica requiere gestionar efectos, suscripciones o cancelaciones, y extraerla permite simplificar el componente y evitar errores de ciclo de vida.
+
+La extracción debe responder a una necesidad real y mantener una responsabilidad clara, evitando abstracciones innecesarias.
 
 
 ## Criterio para ampliar la arquitectura
