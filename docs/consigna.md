@@ -1,6 +1,6 @@
 # TP2 Grupal: Proyecto React en equipo
 
-**Materia:** Desarrollo de Sistemas Web · Front End · 2026 · 2.º cuatrimestre 
+**Materia:** Desarrollo de Sistemas Web · Front End · 2026 · 2.º cuatrimestre
 **↪ [Enlace a consigna](https://ifts29-portada.vercel.app/trayecto/tp2/)**
 
 ## Objetivo

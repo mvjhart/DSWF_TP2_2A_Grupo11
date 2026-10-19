@@ -21,28 +21,8 @@ Una vez integrado un cambio, la rama se elimina.
 
 ### Convención de nombres
 
-Utilizamos una convención basada en los mismos tipos definidos para los commits:
-
 ```text
 tipo/nombre-del-cambio
-```
-
-Tipos principales:
-
-- `feat/` — nueva funcionalidad.
-- `fix/` — corrección de un error.
-- `docs/` — documentación.
-- `chore/` — tareas de mantenimiento, configuración u organización.
-- `refactor/` — reestructuración del código sin modificar su comportamiento.
-
-Ejemplos:
-
-```text
-feat/configurar-react-router
-chore/estructura-base
-docs/agregar-convenciones
-fix/error-navegacion-mobile
-refactor/organizar-componentes
 ```
 
 Los nombres deben ser breves, descriptivos y escritos en minúsculas utilizando guiones.

@@ -22,6 +22,8 @@ src/
 │   │   ├── Home.jsx
 │   │   └── Home.css
 │   └── ...
+├── hooks/
+│   └── useMediaQuery.js
 ├── App.jsx
 ├── router.jsx
 ├── main.jsx
@@ -32,7 +34,16 @@ src/
 
 ### `components/`
 
-Contiene componentes reutilizables de la interfaz.
+Contiene los componentes reutilizables de la interfaz.
+
+**Criterios de creación y reutilización:**
+
+- **Necesidad real:** crear componentes cuando permitan resolver una necesidad concreta del proyecto, evitando abstraer elementos que no lo justifiquen.
+- **Reutilización:** como criterio inicial, evaluar la extracción de bloques visuales que aparezcan dos o más veces con una estructura o un comportamiento común. La cantidad de apariciones orienta la decisión, pero no es el único criterio.
+- **Responsabilidad clara:** cada componente debe tener un propósito definido y limitarse a las responsabilidades que le corresponden.
+- **Flexibilidad:** los componentes deben admitir las variaciones necesarias mediante `props`, sin acumular condiciones o configuraciones innecesarias para cubrir casos que no comparten una necesidad real.
+- **Evolución compartida:** los componentes pueden modificarse a medida que surjan nuevas necesidades. Antes de cambiar su estructura, comportamiento o `props`, se deben considerar sus usos existentes y evitar romper el contrato del que dependen otras partes de la aplicación. Si un cambio incompatible es necesario, deberán revisarse y adaptarse también esos usos.
+- **Colaboración:** antes de duplicar un componente o modificar uno existente para un nuevo caso de uso, conviene revisar si puede ampliarse de forma coherente con su responsabilidad y con las necesidades de quienes ya lo utilizan.
 
 Cada componente se organiza en su propia carpeta y mantiene sus archivos relacionados juntos.
 
@@ -145,6 +156,19 @@ App
 ```
 
 Cada página es responsable de su propio elemento `<main>`, mientras que `App` mantiene la estructura compartida entre rutas.
+
+## Hooks
+
+Contiene hooks personalizados: funciones que encapsulan lógica basada en React, como estado y efectos, para reutilizarla sin duplicar su implementación ni mezclarla innecesariamente con la interfaz.
+
+Cada hook se organiza en un archivo propio (`useNombre.js`), sin carpetas individuales por hook.
+
+La carpeta `hooks/` se incorpora cuando exista al menos un hook que justifique su creación según alguno de estos criterios:
+
+1. **Lógica compartida:** dos o más componentes necesitan la misma lógica y conviene centralizarla.
+2. **Efectos y limpieza:** la lógica requiere gestionar efectos, suscripciones o cancelaciones, y extraerla permite simplificar el componente y evitar errores de ciclo de vida.
+
+La extracción debe responder a una necesidad real y mantener una responsabilidad clara, evitando abstracciones innecesarias.
 
 ## Criterio para ampliar la arquitectura
 
