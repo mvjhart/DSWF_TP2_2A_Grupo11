@@ -18,9 +18,9 @@ src/
 │   │   └── Header.css
 │   └── ...
 ├── pages/
-│   ├── Home/
-│   │   ├── Home.jsx
-│   │   └── Home.css
+│   ├── Inicio/
+│   │   ├── Inicio.jsx
+│   │   └── Inicio.css
 │   └── ...
 ├── hooks/
 │   └── useMediaQuery.js
