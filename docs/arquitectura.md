@@ -170,7 +170,6 @@ La carpeta `hooks/` se incorpora cuando exista al menos un hook que justifique s
 
 La extracción debe responder a una necesidad real y mantener una responsabilidad clara, evitando abstracciones innecesarias.
 
-
 ## Criterio para ampliar la arquitectura
 
 No se crearán carpetas o capas únicamente como preparación para posibles necesidades futuras.

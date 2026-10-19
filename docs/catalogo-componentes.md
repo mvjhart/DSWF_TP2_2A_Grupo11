@@ -1,6 +1,6 @@
 # B.4 · Catálogo de componentes compartidos
 
-Este catálogo es un *guia* distingue entre componentes que responden a necesidades ya identificadas, familias de elementos que podrían compartir una implementación y abstracciones que requieren validación durante el desarrollo.
+Este catálogo es un _guia_ distingue entre componentes que responden a necesidades ya identificadas, familias de elementos que podrían compartir una implementación y abstracciones que requieren validación durante el desarrollo.
 
 Los nombres y las `props` son provisionales. Su inclusión no implica que todos los candidatos deban implementarse como componentes independientes ni que deban compartir una única implementación.
 
@@ -73,7 +73,6 @@ Puede ir agregandose información comforme avanza el desarrollo.
 - **Variantes:** sección con o sin descripción; contenido en grilla, lista o disposición libre.
 - **Pendientes:** comprobar si se repite suficiente estructura como para necesitar un componente React.
 
-
 ## 3. Integrantes y perfiles
 
 ### 3.1. `MemberCard`
@@ -122,7 +121,6 @@ Puede ir agregandose información comforme avanza el desarrollo.
 - **Posibles `props`:** Podrían considerarse `variant`, `children` u opciones de presentación si la comparación de los casos reales las justifica.
 - **Variantes:** por ahora, se reconocen como posibles diferencias las tarjetas de integrantes y los elementos favoritos, pero no se da por sentado que deban derivar de una misma tarjeta base.
 - **Pendientes:** comparar las estructuras y los estilos de `MemberCard` y `FavoriteItemCard`. Si solo comparten propiedades CSS, reutilizar estilos puede ser suficiente; si comparten estructura y responsabilidad visual, evaluar un componente. No implementar una tarjeta universal solo porque varios elementos tengan forma de caja.
-
 
 ## 5. Datos locales y consulta de información adicional
 
