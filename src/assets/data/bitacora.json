@@ -150,5 +150,13 @@
     "titulo": "Componente AccordionItem reutilizable y página de bitácora en React",
     "texto": "Se extrajo el acordeón a un componente AccordionItem genérico en components/, con estado de React y atributos ARIA (aria-expanded, aria-controls, aria-hidden) para accesibilidad. La página Bitacora.jsx se encarga del formateo de fechas en ISO a texto local, del mapeo de categorías a colores y del armado del header de cada entrada. No se manipula el DOM directamente.",
     "tp": "TP2"
+  },
+  {
+    "id": 20,
+    "fecha": "2026-10-20",
+    "categoria": "Estructura",
+    "titulo": "Gestión global del tema mediante React Context",
+    "texto": "Se implementó ThemeContext junto con ThemeProvider y el hook personalizado useTheme para centralizar la gestión del tema claro y oscuro. Se evitó prop drilling y la duplicación del estado entre componentes. El proveedor administra el estado, la persistencia en localStorage y las transiciones visuales, mientras que las variables CSS permiten mantener estilos consistentes en toda la aplicación.",
+    "tp": "TP2"
   }
 ]
