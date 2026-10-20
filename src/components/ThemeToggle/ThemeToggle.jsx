@@ -1,6 +1,6 @@
 // src/components/ThemeToggle/ThemeToggle.jsx
 
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../hooks/useTheme.js";
 import "./ThemeToggle.css";
 
 function ThemeToggle() {

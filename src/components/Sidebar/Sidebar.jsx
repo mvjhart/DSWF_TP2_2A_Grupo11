@@ -15,8 +15,6 @@ function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil }) {
   const [transicionHabilitada, setTransicionHabilitada] = useState(false);
 
   useEffect(() => {
-    setTransicionHabilitada(false);
-
     if (!esMovil) return;
 
     const frame = requestAnimationFrame(() => {
@@ -30,7 +28,7 @@ function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil }) {
     "sidebar",
     esMovil && "sidebar--movil",
     isOpen && "sidebar--abierta",
-    transicionHabilitada && "sidebar--transicion",
+    esMovil && transicionHabilitada && "sidebar--transicion",
   ]
     .filter(Boolean)
     .join(" ");

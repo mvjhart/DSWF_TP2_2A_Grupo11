@@ -154,7 +154,7 @@
 }
 
 .bitacora__tag--rosa {
-  background:  var(--color-tag-rosa-fondo);
+  background: var(--color-tag-rosa-fondo);
   color: var(--color-tag-rosa-texto);
 }
 

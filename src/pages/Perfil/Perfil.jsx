@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router";
 
-
 // MOMENTANEO- BORRAR LUEGO Y CONECTAR CON JSON
 const integrantes = [
   {
@@ -18,23 +17,21 @@ const integrantes = [
   {
     slug: "federico",
     nombre: "Federico",
-  }
+  },
 ];
 
 function Perfil() {
   const { slug } = useParams();
-  
-  const integrante = integrantes.find(
-    (integrante) => integrante.slug === slug,
-  );
+
+  const integrante = integrantes.find((integrante) => integrante.slug === slug);
 
   if (!integrante) {
     return (
       <main>
         <h1>Integrante no encontrado</h1>
         <p>
-          No encontramos un perfil para "{slug}".
-          Verificá la dirección o volvé a la lista de integrantes.
+          No encontramos un perfil para "{slug}". Verificá la dirección o volvé
+          a la lista de integrantes.
         </p>
 
         <Link to="/">Volver al inicio</Link>

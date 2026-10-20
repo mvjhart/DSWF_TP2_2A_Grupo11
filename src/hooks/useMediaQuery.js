@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
+// src/hooks/useMediaQuery.js
+
+import { useSyncExternalStore } from "react";
 
 function useMediaQuery(query) {
-  const [matches, setMatches] = useState(() => {
-    return window.matchMedia(query).matches;
-  });
-
-  useEffect(() => {
+  function suscribirse(callback) {
     const mediaQuery = window.matchMedia(query);
 
-    function actualizarEstado(event) {
-      setMatches(event.matches);
-    }
-
-    // Sincroniza el estado con la consulta actual.
-    setMatches(mediaQuery.matches);
-
-    // Escucha cambios en la coincidencia de la media query.
-    mediaQuery.addEventListener("change", actualizarEstado);
+    mediaQuery.addEventListener("change", callback);
 
     return () => {
-      mediaQuery.removeEventListener("change", actualizarEstado);
+      mediaQuery.removeEventListener("change", callback);
     };
-  }, [query]);
+  }
 
-  return matches;
+  function obtenerSnapshot() {
+    return window.matchMedia(query).matches;
+  }
+
+  return useSyncExternalStore(suscribirse, obtenerSnapshot, () => false);
 }
 
 export default useMediaQuery;

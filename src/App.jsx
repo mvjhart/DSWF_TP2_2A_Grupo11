@@ -14,6 +14,7 @@ function App() {
 
   const esEscritorio = useMediaQuery("(min-width: 769px)");
   const esMovil = !esEscritorio;
+  const menuVisible = esMovil && menuAbierto;
 
   const cerrarMenu = useCallback(() => {
     // Devolvemos el foco después de que el header deje de estar inerte.
@@ -25,26 +26,18 @@ function App() {
     setMenuAbierto((abierto) => !abierto);
   }
 
-  // En escritorio no necesitamos el menú desplegable.
-  useEffect(() => {
-    if (esEscritorio) {
-      setMenuAbierto(false);
-    }
-  }, [esEscritorio]);
-
   // Restaura el foco cuando el menú ya se cerró y el botón vuelve
   // a estar disponible para recibirlo.
   useEffect(() => {
-    if (menuAbierto || !devolverFocoRef.current) return;
+    if (menuVisible || !devolverFocoRef.current) return;
 
     botonMenuRef.current?.focus();
     devolverFocoRef.current = false;
-  }, [menuAbierto]);
- 
+  }, [menuVisible]);
 
   // Bloquea el scroll de la página mientras el menú está abierto.
   useEffect(() => {
-    if (!menuAbierto || !esMovil) return;
+    if (menuVisible) return;
 
     const overflowAnterior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -52,28 +45,25 @@ function App() {
     return () => {
       document.body.style.overflow = overflowAnterior;
     };
-  }, [menuAbierto, esMovil]);
+  }, [menuVisible]);
 
   return (
     <div className="app-layout">
       <Header
-        menuAbierto={menuAbierto}
+        menuAbierto={menuVisible}
         onToggleMenu={alternarMenu}
         botonMenuRef={botonMenuRef}
-        inert={esMovil && menuAbierto}
+        inert={menuVisible}
       />
 
       <Sidebar
-        isOpen={menuAbierto}
+        isOpen={menuVisible}
         onNavigate={cerrarMenu}
         sidebarRef={sidebarRef}
         esMovil={esMovil}
       />
 
-      <div 
-        className="app-content"
-        inert={esMovil && menuAbierto}
-      >
+      <div className="app-content" inert={menuVisible}>
         <Outlet />
         <footer>
           <p>Footer</p>

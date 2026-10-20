@@ -3,7 +3,7 @@
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import "./Header.css";
 
-function Header({ menuAbierto, onToggleMenu, botonMenuRef, inert}) {
+function Header({ menuAbierto, onToggleMenu, botonMenuRef, inert }) {
   return (
     <header className="mobile-header" inert={inert}>
       <button
