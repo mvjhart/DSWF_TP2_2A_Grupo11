@@ -1,0 +1,24 @@
+
+/* src/App.css */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.app-content > main {
+  flex: 1;
+  /* padding: 2rem; */
+}
+
+.app-content footer {
+  padding: 1rem 2rem;
+  border-top: 1px solid #d1d5db;
+}

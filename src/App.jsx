@@ -1,20 +1,18 @@
-import { Outlet, Link } from "react-router";
+import { Outlet} from "react-router";
+import Sidebar from "./components/Sidebar/Sidebar";
+import "./App.css";
 
 function App() {
   return (
-    <>
-      <header>
-        <h1>Vite + React</h1>
-        <nav>
-          <Link to="/">Inicio</Link>
-          <Link to="/bitacora">Bitacora</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <footer>
-        <p>Footer</p>
-      </footer>
-    </>
+    <div className="app-layout">
+      <Sidebar />
+      <div className="">
+        <Outlet />
+        <footer>
+          <p>Footer</p>
+        </footer>
+      </div>
+    </div>
   );
 }
 
