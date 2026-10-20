@@ -1,7 +1,91 @@
 /* Estilos globales */
 
+/************* TEMAS START *************/
 
-/* src/index.css */
+:root,
+[data-theme="claro"] {
+  color-scheme: light;
+
+  --color-fondo: #fff;
+  --color-superficie: #fff;
+  --color-texto: #1f2937;
+  --color-borde: #d1d5db;
+  --color-hover: #f3f4f6;
+  --color-activo: #e5e7eb;
+
+  --color-boton-tema: #fff;
+  --color-boton-tema-hover: #f3f4f6;
+  --color-sombra: rgb(0 0 0 / 10%);
+
+  --color-acento: #00adb5;
+  --color-texto-suave: #666;
+
+  /* Etiquetas */
+  --color-tag-celeste-fondo: rgb(56 189 248 / 15%);
+  --color-tag-celeste-texto: #0284c7;
+
+  --color-tag-violeta-fondo: rgb(168 85 247 / 15%);
+  --color-tag-violeta-texto: #7e22ce;
+
+  --color-tag-ambar-fondo: rgb(245 158 11 / 15%);
+  --color-tag-ambar-texto: #b45309;
+
+  --color-tag-coral-fondo: rgb(244 63 94 / 15%);
+  --color-tag-coral-texto: #be123c;
+
+  --color-tag-verde-fondo: rgb(16 185 129 / 15%);
+  --color-tag-verde-texto: #047857;
+
+  --color-tag-rosa-fondo: rgb(236 72 153 / 15%);
+  --color-tag-rosa-texto: #be185d;
+
+  --color-tag-neutro-fondo: rgb(148 163 184 / 18%);
+  --color-tag-neutro-texto: #475569;
+}
+
+[data-theme="oscuro"] {
+  color-scheme: dark;
+
+  --color-fondo: #111827;
+  --color-superficie: #1f2937;
+  --color-texto: #f3f4f6;
+  --color-borde: #374151;
+  --color-hover: #374151;
+  --color-activo: #4b5563;
+
+  --color-boton-tema: #1f2937;
+  --color-boton-tema-hover: #374151;
+  --color-sombra: rgb(0 0 0 / 25%);
+
+  --color-acento: #00adb5;
+  --color-texto-suave: #9ca3af;
+
+  /* Etiquetas: fondos suaves y textos legibles en oscuro */
+  --color-tag-celeste-fondo: rgb(56 189 248 / 20%);
+  --color-tag-celeste-texto: #7dd3fc;
+
+  --color-tag-violeta-fondo: rgb(168 85 247 / 20%);
+  --color-tag-violeta-texto: #d8b4fe;
+
+  --color-tag-ambar-fondo: rgb(245 158 11 / 20%);
+  --color-tag-ambar-texto: #fcd34d;
+
+  --color-tag-coral-fondo: rgb(244 63 94 / 20%);
+  --color-tag-coral-texto: #fda4af;
+
+  --color-tag-verde-fondo: rgb(16 185 129 / 20%);
+  --color-tag-verde-texto: #6ee7b7;
+
+  --color-tag-rosa-fondo: rgb(236 72 153 / 20%);
+  --color-tag-rosa-texto: #f9a8d4;
+
+  --color-tag-neutro-fondo: rgb(148 163 184 / 20%);
+  --color-tag-neutro-texto: #cbd5e1;
+}
+
+/************* TEMAS END *************/
+
+/************* RESET START *************/
 
 /* 1. Evita que padding y bordes aumenten el tamaño declarado */
 *,
@@ -25,7 +109,11 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
     sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
