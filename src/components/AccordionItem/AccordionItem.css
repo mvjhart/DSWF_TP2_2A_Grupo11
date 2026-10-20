@@ -1,0 +1,81 @@
+.accordion-item {
+  background-color: var(--color-tarjeta, #ffffff);
+  border: 1px solid var(--color-borde, #e2e2e2);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px var(--color-sombra, rgba(0, 0, 0, 0.06));
+}
+
+.accordion-item__titulo-wrapper {
+  margin: 0;
+}
+
+.accordion-item__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 1.1rem 2.6rem 1.1rem 1.4rem;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  position: relative;
+}
+
+.accordion-item__header:hover {
+  background-color: var(--color-fondo, #f4f6f8);
+}
+
+.accordion-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.accordion-item__titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.accordion-item__icono {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.4rem;
+  font-size: 1.2rem;
+  color: var(--color-secundario, #00adb5);
+}
+
+.accordion-item__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.accordion-item--abierto .accordion-item__content {
+  grid-template-rows: 1fr;
+}
+
+.accordion-item__inner {
+  overflow: hidden;
+}
+
+/* Estilo por defecto del contenido: quien use el componente puede
+   sobreescribirlo desde su propio CSS con mayor especificidad. */
+.accordion-item__inner > p {
+  margin: 0;
+  padding: 0 1.4rem 1.2rem;
+  color: var(--color-texto-suave, #666666);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-item__content {
+    transition: none;
+  }
+}
