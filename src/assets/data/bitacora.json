@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-09-18",
+    "categoria": "Estructura",
+    "titulo": "Estructura base del proyecto",
+    "texto": "Se realizó la organización del proyecto y la división equitativa de tareas entre los integrantes. A continuación, se creó el repositorio en GitHub y se estructuraron los archivos en las carpetas solicitadas (CSS, imágenes y JS), incorporando un HTML con la portada y una hoja de estilos con una paleta de colores provisoria, a la espera de la guía de estilos definitiva. Finalmente, se realizó el deploy de la página en Vercel.",
+    "tp": "TP1"
+  },
+  {
+    "id": 2,
+    "fecha": "2026-09-19",
+    "categoria": "Diseño",
+    "titulo": "Diseño de portada y perfiles individuales",
+    "texto": "Se discutió si cada perfil individual necesitaba una animación propia distinta a la de los demás, ya que la consigna menciona la uniformidad como criterio de corrección: se interpretó que las tarjetas pueden ser diferentes entre sí, pero deberían guardar un parentesco visual —una especie de identidad compartida— sin llegar a ser idénticas.",
+    "tp": "TP1"
+  },
+  {
+    "id": 3,
+    "fecha": "2026-09-22",
+    "categoria": "Diseño",
+    "titulo": "Definición de estilo compartido entre perfiles",
+    "texto": "Se decidió conservar la base existente, ya que su simplicidad permite que cada integrante desarrolle su perfil individual sin generar conflictos de diseño entre sí. Como resultado, se acordó adoptar una misma estructura, tipografía (Poppins) y paleta de colores en todos los perfiles, dejando a cada integrante la libertad de sumar una animación o interacción propia que aporte un toque personal sin romper la cohesión visual del sitio.",
+    "tp": "TP1"
+  },
+  {
+    "id": 4,
+    "fecha": "2026-09-22",
+    "categoria": "Navegación",
+    "titulo": "Navegación secundaria entre perfiles y corrección de bug",
+    "texto": "Se confirmó que ningún recorrido dentro del sitio puede depender del botón “Atrás” del navegador, por lo que se propuso incorporar una segunda navegación dentro de cada perfil individual, que permita pasar directamente de un perfil a otro y cierre el recorrido en el primero, además del enlace de regreso al inicio ya disponible en el menú principal.",
+    "tp": "TP1"
+  },
+  {
+    "id": 5,
+    "fecha": "2026-09-22",
+    "categoria": "Bug detectado",
+    "titulo": "Corrección de bug",
+    "texto": "Durante las pruebas de interacción, se reportó un error a corregir: al volver desde un perfil mediante el botón de retroceso del navegador, la tarjeta correspondiente en la portada queda incorrectamente marcada como seleccionada, cuando debería perder ese estado.",
+    "tp": "TP1"
+  },
+  {
+    "id": 6,
+    "fecha": "2026-09-23",
+    "categoria": "Bug resuelto",
+    "titulo": "Resolución del bug de foco en tarjetas",
+    "texto": "Se corrigió el bug reportado en la entrada anterior, relacionado con el foco de las tarjetas de la portada. La solución consistió en reemplazar la propiedad :focus-within por :has(:focus-visible), de modo que la expansión por teclado ocurra únicamente cuando el foco es realmente visible para el usuario.",
+    "tp": "TP1"
+  },
+  {
+    "id": 7,
+    "fecha": "2026-09-23",
+    "categoria": "Diseño",
+    "titulo": "Rediseño del banner",
+    "texto": "Se rediseñó parcialmente la sección hero, que de ahora en más pasa a llamarse banner, sumándole una textura decorativa y adaptando su comportamiento para pantallas pequeñas.",
+    "tp": "TP1"
+  },
+  {
+    "id": 8,
+    "fecha": "2026-09-25",
+    "categoria": "Estructura",
+    "titulo": "Incorporación de la sección Bitácora",
+    "texto": "Se desarrolló la página de bitácora para documentar el proceso del equipo. Se maquetó la estructura HTML, se aplicaron estilos con tipografía fluida, se implementó su lógica interactiva en JavaScript y se verificó la navegación interna.",
+    "tp": "TP1"
+  },
+  {
+    "id": 9,
+    "fecha": "2026-09-25",
+    "categoria": "Mantenimiento",
+    "titulo": "Limpieza de código y corrección de sintaxis",
+    "texto": "Se aplicaron mejoras generales de accesibilidad, limpieza de código y se solucionó un bug menor de sintaxis (un cierre de corchete faltante).",
+    "tp": "TP1"
+  },
+  {
+    "id": 10,
+    "fecha": "2026-09-25",
+    "categoria": "Accesibilidad",
+    "titulo": "Corrección de accesibilidad en el acordeón",
+    "texto": "Se reestructuró el HTML del acordeón de la bitácora para garantizar su validez. Se corrigió la jerarquía de encabezados, se eliminaron etiquetas inválidas dentro de los botones y se añadieron atributos ARIA para su correcta interpretación por lectores de pantalla.",
+    "tp": "TP1"
+  },
+  {
+    "id": 11,
+    "fecha": "2026-09-26",
+    "categoria": "Organización",
+    "titulo": "Acuerdo de modularización del CSS por perfil",
+    "texto": "Se estableció como acuerdo del equipo separar los estilos CSS en archivos independientes según el perfil de cada integrante. Esta medida busca evitar conflictos de fusión (merge conflicts) en la hoja global, facilitar las revisiones de código y agilizar el mantenimiento individual.",
+    "tp": "TP1"
+  },
+  {
+    "id": 12,
+    "fecha": "2026-09-26",
+    "categoria": "Dificultades",
+    "titulo": "Conflicto por reversión inadvertida y ruptura de enlaces",
+    "texto": "Tras el merge de la rama Feature/icon GitHub (#10), se creó y fusionó un PR de revert (#11) guiado por IA sin previa revisión del equipo. Esto provocó una reubicación desorganizada de 578 líneas de código CSS hacia la hoja global styles.css y rompió el enlace hacia la bitácora desde el perfil de Victoria al no incluir la referencia al directorio padre (solicitando integrantes/bitacora.html en lugar de ../bitacora.html).",
+    "tp": "TP1"
+  },
+  {
+    "id": 13,
+    "fecha": "2026-09-26",
+    "categoria": "Soluciones",
+    "titulo": "Restauración mediante 'Revert del Revert' y protocolo de flujo de trabajo",
+    "texto": "Para restaurar el estado estable, se realizó una reversión del PR previo ('Revert Revert Feature/icon GitHub'). A través del canal de comunicación del equipo, se aclaró el origen del problema y se establecieron acuerdos de trabajo estrictos: prohibición de auto-aprobar o auto-mergear PRs propios, evaluación crítica de las respuestas de la IA antes de ejecutar comandos en Git y obligación de consultar al grupo o enviar capturas ante cualquier duda técnica antes de alterar el repositorio compartido.",
+    "tp": "TP1"
+  },
+  {
+    "id": 14,
+    "fecha": "2026-09-27",
+    "categoria": "Documentación",
+    "titulo": "Finalización del README.md, guía técnica y documentación para la presentación",
+    "texto": "Se completó la redacción integral del archivo README.md obligatorio para la entrega final del proyecto. Se consolidaron los enlaces de GitHub y del deploy en Vercel, la estructura general del proyecto, la matriz de roles y responsabilidades de los integrantes y las guías de ejecución local (Live Server).\n\nAsimismo, se incluyó la documentación técnica de JavaScript explicando el funcionamiento de scripts principales: main.js (efecto 3D en tarjetas) y bitacora.js (inyección dinámica de entradas). Finalmente, se registró formalmente la declaración sobre el uso ético y asistencial de la IA en tareas de matemáticas para animaciones 3D, persistencia y depuración responsive.",
+    "tp": "TP1"
+  },
+  {
+    "id": 15,
+    "fecha": "2026-10-18",
+    "categoria": "Migración",
+    "titulo": "Creación del repositorio de TP2 y base React",
+    "texto": "Se creó el repositorio público e independiente de TP2 y se inicializó el proyecto con Vite + React. Se instaló React Router y se configuraron ESLint, Prettier, Stylelint y GitHub Actions. El sitio quedó publicado en Vercel con despliegue automático desde main.",
+    "tp": "TP2"
+  },
+  {
+    "id": 16,
+    "fecha": "2026-10-18",
+    "categoria": "Migración",
+    "titulo": "Definición de arquitectura y catálogo de componentes",
+    "texto": "Se documentó la arquitectura base del proyecto en docs/arquitectura.md y se definió el catálogo de componentes compartidos en docs/catalogo-componentes.md. Se acordó una organización por componentes y páginas, la reutilización como criterio central y la creación de carpetas solo cuando exista una necesidad real.",
+    "tp": "TP2"
+  },
+  {
+    "id": 17,
+    "fecha": "2026-10-18",
+    "categoria": "Migración",
+    "titulo": "Mapa de migración de TP1 a TP2",
+    "texto": "Se auditó el proyecto de TP1 y se documentó en docs/migracion-tp1-tp2.md el destino de cada archivo: HTML, CSS, JavaScript, imágenes y documentación. Se definió que los cuatro perfiles activos compartirán una única página de React y que los estilos se separarán en globales, por componente y por página.",
+    "tp": "TP2"
+  },
+  {
+    "id": 18,
+    "fecha": "2026-10-19",
+    "categoria": "Bitácora",
+    "titulo": "Migración de la bitácora a JSON y React",
+    "texto": "Se migraron los 14 registros de bitacoraData.js del TP1 a src/assets/data/bitacora.json, agregando id único autoincremental, fecha en formato ISO 8601 y un campo tp para distinguir los registros del TP1 de los del TP2. Se sumaron además entradas nuevas correspondientes al proceso de migración a React.",
+    "tp": "TP2"
+  }
+]
