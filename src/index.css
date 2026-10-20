@@ -1,1 +1,239 @@
 /* Estilos globales */
+
+/************* TEMAS START *************/
+
+:root,
+[data-theme="claro"] {
+  color-scheme: light;
+
+  --color-fondo: #fff;
+  --color-superficie: #fff;
+  --color-texto: #1f2937;
+  --color-borde: #d1d5db;
+  --color-hover: #f3f4f6;
+  --color-activo: #e5e7eb;
+
+  --color-boton-tema: #fff;
+  --color-boton-tema-hover: #f3f4f6;
+  --color-sombra: rgb(0 0 0 / 10%);
+
+  --color-acento: #00adb5;
+  --color-texto-suave: #666;
+
+  /* Etiquetas */
+  --color-tag-celeste-fondo: rgb(56 189 248 / 15%);
+  --color-tag-celeste-texto: #0284c7;
+
+  --color-tag-violeta-fondo: rgb(168 85 247 / 15%);
+  --color-tag-violeta-texto: #7e22ce;
+
+  --color-tag-ambar-fondo: rgb(245 158 11 / 15%);
+  --color-tag-ambar-texto: #b45309;
+
+  --color-tag-coral-fondo: rgb(244 63 94 / 15%);
+  --color-tag-coral-texto: #be123c;
+
+  --color-tag-verde-fondo: rgb(16 185 129 / 15%);
+  --color-tag-verde-texto: #047857;
+
+  --color-tag-rosa-fondo: rgb(236 72 153 / 15%);
+  --color-tag-rosa-texto: #be185d;
+
+  --color-tag-neutro-fondo: rgb(148 163 184 / 18%);
+  --color-tag-neutro-texto: #475569;
+}
+
+[data-theme="oscuro"] {
+  color-scheme: dark;
+
+  --color-fondo: #111827;
+  --color-superficie: #1f2937;
+  --color-texto: #f3f4f6;
+  --color-borde: #374151;
+  --color-hover: #374151;
+  --color-activo: #4b5563;
+
+  --color-boton-tema: #1f2937;
+  --color-boton-tema-hover: #374151;
+  --color-sombra: rgb(0 0 0 / 25%);
+
+  --color-acento: #00adb5;
+  --color-texto-suave: #9ca3af;
+
+  /* Etiquetas: fondos suaves y textos legibles en oscuro */
+  --color-tag-celeste-fondo: rgb(56 189 248 / 20%);
+  --color-tag-celeste-texto: #7dd3fc;
+
+  --color-tag-violeta-fondo: rgb(168 85 247 / 20%);
+  --color-tag-violeta-texto: #d8b4fe;
+
+  --color-tag-ambar-fondo: rgb(245 158 11 / 20%);
+  --color-tag-ambar-texto: #fcd34d;
+
+  --color-tag-coral-fondo: rgb(244 63 94 / 20%);
+  --color-tag-coral-texto: #fda4af;
+
+  --color-tag-verde-fondo: rgb(16 185 129 / 20%);
+  --color-tag-verde-texto: #6ee7b7;
+
+  --color-tag-rosa-fondo: rgb(236 72 153 / 20%);
+  --color-tag-rosa-texto: #f9a8d4;
+
+  --color-tag-neutro-fondo: rgb(148 163 184 / 20%);
+  --color-tag-neutro-texto: #cbd5e1;
+}
+
+/************* TEMAS END *************/
+
+/************* RESET START *************/
+
+/* 1. Evita que padding y bordes aumenten el tamaño declarado */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Elimina márgenes y padding predeterminados */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Configuración general del documento */
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 4. Evita que imágenes y otros medios excedan su contenedor */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 5. Los controles heredan la tipografía del documento */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 6. Los enlaces heredan el color; cada componente define su estilo */
+a {
+  color: inherit;
+}
+
+/* 7. Evita estilos tipográficos automáticos en títulos y controles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/************* RESET END *************/
+
+/************* HTML & BODY START *************/
+
+html {
+  background-color: var(--color-fondo);
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/************* HTML & BODY END *************/
+
+/************* TRANSICIÓN DE TEMA START *************/
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* De claro a oscuro: la captura clara se contrae. */
+:root[data-theme-transicion="a-oscuro"]::view-transition-old(root) {
+  z-index: 2;
+  animation: cerrar-tema 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+:root[data-theme-transicion="a-oscuro"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* De oscuro a claro: la captura clara se expande. */
+:root[data-theme-transicion="a-claro"]::view-transition-new(root) {
+  z-index: 2;
+  animation: abrir-tema 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+:root[data-theme-transicion="a-claro"]::view-transition-old(root) {
+  z-index: 1;
+}
+
+@keyframes abrir-tema {
+  from {
+    clip-path: circle(0 at var(--tema-x) var(--tema-y));
+  }
+
+  to {
+    clip-path: circle(var(--tema-radio) at var(--tema-x) var(--tema-y));
+  }
+}
+
+@keyframes cerrar-tema {
+  from {
+    clip-path: circle(var(--tema-radio) at var(--tema-x) var(--tema-y));
+  }
+
+  to {
+    clip-path: circle(0 at var(--tema-x) var(--tema-y));
+  }
+}
+
+/************* TRANSICIÓN DE TEMA END *************/
+
+/************* PREFERENCIAS GLOBALES START *************/
+
+/* Respeta la preferencia del usuario por reducir el movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/************* PREFERENCIAS GLOBALES END *************/

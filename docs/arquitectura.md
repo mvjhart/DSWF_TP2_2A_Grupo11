@@ -18,9 +18,9 @@ src/
 │   │   └── Header.css
 │   └── ...
 ├── pages/
-│   ├── Home/
-│   │   ├── Home.jsx
-│   │   └── Home.css
+│   ├── Inicio/
+│   │   ├── Inicio.jsx
+│   │   └── Inicio.css
 │   └── ...
 ├── hooks/
 │   └── useMediaQuery.js
@@ -98,6 +98,18 @@ Se encarga de montar React y configurar los elementos globales necesarios para i
 ### `router.jsx`
 
 Define las rutas de la aplicación y relaciona cada ruta con su página correspondiente.
+
+**Mapa de rutas**
+
+| Ruta                 | Página     | Responsabilidad                                                                  |
+| -------------------- | ---------- | -------------------------------------------------------------------------------- |
+| `/`                  | `Inicio`   | Presentación del equipo y acceso a sus integrantes.                              |
+| `/integrantes/:slug` | `Perfil`   | Mostrar el perfil del integrante identificado por su `slug`.                     |
+| `/recursos`          | `Recursos` | Consultar la colección general de favoritos del equipo.                          |
+| `/api`               | `Api`      | Presentar información obtenida desde una API pública.                            |
+| `/arbol`             | `Arbol`    | Visualizar la estructura del árbol de renderizado de React.                      |
+| `/bitacora`          | `Bitacora` | Consultar los registros de la bitácora del proyecto.                             |
+| `*`                  | `NotFound` | Mostrar una página de error cuando la URL no coincide con ninguna ruta definida. |
 
 ### `App.jsx`
 

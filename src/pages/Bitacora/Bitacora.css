@@ -20,7 +20,7 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: var(--color-tarjeta, #ffffff);
+  background: var(--color-superficie, #ffffff);
   border: 1px solid var(--color-borde, #e2e2e2);
   border-radius: 10px;
 }
@@ -52,8 +52,8 @@
   font-weight: 600;
   padding: 0.5rem 0.9rem;
   border-radius: 6px;
-  border: 1px solid var(--color-secundario, #00adb5);
-  background: var(--color-secundario, #00adb5);
+  border: 1px solid var(--color-acento, #00adb5);
+  background: var(--color-acento, #00adb5);
   color: #ffffff;
   cursor: pointer;
 }
@@ -77,7 +77,7 @@
 .bitacora__vacia {
   text-align: center;
   padding: 2rem;
-  background: var(--color-tarjeta, #ffffff);
+  background: var(--color-superficie, #ffffff);
   border: 1px solid var(--color-borde, #e2e2e2);
   border-radius: 10px;
 }
@@ -93,7 +93,7 @@
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: none;
-  background: var(--color-secundario, #00adb5);
+  background: var(--color-acento, #00adb5);
   color: #ffffff;
   cursor: pointer;
 }
@@ -129,38 +129,38 @@
 }
 
 .bitacora__tag--celeste {
-  background: rgba(56, 189, 248, 0.15);
-  color: #0284c7;
+  background: var(--color-tag-celeste-fondo);
+  color: var(--color-tag-celeste-texto);
 }
 
 .bitacora__tag--violeta {
-  background: rgba(168, 85, 247, 0.15);
-  color: #7e22ce;
+  background: var(--color-tag-violeta-fondo);
+  color: var(--color-tag-violeta-texto);
 }
 
 .bitacora__tag--ambar {
-  background: rgba(245, 158, 11, 0.15);
-  color: #b45309;
+  background: var(--color-tag-ambar-fondo);
+  color: var(--color-tag-ambar-texto);
 }
 
 .bitacora__tag--coral {
-  background: rgba(244, 63, 94, 0.15);
-  color: #be123c;
+  background: var(--color-tag-coral-fondo);
+  color: var(--color-tag-coral-texto);
 }
 
 .bitacora__tag--verde {
-  background: rgba(16, 185, 129, 0.15);
-  color: #047857;
+  background: var(--color-tag-verde-fondo);
+  color: var(--color-tag-verde-texto);
 }
 
 .bitacora__tag--rosa {
-  background: rgba(236, 72, 153, 0.15);
-  color: #be185d;
+  background: var(--color-tag-rosa-fondo);
+  color: var(--color-tag-rosa-texto);
 }
 
 .bitacora__tag--neutro {
-  background: rgba(148, 163, 184, 0.18);
-  color: #475569;
+  background: var(--color-tag-neutro-fondo);
+  color: var(--color-tag-neutro-texto);
 }
 
 .bitacora__tp {

@@ -1,5 +1,5 @@
 .accordion-item {
-  background-color: var(--color-tarjeta, #ffffff);
+  background-color: var(--color-superficie, #ffffff);
   border: 1px solid var(--color-borde, #e2e2e2);
   border-radius: 10px;
   overflow: hidden;
@@ -27,7 +27,7 @@
 }
 
 .accordion-item__header:hover {
-  background-color: var(--color-fondo, #f4f6f8);
+  background-color: var(--color-hover, #f4f6f8);
 }
 
 .accordion-item__meta {

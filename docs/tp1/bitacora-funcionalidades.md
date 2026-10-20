@@ -40,11 +40,11 @@ flowchart TD
 
 **Implementación técnica**
 
-* `.map()` / `.join('')` transforman el array de datos en un único string de HTML.
-* `querySelectorAll(".timeline-header")` selecciona los botones ya insertados.
-* `classList.toggle()` / `contains()` controlan el estado visual de cada entrada.
-* `closest(".timeline-item")` ubica el `<article>` contenedor a partir del botón, sin depender de la profundidad exacta del DOM.
-* `setAttribute()` mantiene `aria-expanded` y `aria-hidden` sincronizados con el estado real.
+- `.map()` / `.join('')` transforman el array de datos en un único string de HTML.
+- `querySelectorAll(".timeline-header")` selecciona los botones ya insertados.
+- `classList.toggle()` / `contains()` controlan el estado visual de cada entrada.
+- `closest(".timeline-item")` ubica el `<article>` contenedor a partir del botón, sin depender de la profundidad exacta del DOM.
+- `setAttribute()` mantiene `aria-expanded` y `aria-hidden` sincronizados con el estado real.
 
 **Accesibilidad**
 
@@ -67,7 +67,12 @@ El array de entradas vive en su propio archivo, `bitacoraData.js`, expuesto con 
 
 ```js
 export const bitacoraData = [
-  { fecha: "18 de septiembre de 2026", categoria: "Estructura", titulo: "...", texto: "..." },
+  {
+    fecha: "18 de septiembre de 2026",
+    categoria: "Estructura",
+    titulo: "...",
+    texto: "...",
+  },
   // una entrada nueva es un objeto más en este array
 ];
 ```
@@ -78,8 +83,8 @@ import { bitacoraData } from "./bitacoraData.js";
 
 **Implementación técnica**
 
-* Ambos archivos son módulos ES nativos (`import` / `export`), por lo que `bitacora.html` los carga con `<script type="module" src="js/bitacora.js"></script>` en vez de un `<script>` común.
-* Los módulos son la razón por la que este comportamiento no funciona si se abre el HTML directamente desde el explorador de archivos (`file:///`): el navegador bloquea los `import` entre archivos locales por política de CORS, y sí funciona una vez servido por HTTP (Live Server o el deploy de Vercel).
+- Ambos archivos son módulos ES nativos (`import` / `export`), por lo que `bitacora.html` los carga con `<script type="module" src="js/bitacora.js"></script>` en vez de un `<script>` común.
+- Los módulos son la razón por la que este comportamiento no funciona si se abre el HTML directamente desde el explorador de archivos (`file:///`): el navegador bloquea los `import` entre archivos locales por política de CORS, y sí funciona una vez servido por HTTP (Live Server o el deploy de Vercel).
 
 ---
 
@@ -95,16 +100,16 @@ Como consecuencia de ese cambio de estructura, `header.parentElement` dejó de a
 
 #### Resumen de APIs y mecanismos utilizados
 
-| Recurso | Uso |
-| --- | --- |
-| ES Modules (`import` / `export`) | Separar el modelo de datos (`bitacoraData.js`) del comportamiento (`bitacora.js`) |
-| `Array.prototype.map()` | Transformar cada objeto de `bitacoraData` en un fragmento de HTML |
-| `Array.prototype.join('')` | Unir los fragmentos en un único string antes de insertarlos |
-| `innerHTML` | Insertar todo el HTML generado en `#contenedor-bitacora` |
-| `querySelectorAll()` | Seleccionar los botones del acordeón ya insertados |
-| `addEventListener("click", ...)` | Escuchar la interacción sobre cada botón |
-| `classList` | Controlar el estado visual (`activo`) de cada entrada |
-| `closest()` | Ubicar el `<article>` contenedor a partir del botón |
-| `setAttribute()` | Sincronizar `aria-expanded` y `aria-hidden` con el estado real |
-| `aria-controls` / `aria-labelledby` | Vincular cada botón con su panel para lectores de pantalla |
-| Template literals | Generar IDs únicos por entrada (`header-bitacora-${indice}`, `panel-bitacora-${indice}`) |
+| Recurso                             | Uso                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------- |
+| ES Modules (`import` / `export`)    | Separar el modelo de datos (`bitacoraData.js`) del comportamiento (`bitacora.js`)        |
+| `Array.prototype.map()`             | Transformar cada objeto de `bitacoraData` en un fragmento de HTML                        |
+| `Array.prototype.join('')`          | Unir los fragmentos en un único string antes de insertarlos                              |
+| `innerHTML`                         | Insertar todo el HTML generado en `#contenedor-bitacora`                                 |
+| `querySelectorAll()`                | Seleccionar los botones del acordeón ya insertados                                       |
+| `addEventListener("click", ...)`    | Escuchar la interacción sobre cada botón                                                 |
+| `classList`                         | Controlar el estado visual (`activo`) de cada entrada                                    |
+| `closest()`                         | Ubicar el `<article>` contenedor a partir del botón                                      |
+| `setAttribute()`                    | Sincronizar `aria-expanded` y `aria-hidden` con el estado real                           |
+| `aria-controls` / `aria-labelledby` | Vincular cada botón con su panel para lectores de pantalla                               |
+| Template literals                   | Generar IDs únicos por entrada (`header-bitacora-${indice}`, `panel-bitacora-${indice}`) |
