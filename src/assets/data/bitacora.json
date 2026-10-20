@@ -142,5 +142,13 @@
     "titulo": "Migración de la bitácora a JSON y React",
     "texto": "Se migraron los 14 registros de bitacoraData.js del TP1 a src/assets/data/bitacora.json, agregando id único autoincremental, fecha en formato ISO 8601 y un campo tp para distinguir los registros del TP1 de los del TP2. Se sumaron además entradas nuevas correspondientes al proceso de migración a React.",
     "tp": "TP2"
+  },
+  {
+    "id": 19,
+    "fecha": "2026-10-19",
+    "categoria": "Bitácora",
+    "titulo": "Componente AccordionItem reutilizable y página de bitácora en React",
+    "texto": "Se extrajo el acordeón a un componente AccordionItem genérico en components/, con estado de React y atributos ARIA (aria-expanded, aria-controls, aria-hidden) para accesibilidad. La página Bitacora.jsx se encarga del formateo de fechas en ISO a texto local, del mapeo de categorías a colores y del armado del header de cada entrada. No se manipula el DOM directamente.",
+    "tp": "TP2"
   }
 ]
