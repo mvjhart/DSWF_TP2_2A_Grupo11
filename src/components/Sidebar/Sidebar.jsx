@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import "./Sidebar.css";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 const enlaces = [
   { to: "/", label: "Quiénes somos" },
@@ -9,19 +11,63 @@ const enlaces = [
   { to: "/bitacora", label: "Bitácora" },
 ];
 
-function Sidebar() {
+function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil }) {
+  const [transicionHabilitada, setTransicionHabilitada] = useState(false);
+
+  useEffect(() => {
+    setTransicionHabilitada(false);
+
+    if (!esMovil) return;
+
+    const frame = requestAnimationFrame(() => {
+      setTransicionHabilitada(true);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [esMovil]);
+
+  const clasesSidebar = [
+    "sidebar",
+    esMovil && "sidebar--movil",
+    isOpen && "sidebar--abierta",
+    transicionHabilitada && "sidebar--transicion",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <aside className="sidebar">
-      <h2>Grupo 11</h2>
+    <aside
+      id="sidebar-principal"
+      ref={sidebarRef}
+      className={clasesSidebar}
+      tabIndex={-1}
+    >
+      {esMovil && isOpen && (
+        <button
+          type="button"
+          className="sidebar__close"
+          onClick={onNavigate}
+          aria-label="Cerrar menú de navegación"
+        >
+          Cerrar menú
+        </button>
+      )}
+
+      <div className="sidebar__header">
+        <h2>Grupo 11</h2>
+        {!esMovil && <ThemeToggle />}
+      </div>
+
       <nav aria-label="Menú de navegación">
-        {enlaces.map((enlace) => (
+        {enlaces.map(({ to, label }) => (
           <NavLink
-            key={enlace.to}
-            to={enlace.to}
-            end={enlace.to === "/"}
+            key={to}
+            to={to}
+            end={to === "/"}
             className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={onNavigate}
           >
-            {enlace.label}
+            {label}
           </NavLink>
         ))}
       </nav>

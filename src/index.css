@@ -156,3 +156,84 @@ h6 {
 button {
   cursor: pointer;
 }
+
+/************* RESET END *************/
+
+/************* HTML & BODY START *************/
+
+html {
+  background-color: var(--color-fondo);
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/************* HTML & BODY END *************/
+
+/************* TRANSICIÓN DE TEMA START *************/
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* De claro a oscuro: la captura clara se contrae. */
+:root[data-theme-transicion="a-oscuro"]::view-transition-old(root) {
+  z-index: 2;
+  animation: cerrar-tema 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+:root[data-theme-transicion="a-oscuro"]::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* De oscuro a claro: la captura clara se expande. */
+:root[data-theme-transicion="a-claro"]::view-transition-new(root) {
+  z-index: 2;
+  animation: abrir-tema 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+:root[data-theme-transicion="a-claro"]::view-transition-old(root) {
+  z-index: 1;
+}
+
+@keyframes abrir-tema {
+  from {
+    clip-path: circle(0 at var(--tema-x) var(--tema-y));
+  }
+
+  to {
+    clip-path: circle(var(--tema-radio) at var(--tema-x) var(--tema-y));
+  }
+}
+
+@keyframes cerrar-tema {
+  from {
+    clip-path: circle(var(--tema-radio) at var(--tema-x) var(--tema-y));
+  }
+
+  to {
+    clip-path: circle(0 at var(--tema-x) var(--tema-y));
+  }
+}
+
+/************* TRANSICIÓN DE TEMA END *************/
+
+/************* PREFERENCIAS GLOBALES START *************/
+
+/* Respeta la preferencia del usuario por reducir el movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/************* PREFERENCIAS GLOBALES END *************/
