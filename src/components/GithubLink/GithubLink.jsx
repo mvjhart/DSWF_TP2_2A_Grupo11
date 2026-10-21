@@ -1,5 +1,5 @@
 import { useLocation } from "react-router";
-import integrantes from "../../assets/data/integrantes";
+import integrantes from "../../assets/data/integrantes.json";
 import "./GithubLink.css";
 
 const REPOSITORIO_TP2 = "https://github.com/mvjhart/DSWF_TP2_2A_Grupo11";
