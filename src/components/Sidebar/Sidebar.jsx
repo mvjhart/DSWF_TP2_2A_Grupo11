@@ -11,7 +11,6 @@ const enlaces = [
 ];
 
 function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil, animar }) {
-
   const clasesSidebar = [
     "sidebar",
     esMovil && "sidebar--movil",
