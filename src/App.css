@@ -14,14 +14,8 @@
 }
 
 .app-content > main {
-  flex: 1;
+  flex: 1 0 auto;
   padding: 2rem;
-}
-
-/* Footer */
-.app-content footer {
-  padding: 1rem 2rem;
-  border-top: 1px solid var(--color-borde);
 }
 
 /* Escritorio: el contenido tiene scroll propio */
@@ -36,24 +30,16 @@
     min-height: 0;
     overflow-y: auto;
   }
-
-  .app-content > main {
-    flex: 0 0 auto;
-  }
 }
 
 /* Móvil */
 @media (max-width: 768px) {
   .app-layout {
-    display: block;
+    flex-direction: column;
     min-height: 100vh;
+    min-height: 100dvh;
   }
-
   .app-content > main {
     padding: 1.25rem;
-  }
-
-  .app-content footer {
-    padding: 1rem 1.25rem;
   }
 }
