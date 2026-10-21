@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "victoria",
+    "nombre": "María Victoria Mariani",
+    "ciudad": "Buenos Aires, Argentina",
+    "edad": 35,
+    "imagen": "PENDIENTE: ruta en src/assets/images/victoria/",
+    "habilidades": [
+      {
+        "categoria": "Lenguajes",
+        "items": ["PHP", "JavaScript", "Kotlin", "Java", "Python"]
+      }
+    ],
+    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
+    "tag": "PENDIENTE: etiqueta corta",
+    "descripcion": "PENDIENTE: presentación breve para la portada"
+  },
+  {
+    "slug": "candelaria",
+    "nombre": "Candelaria Chazarreta",
+    "ciudad": "Santiago del Estero, Argentina",
+    "edad": 27,
+    "imagen": "PENDIENTE: ruta en src/assets/images/candelaria/",
+    "habilidades": [
+      {
+        "categoria": "Lenguajes",
+        "items": [
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Node.js",
+          "C#",
+          "MySql"
+        ]
+      },
+      {
+        "categoria": "Herramientas",
+        "items": ["Figma", "Git", "GitHub"]
+      }
+    ],
+    "rol": "Maquetación de la bitácora, enlaces y recorrido entre secciones",
+    "tag": "Bitácora & Navegación",
+    "descripcion": "PENDIENTE: presentación breve para la portada"
+  },
+  {
+    "slug": "federico",
+    "nombre": "Federico Acosta Maneiro",
+    "ciudad": "Buenos Aires, Argentina",
+    "edad": 32,
+    "imagen": "PENDIENTE: ruta en src/assets/images/federico/",
+    "habilidades": [
+      {
+        "categoria": "Lenguajes",
+        "items": [
+          "HTML5",
+          "CSS3",
+          "JavaScript",
+          "TypeScript",
+          "Node.js",
+          "Java",
+          "C#",
+          "Kotlin",
+          "MySql"
+        ]
+      },
+      {
+        "categoria": "Frameworks",
+        "items": ["Spring Boot", "React"]
+      },
+      {
+        "categoria": "Herramientas",
+        "items": ["Figma", "Postman", "Git", "GitHub"]
+      }
+    ],
+    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
+    "tag": "PENDIENTE: etiqueta corta",
+    "descripcion": "PENDIENTE: presentación breve para la portada"
+  },
+  {
+    "slug": "marcos",
+    "nombre": "Marcos Aquino",
+    "ciudad": "Buenos Aires, Argentina",
+    "edad": 28,
+    "imagen": "PENDIENTE: ruta en src/assets/images/marcos/",
+    "habilidades": [
+      {
+        "categoria": "Lenguajes",
+        "items": ["HTML5", "CSS3", "JavaScript", "Python", "C#"]
+      },
+      {
+        "categoria": "Herramientas",
+        "items": ["Figma", "Git", "GitHub"]
+      }
+    ],
+    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
+    "tag": "PENDIENTE: etiqueta corta",
+    "descripcion": "PENDIENTE: presentación breve para la portada"
+  }
+]
