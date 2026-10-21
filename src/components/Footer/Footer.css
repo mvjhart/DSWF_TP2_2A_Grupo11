@@ -6,17 +6,16 @@
 }
 
 .footer p {
-    display: flex;
-    gap: 0.7em;
+  display: flex;
+  gap: 0.7em;
 }
 
-.footer  p > span::after {
+.footer p > span::after {
   content: "|";
   margin-left: 0.75em;
   margin-right: 0.5em;
   color: var(--color-borde);
 }
-
 
 /* Móvil */
 @media (max-width: 768px) {

@@ -19,7 +19,7 @@ const integrantes = [
     slug: "marcos",
     nombre: "Marcos",
     github: "https://github.com/Marcos028",
-  }
+  },
 ];
 
 export default integrantes;

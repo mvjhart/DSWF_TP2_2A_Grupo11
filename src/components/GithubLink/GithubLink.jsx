@@ -1,4 +1,3 @@
-
 import { useLocation } from "react-router";
 import integrantes from "../../assets/data/integrantes";
 import "./GithubLink.css";
@@ -11,12 +10,9 @@ function GithubLink() {
   const coincidencia = pathname.match(/^\/integrantes\/([^/]+)\/?$/);
   const slug = coincidencia ? coincidencia[1] : null;
 
-  const integrante = integrantes.find(
-    (integrante) => integrante.slug === slug,
-  );
+  const integrante = integrantes.find((integrante) => integrante.slug === slug);
 
-  const destino =
-    integrante?.github || REPOSITORIO_TP2;
+  const destino = integrante?.github || REPOSITORIO_TP2;
 
   const etiqueta = integrante?.github
     ? `Visitar el GitHub de ${integrante.nombre}`

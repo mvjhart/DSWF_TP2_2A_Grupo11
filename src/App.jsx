@@ -66,7 +66,7 @@ function App() {
 
       <div className="app-content" inert={menuVisible}>
         <Outlet />
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

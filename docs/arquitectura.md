@@ -186,7 +186,7 @@ La extracción debe responder a una necesidad real y mantener una responsabilida
 
 ## Context
 
-Contiene contextos de React y sus proveedores (`Provider`), que permiten compartir estado y funcionalidades entre componentes sin tener que pasar props por múltiples niveles (*prop drilling*).
+Contiene contextos de React y sus proveedores (`Provider`), que permiten compartir estado y funcionalidades entre componentes sin tener que pasar props por múltiples niveles (_prop drilling_).
 
 Cada contexto se organiza en archivos propios dentro de `context/`, agrupando la definición del contexto y su proveedor cuando corresponda. Los hooks personalizados que facilitan su consumo se mantienen en `hooks/`.
 
@@ -196,7 +196,6 @@ La carpeta `context/` se incorpora cuando exista al menos un estado o conjunto d
 2. **Responsabilidad global o transversal:** la lógica debe estar disponible en distintas partes de la aplicación y conviene centralizar su gestión para evitar duplicaciones o estados inconsistentes.
 
 La extracción debe responder a una necesidad real, mantener una responsabilidad clara y evitar el uso de Context para estados locales que pueden resolverse dentro de un componente o mediante props.
-
 
 ## Criterio para ampliar la arquitectura
 

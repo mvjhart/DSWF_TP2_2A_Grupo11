@@ -1,9 +1,7 @@
-
 .github-link {
   color: var(--color-texto);
   text-decoration: none;
-  transition:
-    color 200ms ease,
+  transition: color 200ms ease;
 }
 
 .github-link:hover {
