@@ -37,7 +37,7 @@ function App() {
 
   // Bloquea el scroll de la página mientras el menú está abierto.
   useEffect(() => {
-    if (menuVisible) return;
+    if (!menuVisible) return;
 
     const overflowAnterior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
