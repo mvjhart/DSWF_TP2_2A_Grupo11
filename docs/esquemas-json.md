@@ -2,10 +2,10 @@
 
 Documentación de los dos archivos de datos locales del proyecto (Issue D, subissues D.1 y D.2). Ambos viven en `src/assets/data/`, junto a `bitacora.json`.
 
-| Archivo                           | Contenido                         | Se usa en                                     |
-| --------------------------------- | --------------------------------- | --------------------------------------------- |
-| `src/assets/data/integrantes.json` | Un registro por integrante (4)    | Portada (`/`) y perfiles (`/integrantes/:slug`) |
-| `src/assets/data/favoritos.json`   | Películas y álbumes de cada integrante (40) | Perfiles (destacados) y colección (`/recursos`) |
+| Archivo                            | Contenido                                   | Se usa en                                                        |
+| ---------------------------------- | ------------------------------------------- | ---------------------------------------------------------------- |
+| `src/assets/data/integrantes.json` | Un registro por integrante (4)              | Portada (`/`), perfiles (`/integrantes/:slug`) y enlace a GitHub |
+| `src/assets/data/favoritos.json`   | Películas y álbumes de cada integrante (40) | Perfiles (destacados) y colección (`/recursos`)                  |
 
 Los dos archivos se relacionan mediante el `slug` del integrante: cada favorito lo referencia en `memberSlug`. Así la información se escribe una sola vez y se reutiliza en la portada, los perfiles y la colección completa.
 
@@ -20,17 +20,18 @@ Los dos archivos se relacionan mediante el `slug` del integrante: cada favorito 
 
 Un array de objetos, uno por integrante.
 
-| Propiedad      | Tipo                                       | Obligatoria | Responsabilidad                                                                                                                  |
-| -------------- | ------------------------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `slug`         | `string`                                   | Sí          | Identificador único y estable. Se usa como segmento de la ruta (`/integrantes/victoria`) y como referencia desde `favoritos.json`. |
-| `nombre`       | `string`                                   | Sí          | Nombre y apellido. Se muestra en la tarjeta de portada y en el encabezado del perfil.                                            |
-| `tag`          | `string`                                   | Sí          | Etiqueta **corta** de la tarjeta de portada (por ejemplo, "Bitácora & Navegación").                                              |
-| `descripcion`  | `string`                                   | Sí          | Presentación breve del integrante para la portada.                                                                               |
-| `rol`          | `string`                                   | Sí          | Área de la que es responsable (coordina y revisa el trabajo del área; no implica hacerlo todo). Se muestra en el perfil y alimenta el README. |
-| `ciudad`       | `string`                                   | No          | Ubicación para el encabezado del perfil.                                                                                         |
-| `edad`         | `number`                                   | No          | Dato personal que cambia con el tiempo; incluirlo solo si el integrante quiere mostrarlo.                                        |
-| `imagen`       | `string`                                   | No          | Ruta de la imagen del integrante dentro de `src/assets/images/<integrante>/`. Sin valor, la interfaz usa una imagen por defecto. |
-| `habilidades`  | `array` de `{ categoria, items }`          | No          | Habilidades agrupadas por categoría. `items` es un array de `string`. Una sola fila de habilidades es un único objeto en el array. |
+| Propiedad     | Tipo                              | Obligatoria | Responsabilidad                                                                                                                               |
+| ------------- | --------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`        | `string`                          | Sí          | Identificador único y estable. Se usa como segmento de la ruta (`/integrantes/victoria`) y como referencia desde `favoritos.json`.            |
+| `nombre`      | `string`                          | Sí          | Nombre y apellido. Se muestra en la tarjeta de portada y en el encabezado del perfil.                                                         |
+| `tag`         | `string`                          | Sí          | Etiqueta **corta** de la tarjeta de portada (por ejemplo, "Bitácora & Navegación").                                                           |
+| `descripcion` | `string`                          | Sí          | Presentación breve del integrante para la portada.                                                                                            |
+| `rol`         | `string`                          | Sí          | Área de la que es responsable (coordina y revisa el trabajo del área; no implica hacerlo todo). Se muestra en el perfil y alimenta el README. |
+| `github`      | `string`                          | Sí          | URL completa del perfil de GitHub del integrante. Se usa en el enlace a GitHub de cada perfil y alimenta el README.                           |
+| `ciudad`      | `string`                          | No          | Ubicación para el encabezado del perfil.                                                                                                      |
+| `edad`        | `number`                          | No          | Dato personal que cambia con el tiempo; incluirlo solo si el integrante quiere mostrarlo.                                                     |
+| `imagen`      | `string`                          | No          | Ruta de la imagen del integrante dentro de `src/assets/images/<integrante>/`. Sin valor, la interfaz usa una imagen por defecto.              |
+| `habilidades` | `array` de `{ categoria, items }` | No          | Habilidades agrupadas por categoría. `items` es un array de `string`. Una sola fila de habilidades es un único objeto en el array.            |
 
 ### Reglas del `slug`
 
@@ -58,7 +59,8 @@ Ambos describen la responsabilidad, pero con distinta extensión: `tag` es la ve
   ],
   "rol": "Maquetación de la bitácora, enlaces y recorrido entre secciones",
   "tag": "Bitácora & Navegación",
-  "descripcion": "Presentación breve para la portada."
+  "descripcion": "Presentación breve para la portada.",
+  "github": "https://github.com/kndxt"
 }
 ```
 
@@ -70,24 +72,24 @@ Un array de objetos. Cada integrante aporta 5 películas y 5 álbumes (40 regist
 
 ### Propiedades comunes
 
-| Propiedad    | Tipo       | Obligatoria | Responsabilidad                                                                                                      |
-| ------------ | ---------- | ----------- | -------------------------------------------------------------------------------------------------------------------- |
-| `id`         | `string`   | Sí          | Identificador único del registro (`fav-001`, `fav-002`, …). Se usa como `key` al renderizar.                          |
-| `memberSlug` | `string`   | Sí          | `slug` del integrante dueño del favorito. Debe existir en `integrantes.json`.                                        |
-| `tipo`       | `string`   | Sí          | Determina qué campos específicos tiene el registro y alimenta el filtro. Valores actuales: `album`, `pelicula`.      |
-| `titulo`     | `string`   | Sí          | Título del favorito. Se muestra y se usa en la búsqueda.                                                             |
-| `anio`       | `number`   | No          | Año de lanzamiento.                                                                                                  |
-| `comentario` | `string`   | No          | Comentario personal. Es parte de la información adicional que se despliega y entra en la búsqueda.                   |
-| `generos`    | `string[]` | No          | Géneros del favorito. Sirve como propiedad de filtro.                                                                |
-| `imagen`     | `string`   | No          | Ruta de la portada o póster dentro de `src/assets/images/<integrante>/`.                                             |
-| `featured`   | `boolean`  | No          | `true` si el integrante quiere destacarlo en su perfil. Si falta, se considera `false`.                              |
-| `order`      | `number`   | No          | Posición entre los destacados del perfil (1 a 3). Solo tiene sentido con `featured: true`.                           |
+| Propiedad    | Tipo       | Obligatoria | Responsabilidad                                                                                                 |
+| ------------ | ---------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| `id`         | `string`   | Sí          | Identificador único del registro (`fav-001`, `fav-002`, …). Se usa como `key` al renderizar.                    |
+| `memberSlug` | `string`   | Sí          | `slug` del integrante dueño del favorito. Debe existir en `integrantes.json`.                                   |
+| `tipo`       | `string`   | Sí          | Determina qué campos específicos tiene el registro y alimenta el filtro. Valores actuales: `album`, `pelicula`. |
+| `titulo`     | `string`   | Sí          | Título del favorito. Se muestra y se usa en la búsqueda.                                                        |
+| `anio`       | `number`   | No          | Año de lanzamiento.                                                                                             |
+| `comentario` | `string`   | No          | Comentario personal. Es parte de la información adicional que se despliega y entra en la búsqueda.              |
+| `generos`    | `string[]` | No          | Géneros del favorito. Sirve como propiedad de filtro.                                                           |
+| `imagen`     | `string`   | No          | Ruta de la portada o póster dentro de `src/assets/images/<integrante>/`.                                        |
+| `featured`   | `boolean`  | No          | `true` si el integrante quiere destacarlo en su perfil. Si falta, se considera `false`.                         |
+| `order`      | `number`   | No          | Posición entre los destacados del perfil (1 a 3). Solo tiene sentido con `featured: true`.                      |
 
 ### Propiedades específicas por tipo
 
-| Tipo       | Propiedad  | Tipo     | Obligatoria | Responsabilidad                                  |
-| ---------- | ---------- | -------- | ----------- | ------------------------------------------------ |
-| `album`    | `artista`  | `string` | Sí          | Artista o banda. Se muestra y entra en la búsqueda. |
+| Tipo       | Propiedad  | Tipo     | Obligatoria | Responsabilidad                                               |
+| ---------- | ---------- | -------- | ----------- | ------------------------------------------------------------- |
+| `album`    | `artista`  | `string` | Sí          | Artista o banda. Se muestra y entra en la búsqueda.           |
 | `pelicula` | `sinopsis` | `string` | No          | Resumen de la película. Es información adicional desplegable. |
 
 Un registro de un tipo no incluye los campos del otro. Para agregar un tipo nuevo (por ejemplo `serie`) se define su `tipo` y sus propiedades específicas sin modificar los registros existentes.
@@ -135,6 +137,7 @@ Un registro de un tipo no incluye los campos del otro. Para agregar un tipo nuev
 ## Reglas de integridad
 
 - Los `slug` de `integrantes.json` son únicos.
+- Todo integrante tiene `github` con la URL completa de su perfil.
 - Los `id` de `favoritos.json` son únicos.
 - Todo `memberSlug` coincide con un `slug` existente en `integrantes.json`.
 - Cada integrante tiene como máximo tres favoritos con `featured: true`, con `order` del 1 al 3 sin repetirse.
@@ -142,7 +145,7 @@ Un registro de un tipo no incluye los campos del otro. Para agregar un tipo nuev
 
 ## Datos pendientes
 
-Las plantillas incluyen los 4 integrantes y los 40 favoritos, con los textos sin completar marcados con `PENDIENTE` y los años en `null`. Los únicos datos reales cargados son los de Candelaria (nombre, ciudad, edad, habilidades, rol y tag) y los dos favoritos de Victoria (`fav-001` y `fav-002`), tomados de la discussion de la issue.
+Los textos sin completar se marcan con `PENDIENTE` y los años sin cargar valen `null`. Hasta que se reemplacen, no deben mostrarse en la interfaz.
 
 Para encontrar lo que falta completar, desde la raíz del proyecto en PowerShell:
 

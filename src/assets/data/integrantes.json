@@ -13,7 +13,8 @@
     ],
     "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
     "tag": "PENDIENTE: etiqueta corta",
-    "descripcion": "PENDIENTE: presentación breve para la portada"
+    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "github": "https://github.com/mvjhart"
   },
   {
     "slug": "candelaria",
@@ -42,7 +43,8 @@
     ],
     "rol": "Maquetación de la bitácora, enlaces y recorrido entre secciones",
     "tag": "Bitácora & Navegación",
-    "descripcion": "PENDIENTE: presentación breve para la portada"
+    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "github": "https://github.com/kndxt"
   },
   {
     "slug": "federico",
@@ -76,7 +78,8 @@
     ],
     "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
     "tag": "PENDIENTE: etiqueta corta",
-    "descripcion": "PENDIENTE: presentación breve para la portada"
+    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "github": "https://github.com/federicosd06-dev"
   },
   {
     "slug": "marcos",
@@ -96,6 +99,7 @@
     ],
     "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
     "tag": "PENDIENTE: etiqueta corta",
-    "descripcion": "PENDIENTE: presentación breve para la portada"
+    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "github": "https://github.com/Marcos028"
   }
 ]

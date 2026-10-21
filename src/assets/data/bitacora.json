@@ -158,5 +158,13 @@
     "titulo": "Gestión global del tema mediante React Context",
     "texto": "Se implementó ThemeContext junto con ThemeProvider y el hook personalizado useTheme para centralizar la gestión del tema claro y oscuro. Se evitó prop drilling y la duplicación del estado entre componentes. El proveedor administra el estado, la persistencia en localStorage y las transiciones visuales, mientras que las variables CSS permiten mantener estilos consistentes en toda la aplicación.",
     "tp": "TP2"
+  },
+  {
+    "id": 21,
+    "fecha": "2026-10-21",
+    "categoria": "Estructura",
+    "titulo": "Definición de los esquemas JSON de integrantes y favoritos",
+    "texto": "Se separaron los datos en dos archivos, integrantes.json y favoritos.json, relacionados por el slug de cada integrante (memberSlug), para reutilizar la información en la portada, los perfiles y la colección sin duplicarla. Se fijaron los slugs victoria, candelaria, federico y marcos, y se documentaron las propiedades obligatorias y opcionales en docs/esquemas-json.md. Se incorporó el campo github, que ya usaban el footer y el enlace de cada perfil. Se reemplazó la lista temporal integrantes.js por integrantes.json.",
+    "tp": "TP2"
   }
 ]
