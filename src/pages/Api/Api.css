@@ -1,0 +1,305 @@
+/*
+  Esta hoja no depende de colores fijos: hereda el color de texto de la app
+  y deriva fondos y bordes con color-mix(currentColor), así que se adapta
+  sola al tema claro y oscuro. Cuando estén los tokens de M.2 se pueden
+  reemplazar los color-mix por variables.
+*/
+
+.api {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.api__encabezado p,
+.api__explicacion p {
+  max-width: 70ch;
+}
+
+.api__explicacion,
+.api__resultados {
+  margin-top: 2.5rem;
+}
+
+.api__explicacion h3 {
+  margin: 1.25rem 0 0.4rem;
+  font-size: 1rem;
+}
+
+.api__explicacion a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ===================================================
+   Botones (buscador, sugeridos y "Ver canciones")
+   =================================================== */
+
+.api__buscador button,
+.api__sugeridos button,
+.api__album-toggle {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.api__buscador button:hover,
+.api__sugeridos button:hover,
+.api__album-toggle:hover {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.api__buscador button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.api input:focus-visible,
+.api button:focus-visible,
+.api a:focus-visible,
+.api__tracks:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ===================================================
+   Buscador
+   =================================================== */
+
+.api__buscador {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 0.75rem;
+}
+
+.api__buscador input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.api__buscador button {
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+}
+
+.api__sugeridos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.api__sugeridos button[aria-pressed='true'] {
+  border-color: currentColor;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  font-weight: 600;
+}
+
+/* ===================================================
+   Estados
+   =================================================== */
+
+.api__estado {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid currentColor;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.api__estado--error {
+  border-left-color: #ef4444;
+}
+
+.api__estado--compacto {
+  margin: 0.4rem 0;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+/* ===================================================
+   Grilla de álbumes
+   align-items: start evita que al abrir una card las
+   demás de su fila se estiren con ella.
+   =================================================== */
+
+.api__grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem 1.25rem;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 500px) {
+  .api__grilla {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem 0.75rem;
+  }
+}
+
+/* ===================================================
+   Card de álbum
+   =================================================== */
+
+.api__album {
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 4%, transparent);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.api__album h3 {
+  margin: 0.5rem 0 0.1rem;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.api__album > p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.api__album-toggle {
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+@media (hover: hover) {
+  .api__album:hover {
+    border-color: color-mix(in srgb, currentColor 30%, transparent);
+    box-shadow: 0 4px 16px color-mix(in srgb, currentColor 8%, transparent);
+  }
+
+  .api__album:hover .api__portada {
+    transform: scale(1.03);
+  }
+}
+
+/* ===================================================
+   Portada
+   =================================================== */
+
+.api__portada {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6px;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  transition: transform 0.25s ease;
+}
+
+.api__portada--vacia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed color-mix(in srgb, currentColor 35%, transparent);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, currentColor 8%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ===================================================
+   Panel de canciones
+   La card no cambia de ancho al abrirse: el panel crece
+   hasta una altura máxima y el resto se desplaza dentro.
+   =================================================== */
+
+.api__tracks {
+  max-height: 16rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 6px;
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.api__tracks-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+}
+
+.api__tracks-lista li {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  line-height: 1.35;
+}
+
+.api__track-num,
+.api__track-dur {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.55;
+}
+
+.api__track-num {
+  min-width: 1.4rem;
+  text-align: right;
+}
+
+.api__track-titulo {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+}
+
+/* ===================================================
+   Créditos
+   =================================================== */
+
+.api__creditos {
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api__album,
+  .api__portada {
+    transition: none;
+  }
+
+  .api__album:hover .api__portada {
+    transform: none;
+  }
+}
