@@ -17,6 +17,4 @@ Closes #
 ## Checklist
 
 - [ ] Respeta la arquitectura ([`docs/arquitectura.md`](https://github.com/mvjhart/DSWF_TP2_2A_Grupo11/blob/76dd384e44110e84ba50fe8ba48edf40183c8585/docs/arquitectura.md))
-- [ ] Reutiliza componentes existentes antes de crear uno nuevo
-- [ ] Si cambió la jerarquía de componentes, se actualizó el árbol de renderizado
-- [ ] Se agregó una entrada a la bitácora (si hubo una decisión o problema relevante)
+- [ ] Reutiliza componentes existentes antes de crear uno nuevo.
