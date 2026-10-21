@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import integrantes from "../../assets/data/integrantes.js";
+import integrantes from "../../assets/data/integrantes.json";
 
 function Perfil() {
   const { slug } = useParams();
