@@ -1,0 +1,584 @@
+
+{
+  "components": {
+    "theme-toggle": {
+      "name": "ThemeToggle",
+      "type": "Componentes",
+      "file": "src/components/ThemeToggle/ThemeToggle.jsx",
+      "description": "Permite alternar entre el tema claro y el oscuro.",
+      "props": [],
+      "hooks": [
+        {
+          "name": "useTheme",
+          "file": "src/hooks/useTheme.js",
+          "description": "Obtiene el contexto del tema mediante useContext y lanza un error si se utiliza fuera de ThemeProvider."
+        }
+      ],
+      "children": [
+        {
+          "id": "boton-theme-toggle",
+          "name": "Botón para cambiar el tema",
+          "type": "UI",
+          "file": "src/components/ThemeToggle/ThemeToggle.jsx",
+          "description": "Ejecuta la función para alternar el tema y actualiza sus etiquetas accesibles.",
+          "props": [],
+          "children": [
+            {
+              "id": "icono-tema",
+              "name": "Ícono de tema",
+              "type": "UI",
+              "file": "src/components/ThemeToggle/ThemeToggle.jsx",
+              "description": "Muestra una luna con el tema claro y un sol con el tema oscuro.",
+              "props": [],
+              "conditional": "tema === \"claro\" ? luna : sol",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    "theme-context": {
+      "name": "ThemeContext",
+      "type": "Componentes",
+      "file": "src/context/ThemeContext.js",
+      "description": "Crea y exporta el contexto de React para compartir el estado y las funciones del tema.",
+      "implementation": "createContext(null)",
+      "props": [],
+      "children": []
+    },
+    "theme-provider": {
+      "name": "ThemeProvider",
+      "type": "Componentes",
+      "file": "src/context/ThemeProvider.jsx",
+      "description": "Gestiona el estado global del tema, sincroniza el atributo data-theme, persiste la selección en localStorage y proporciona tema y alternarTema mediante ThemeContext.",
+      "props": [
+        "children"
+      ],
+      "hooks": [
+        {
+          "name": "useState",
+          "description": "Mantiene el tema actual e inicializa su valor mediante obtenerTemaInicial."
+        },
+        {
+          "name": "useEffect",
+          "description": "Sincroniza el tema con data-theme y lo guarda en localStorage."
+        },
+        {
+          "name": "useCallback",
+          "description": "Define la función alternarTema, incluyendo la lógica de transición visual."
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "ThemeContext",
+          "file": "src/context/ThemeContext.js",
+          "description": "Contexto que permite compartir tema y alternarTema con los componentes descendientes."
+        },
+        {
+          "name": "flushSync",
+          "source": "react-dom",
+          "description": "Coordina la actualización de React con la transición visual del tema."
+        }
+      ],
+      "children": []
+    },
+    "accordion-item": {
+      "name": "AccordionItem",
+      "type": "Componentes",
+      "file": "src/components/AccordionItem/AccordionItem.jsx",
+      "description": "Muestra una entrada desplegable con un encabezado y un panel de contenido.",
+      "props": [
+        "title",
+        "headerContent",
+        "children",
+        "defaultOpen"
+      ],
+      "hooks": [
+        {
+          "name": "useState",
+          "description": "Controla si el panel está abierto o cerrado."
+        },
+        {
+          "name": "useId",
+          "description": "Genera identificadores únicos para relacionar el encabezado con el panel."
+        }
+      ],
+      "children": [
+        {
+          "id": "accordion-header",
+          "name": "Encabezado interactivo",
+          "type": "UI",
+          "file": "src/components/AccordionItem/AccordionItem.jsx",
+          "description": "Contiene los metadatos opcionales, el título y el indicador de apertura. Al activarlo, alterna el estado del acordeón.",
+          "props": [],
+          "children": []
+        },
+        {
+          "id": "accordion-panel",
+          "name": "Panel desplegable",
+          "type": "UI",
+          "file": "src/components/AccordionItem/AccordionItem.jsx",
+          "description": "Contiene el contenido recibido mediante children y comunica su estado mediante atributos de accesibilidad.",
+          "props": [],
+          "children": []
+        }
+      ]
+    }
+  },
+  "tree": {
+    "id": "app",
+    "name": "App",
+    "type": "Aplicación",
+    "file": "src/App.jsx",
+    "description": "Organiza la estructura general de la interfaz y administra el menú móvil.",
+    "props": [],
+    "hooks": [
+      {
+        "name": "useState",
+        "description": "Controla si el menú móvil está abierto."
+      },
+      {
+        "name": "useRef",
+        "description": "Mantiene referencias al botón del menú y al sidebar, y permite gestionar la devolución del foco."
+      },
+      {
+        "name": "useCallback",
+        "description": "Define la función para cerrar el menú móvil."
+      },
+      {
+        "name": "useEffect",
+        "description": "Gestiona la devolución del foco y el comportamiento del scroll según el estado del menú."
+      },
+      {
+        "name": "useMediaQuery",
+        "file": "src/hooks/useMediaQuery.js",
+        "description": "Detecta si la pantalla corresponde al diseño de escritorio."
+      }
+    ],
+    "children": [
+      {
+        "id": "header",
+        "name": "Header",
+        "type": "Componentes",
+        "file": "src/components/Header/Header.jsx",
+        "description": "Cabecera móvil con controles para abrir la navegación y cambiar el tema.",
+        "props": [
+          "menuAbierto",
+          "onToggleMenu",
+          "botonMenuRef",
+          "inert"
+        ],
+        "children": [
+          {
+            "id": "boton-menu",
+            "name": "Botón del menú",
+            "type": "UI",
+            "file": "src/components/Header/Header.jsx",
+            "description": "Permite abrir o cerrar la navegación móvil y comunica su estado mediante atributos de accesibilidad.",
+            "props": [],
+            "children": []
+          },
+          {
+            "id": "theme-toggle-header",
+            "name": "ThemeToggle",
+            "type": "Componentes",
+            "componentRef": "theme-toggle",
+            "props": [],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "sidebar",
+        "name": "Sidebar",
+        "type": "Componentes",
+        "file": "src/components/Sidebar/Sidebar.jsx",
+        "description": "Navegación lateral adaptable a escritorio y móvil, con enlaces a las páginas de la aplicación.",
+        "props": [
+          "isOpen",
+          "onNavigate",
+          "sidebarRef",
+          "esMovil"
+        ],
+        "hooks": [
+          {
+            "name": "useState",
+            "description": "Controla si las transiciones del sidebar están habilitadas."
+          },
+          {
+            "name": "useEffect",
+            "description": "Habilita las transiciones en móvil mediante requestAnimationFrame y cancela el proceso al limpiar el efecto."
+          }
+        ],
+        "children": [
+          {
+            "id": "boton-cierre-sidebar",
+            "name": "Botón de cierre",
+            "type": "UI",
+            "file": "src/components/Sidebar/Sidebar.jsx",
+            "description": "Cierra el menú lateral cuando está abierto en móvil.",
+            "props": [],
+            "conditional": "esMovil && isOpen",
+            "children": []
+          },
+          {
+            "id": "encabezado-sidebar",
+            "name": "Encabezado del sidebar",
+            "type": "UI",
+            "file": "src/components/Sidebar/Sidebar.jsx",
+            "description": "Agrupa el título del grupo y el control de tema en escritorio.",
+            "props": [],
+            "children": [
+              {
+                "id": "titulo-grupo",
+                "name": "Grupo 11",
+                "type": "UI",
+                "file": "src/components/Sidebar/Sidebar.jsx",
+                "description": "Identifica al grupo del proyecto.",
+                "props": [],
+                "children": []
+              },
+              {
+                "id": "theme-toggle-sidebar",
+                "name": "ThemeToggle",
+                "type": "Componentes",
+                "componentRef": "theme-toggle",
+                "props": [],
+                "conditional": "!esMovil",
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "navegacion-sidebar",
+            "name": "Navegación",
+            "type": "Router",
+            "file": "src/components/Sidebar/Sidebar.jsx",
+            "description": "Contiene los enlaces de navegación y marca la ruta activa.",
+            "props": [],
+            "children": [
+              {
+                "id": "link-inicio",
+                "name": "Quiénes somos",
+                "type": "Router",
+                "file": "react-router",
+                "description": "Enlace a la página inicial.",
+                "props": [],
+                "route": "/",
+                "children": []
+              },
+              {
+                "id": "link-recursos",
+                "name": "Favoritos",
+                "type": "Router",
+                "file": "react-router",
+                "description": "Enlace a la página de recursos.",
+                "props": [],
+                "route": "/recursos",
+                "children": []
+              },
+              {
+                "id": "link-api",
+                "name": "API pública",
+                "type": "Router",
+                "file": "react-router",
+                "description": "Enlace a la página de la API pública.",
+                "props": [],
+                "route": "/api",
+                "children": []
+              },
+              {
+                "id": "link-arbol",
+                "name": "Árbol de renderizado",
+                "type": "Router",
+                "file": "react-router",
+                "description": "Enlace al visualizador del árbol de renderizado.",
+                "props": [],
+                "route": "/arbol",
+                "children": []
+              },
+              {
+                "id": "link-bitacora",
+                "name": "Bitácora",
+                "type": "Router",
+                "file": "react-router",
+                "description": "Enlace a la bitácora del proyecto.",
+                "props": [],
+                "route": "/bitacora",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "contenido-principal",
+        "name": "Contenedor de contenido",
+        "type": "Layout",
+        "file": "src/App.jsx",
+        "description": "Contiene la página correspondiente a la ruta activa y el pie de página.",
+        "props": [],
+        "children": [
+          {
+            "id": "outlet",
+            "name": "Outlet",
+            "type": "Router",
+            "file": "react-router",
+            "description": "Renderiza la página correspondiente a la ruta coincidente.",
+            "props": [],
+            "children": [
+              {
+                "id": "pagina-inicio",
+                "name": "Inicio",
+                "type": "Página",
+                "file": "src/pages/Inicio/Inicio.jsx",
+                "description": "Presenta el nombre del proyecto y una breve descripción de la aplicación.",
+                "props": [],
+                "route": "/",
+                "children": [
+                  {
+                    "id": "inicio-contenido",
+                    "name": "Contenido principal",
+                    "type": "UI",
+                    "file": "src/pages/Inicio/Inicio.jsx",
+                    "description": "Muestra el título del proyecto y una breve descripción.",
+                    "props": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "bitacora",
+                "name": "Bitácora",
+                "type": "Página",
+                "file": "src/pages/Bitacora/Bitacora.jsx",
+                "description": "Muestra el registro de trabajo del equipo con filtros, orden por fecha y entradas desplegables.",
+                "props": [],
+                "route": "/bitacora",
+                "hooks": [
+                  {
+                    "name": "useState",
+                    "description": "Gestiona los filtros seleccionados y el orden de las fechas."
+                  },
+                  {
+                    "name": "useMemo",
+                    "description": "Calcula las categorías disponibles y las entradas filtradas."
+                  }
+                ],
+                "data": [
+                  {
+                    "name": "bitacora",
+                    "file": "src/assets/data/bitacora.json"
+                  }
+                ],
+                "utilities": [
+                  "colorDeCategoria",
+                  "formatearFecha",
+                  "restablecerTodo"
+                ],
+                "children": [
+                  {
+                    "id": "bitacora-introduccion",
+                    "name": "Título e introducción",
+                    "type": "UI",
+                    "file": "src/pages/Bitacora/Bitacora.jsx",
+                    "description": "Presenta la bitácora y explica qué registra el equipo.",
+                    "props": [],
+                    "children": []
+                  },
+                  {
+                    "id": "bitacora-filtros",
+                    "name": "Filtros y orden",
+                    "type": "UI",
+                    "file": "src/pages/Bitacora/Bitacora.jsx",
+                    "description": "Permite filtrar por TP y categoría, ordenar por fecha y restablecer los filtros.",
+                    "props": [],
+                    "children": []
+                  },
+                  {
+                    "id": "bitacora-contenido",
+                    "name": "Registros de la bitácora",
+                    "type": "UI",
+                    "file": "src/pages/Bitacora/Bitacora.jsx",
+                    "description": "Muestra un mensaje cuando no hay coincidencias o una lista de entradas desplegables.",
+                    "props": [],
+                    "children": [
+                      {
+                        "id": "bitacora-estado-vacio",
+                        "name": "Estado sin resultados",
+                        "type": "UI",
+                        "file": "src/pages/Bitacora/Bitacora.jsx",
+                        "description": "Informa que no hay registros para los filtros seleccionados y permite restablecerlos.",
+                        "props": [],
+                        "conditional": "entradasFiltradas.length === 0",
+                        "children": []
+                      },
+                      {
+                        "id": "bitacora-lista",
+                        "name": "Lista de registros",
+                        "type": "UI",
+                        "file": "src/pages/Bitacora/Bitacora.jsx",
+                        "description": "Renderiza un AccordionItem por cada entrada filtrada.",
+                        "props": [],
+                        "conditional": "entradasFiltradas.length > 0",
+                        "children": [
+                          {
+                            "id": "bitacora-item",
+                            "name": "AccordionItem",
+                            "type": "Componentes",
+                            "componentRef": "accordion-item",
+                            "description": "Representa cada registro de la bitácora.",
+                            "props": [
+                              "title",
+                              "headerContent",
+                              "children"
+                            ],
+                            "repeat": "entradasFiltradas.map",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "pagina-perfil",
+                "name": "Perfil",
+                "type": "Página",
+                "file": "src/pages/Perfil/Perfil.jsx",
+                "description": "Busca un integrante por el slug de la URL y muestra su perfil o un mensaje si no existe.",
+                "props": [],
+                "route": "/integrantes/:slug",
+                "hooks": [
+                  {
+                    "name": "useParams",
+                    "description": "Obtiene el parámetro slug de la ruta actual."
+                  }
+                ],
+                "dependencies": [
+                  {
+                    "name": "Link",
+                    "source": "react-router",
+                    "description": "Permite volver al inicio desde el perfil o desde el mensaje de error."
+                  }
+                ],
+                "children": [
+                  {
+                    "id": "perfil-encontrado",
+                    "name": "Integrante encontrado",
+                    "type": "UI",
+                    "file": "src/pages/Perfil/Perfil.jsx",
+                    "description": "Muestra el nombre y la descripción del perfil, junto con un enlace para volver al inicio.",
+                    "props": [],
+                    "conditional": "integrante existe",
+                    "children": []
+                  },
+                  {
+                    "id": "perfil-no-encontrado",
+                    "name": "Integrante no encontrado",
+                    "type": "UI",
+                    "file": "src/pages/Perfil/Perfil.jsx",
+                    "description": "Muestra el error, informa el slug solicitado y ofrece volver al inicio.",
+                    "props": [],
+                    "conditional": "!integrante",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "pagina-recursos",
+                "name": "Recursos",
+                "type": "Página",
+                "file": "src/pages/Recursos/Recursos.jsx",
+                "description": "Presenta la colección de favoritos del equipo.",
+                "props": [],
+                "route": "/recursos",
+                "children": [
+                  {
+                    "id": "recursos-contenido",
+                    "name": "Contenido principal",
+                    "type": "UI",
+                    "file": "src/pages/Recursos/Recursos.jsx",
+                    "description": "Muestra el título de la sección y una descripción de la colección de favoritos.",
+                    "props": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "pagina-api",
+                "name": "API pública",
+                "type": "Página",
+                "file": "src/pages/Api/Api.jsx",
+                "description": "Presenta la sección de API pública.",
+                "props": [],
+                "route": "/api",
+                "children": [
+                  {
+                    "id": "api-contenido",
+                    "name": "Contenido principal",
+                    "type": "UI",
+                    "file": "src/pages/Api/Api.jsx",
+                    "description": "Muestra el título de la sección y explica que la información se obtendrá desde una API externa.",
+                    "props": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "pagina-arbol",
+                "name": "Árbol de renderizado",
+                "type": "Página",
+                "file": "src/pages/Arbol/Arbol.jsx",
+                "description": "Presenta la sección destinada a representar la estructura de componentes de React.",
+                "props": [],
+                "route": "/arbol",
+                "children": [
+                  {
+                    "id": "arbol-contenido",
+                    "name": "Contenido principal",
+                    "type": "UI",
+                    "file": "src/pages/Arbol/Arbol.jsx",
+                    "description": "Muestra el título de la sección y una breve explicación del árbol de renderizado.",
+                    "props": [],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "pagina-not-found",
+                "name": "NotFound",
+                "type": "Página",
+                "file": "src/pages/NotFound/NotFound.jsx",
+                "description": "Muestra un mensaje cuando la ruta solicitada no existe.",
+                "props": [],
+                "route": "*",
+                "children": [
+                  {
+                    "id": "not-found-contenido",
+                    "name": "Mensaje de página no encontrada",
+                    "type": "UI",
+                    "file": "src/pages/NotFound/NotFound.jsx",
+                    "description": "Muestra el error 404 y explica que la ruta solicitada no existe.",
+                    "props": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "footer",
+            "name": "Pie de página",
+            "type": "UI",
+            "file": "src/App.jsx",
+            "description": "Representa el elemento footer que aparece debajo del contenido de la ruta.",
+            "props": [],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}
