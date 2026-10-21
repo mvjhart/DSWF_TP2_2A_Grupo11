@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  padding: 1rem 2rem;
+  justify-content: center;
+  border-top: 1px solid var(--color-borde);
+}
+
+.footer p {
+  display: flex;
+  gap: 0.7em;
+}
+
+.footer p > span::after {
+  content: "|";
+  margin-left: 0.75em;
+  margin-right: 0.5em;
+  color: var(--color-borde);
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem 1.25rem;
+  }
+}

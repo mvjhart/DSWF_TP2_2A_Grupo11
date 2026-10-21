@@ -1,24 +1,5 @@
 import { Link, useParams } from "react-router";
-
-// MOMENTANEO- BORRAR LUEGO Y CONECTAR CON JSON
-const integrantes = [
-  {
-    slug: "victoria",
-    nombre: "Victoria",
-  },
-  {
-    slug: "candelaria",
-    nombre: "Candelaria",
-  },
-  {
-    slug: "federico",
-    nombre: "Federico",
-  },
-  {
-    slug: "federico",
-    nombre: "Federico",
-  },
-];
+import integrantes from "../../assets/data/integrantes.js";
 
 function Perfil() {
   const { slug } = useParams();
