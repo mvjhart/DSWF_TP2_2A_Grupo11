@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import "./Sidebar.css";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
@@ -11,24 +10,12 @@ const enlaces = [
   { to: "/bitacora", label: "Bitácora" },
 ];
 
-function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil }) {
-  const [transicionHabilitada, setTransicionHabilitada] = useState(false);
-
-  useEffect(() => {
-    if (!esMovil) return;
-
-    const frame = requestAnimationFrame(() => {
-      setTransicionHabilitada(true);
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, [esMovil]);
-
+function Sidebar({ isOpen, onNavigate, sidebarRef, esMovil, animar }) {
   const clasesSidebar = [
     "sidebar",
     esMovil && "sidebar--movil",
     isOpen && "sidebar--abierta",
-    esMovil && transicionHabilitada && "sidebar--transicion",
+    esMovil && animar && "sidebar--transicion",
   ]
     .filter(Boolean)
     .join(" ");

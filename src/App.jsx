@@ -2,11 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import useMediaQuery from "./hooks/useMediaQuery";
 import "./App.css";
 
 function App() {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [animarMenu, setAnimarMenu] = useState(false);
 
   const botonMenuRef = useRef(null);
   const sidebarRef = useRef(null);
@@ -16,13 +18,24 @@ function App() {
   const esMovil = !esEscritorio;
   const menuVisible = esMovil && menuAbierto;
 
+  const [esMovilPrevio, setEsMovilPrevio] = useState(esMovil);
+
+  if (esMovilPrevio !== esMovil) {
+    setEsMovilPrevio(esMovil);
+    setMenuAbierto(false);
+    setAnimarMenu(false);
+  }
+
   const cerrarMenu = useCallback(() => {
+    if (!esMovil) return;
     // Devolvemos el foco después de que el header deje de estar inerte.
     devolverFocoRef.current = true;
+    setAnimarMenu(true);
     setMenuAbierto(false);
-  }, []);
+  }, [esMovil]);
 
   function alternarMenu() {
+    setAnimarMenu(true);
     setMenuAbierto((abierto) => !abierto);
   }
 
@@ -37,7 +50,7 @@ function App() {
 
   // Bloquea el scroll de la página mientras el menú está abierto.
   useEffect(() => {
-    if (menuVisible) return;
+    if (!menuVisible) return;
 
     const overflowAnterior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -61,13 +74,12 @@ function App() {
         onNavigate={cerrarMenu}
         sidebarRef={sidebarRef}
         esMovil={esMovil}
+        animar={animarMenu}
       />
 
       <div className="app-content" inert={menuVisible}>
         <Outlet />
-        <footer>
-          <p>Footer</p>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
