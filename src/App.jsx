@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import useMediaQuery from "./hooks/useMediaQuery";
 import "./App.css";
 
@@ -65,9 +66,7 @@ function App() {
 
       <div className="app-content" inert={menuVisible}>
         <Outlet />
-        <footer>
-          <p>Footer</p>
-        </footer>
+        <Footer/>
       </div>
     </div>
   );
