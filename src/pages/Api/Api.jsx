@@ -18,15 +18,25 @@ function formatearDuracion(ms) {
   return `${min}:${seg}`;
 }
 
-function Estado({ children, error = false, compacto = false }) {
+function Estado({
+  children,
+  error = false,
+  compacto = false,
+  onReintentar = null,
+}) {
   const clases = ['api__estado'];
   if (error) clases.push('api__estado--error');
   if (compacto) clases.push('api__estado--compacto');
 
   return (
-    <p className={clases.join(' ')} role={error ? 'alert' : 'status'}>
-      {children}
-    </p>
+    <div className={clases.join(' ')} role={error ? 'alert' : 'status'}>
+      <p>{children}</p>
+      {onReintentar && (
+        <button type="button" onClick={onReintentar}>
+          Reintentar
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -57,7 +67,10 @@ function Portada({ album }) {
 function AlbumCard({ album }) {
   const [expandido, setExpandido] = useState(false);
   const panelId = useId();
-  const { tracks, cargando, error } = useTracksDeAlbum(album.id, expandido);
+  const { tracks, cargando, error, recargar } = useTracksDeAlbum(
+    album.id,
+    expandido,
+  );
 
   return (
     <li className="api__album">
@@ -88,7 +101,7 @@ function AlbumCard({ album }) {
         >
           {cargando && <Estado compacto>Cargando canciones...</Estado>}
           {error && (
-            <Estado error compacto>
+            <Estado error compacto onReintentar={recargar}>
               {error}
             </Estado>
           )}
@@ -120,7 +133,7 @@ function AlbumCard({ album }) {
 function Api() {
   const [artista, setArtista] = useState(ARTISTA_INICIAL);
   const [texto, setTexto] = useState(ARTISTA_INICIAL);
-  const { albumes, cargando, error } = useAlbumesDeArtista(artista);
+  const { albumes, cargando, error, recargar } = useAlbumesDeArtista(artista);
 
   function buscar(nombre) {
     const limpio = nombre.trim();
@@ -177,7 +190,17 @@ function Api() {
       </section>
 
       <section className="api__resultados" aria-labelledby="api-resultados">
-        <h2 id="api-resultados">Álbumes de {artista}</h2>
+        <div className="api__resultados-encabezado">
+          <h2 id="api-resultados">Álbumes de {artista}</h2>
+          <button
+            type="button"
+            className="api__actualizar"
+            onClick={recargar}
+            disabled={cargando}
+          >
+            {cargando && albumes.length > 0 ? 'Actualizando...' : 'Actualizar'}
+          </button>
+        </div>
 
         <form className="api__buscador" onSubmit={enviar}>
           <label htmlFor="api-artista">Artista</label>
@@ -207,8 +230,14 @@ function Api() {
           ))}
         </ul>
 
-        {cargando && <Estado>Consultando MusicBrainz...</Estado>}
-        {error && <Estado error>{error}</Estado>}
+        {cargando && albumes.length === 0 && (
+          <Estado>Consultando MusicBrainz...</Estado>
+        )}
+        {error && (
+          <Estado error onReintentar={recargar}>
+            {error}
+          </Estado>
+        )}
         {!cargando && !error && albumes.length === 0 && (
           <Estado>
             No encontramos álbumes de estudio para &quot;{artista}&quot;. Probá
@@ -217,7 +246,7 @@ function Api() {
         )}
 
         {albumes.length > 0 && (
-          <ul className="api__grilla">
+          <ul className="api__grilla" aria-busy={cargando}>
             {albumes.map((album) => (
               <AlbumCard key={album.id} album={album} />
             ))}

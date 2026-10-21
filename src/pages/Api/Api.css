@@ -39,7 +39,9 @@
 
 .api__buscador button,
 .api__sugeridos button,
-.api__album-toggle {
+.api__album-toggle,
+.api__actualizar,
+.api__estado button {
   padding: 0.5rem 0.9rem;
   border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
   border-radius: 6px;
@@ -51,11 +53,14 @@
 
 .api__buscador button:hover,
 .api__sugeridos button:hover,
-.api__album-toggle:hover {
+.api__album-toggle:hover,
+.api__actualizar:hover,
+.api__estado button:hover {
   background: color-mix(in srgb, currentColor 10%, transparent);
 }
 
-.api__buscador button:disabled {
+.api__buscador button:disabled,
+.api__actualizar:disabled {
   opacity: 0.6;
   cursor: progress;
 }
@@ -113,10 +118,34 @@
 }
 
 /* ===================================================
+   Encabezado de resultados
+   =================================================== */
+
+.api__resultados-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.api__resultados-encabezado h2 {
+  margin: 0;
+}
+
+.api__actualizar {
+  font-size: 0.85rem;
+}
+
+/* ===================================================
    Estados
    =================================================== */
 
 .api__estado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
   margin: 1rem 0;
   padding: 0.8rem 1rem;
   border-left: 3px solid currentColor;
@@ -125,6 +154,15 @@
 
 .api__estado--error {
   border-left-color: #ef4444;
+}
+
+.api__estado p {
+  margin: 0;
+}
+
+.api__estado button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
 }
 
 .api__estado--compacto {

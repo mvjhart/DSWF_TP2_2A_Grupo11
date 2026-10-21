@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const MB = 'https://musicbrainz.org/ws/2';
 const INTERVALO_MS = 1000;
@@ -36,12 +36,16 @@ function guardarCache(clave, datos) {
   }
 }
 
-// Devuelve el dato cacheado o lo produce y lo guarda.
-async function cacheado(clave, producir) {
-  const enCache = leerCache(clave);
-  if (enCache !== undefined) return enCache;
+// Devuelve el dato cacheado o lo produce y lo guarda. Con `forzar` ignora
+// la caché y la reemplaza con la respuesta nueva. Un `null` (artista no
+// encontrado) no se guarda, para que reintentar vuelva a consultar.
+async function cacheado(clave, producir, forzar = false) {
+  if (!forzar) {
+    const enCache = leerCache(clave);
+    if (enCache !== undefined) return enCache;
+  }
   const datos = await producir();
-  guardarCache(clave, datos);
+  if (datos !== null) guardarCache(clave, datos);
   return datos;
 }
 
@@ -65,7 +69,10 @@ async function consultar(url, signal) {
     respuesta = await fetch(url, { signal });
   } catch (err) {
     if (err.name === 'AbortError') throw err;
-    throw new Error('No se pudo conectar con MusicBrainz. Revisá tu conexión.');
+    throw new Error(
+      'No se pudo conectar con MusicBrainz. Revisá tu conexión.',
+      { cause: err },
+    );
   }
 
   if (!respuesta.ok) {
@@ -96,7 +103,7 @@ function buscarArtista(nombre, signal) {
   });
 }
 
-async function buscarAlbumes(nombreArtista, signal) {
+async function buscarAlbumes(nombreArtista, signal, forzar) {
   const artista = await buscarArtista(nombreArtista, signal);
   if (!artista) return [];
 
@@ -122,10 +129,10 @@ async function buscarAlbumes(nombreArtista, signal) {
         vistos.add(clave);
         return true;
       });
-  });
+  }, forzar);
 }
 
-function buscarTracks(rgId, signal) {
+function buscarTracks(rgId, signal, forzar) {
   return cacheado(`tracks:${rgId}`, async () => {
     const json = await consultar(
       `${MB}/release?release-group=${rgId}&status=official&inc=recordings&fmt=json&limit=1`,
@@ -140,52 +147,85 @@ function buscarTracks(rgId, signal) {
         disco: media.position ?? i + 1,
       })),
     );
-  });
+  }, forzar);
 }
 
 // ============================================================
 // Hooks
 // ============================================================
 
-// El resultado guarda el argumento con el que se pidió. Si no coincide
-// con el actual, todavía se está esperando la respuesta nueva: así
+// Cada resultado guarda el argumento y el número de refresco con que se
+// pidió. Si no coinciden con los actuales, hay una consulta en curso: así
 // "cargando" se deduce y no hace falta setState síncrono en el efecto.
+// Mientras se refresca el mismo argumento se conservan los datos anteriores
+// (para no vaciar la pantalla), pero el error se oculta hasta tener respuesta.
 // `buscar` debe ser una función estable (de módulo).
 function useConsulta(buscar, argumento, habilitado = true) {
   const [resultado, setResultado] = useState(null);
+  const [refresco, setRefresco] = useState(0);
+  const enCurso = useRef(false);
+  const refrescoAplicado = useRef(0);
 
   useEffect(() => {
     if (!habilitado) return;
 
+    // Solo las consultas que vienen de `recargar` ignoran la caché.
+    const forzar = refresco !== refrescoAplicado.current;
+    refrescoAplicado.current = refresco;
+
     const controlador = new AbortController();
-    buscar(argumento, controlador.signal)
-      .then((datos) => setResultado({ argumento, datos, error: null }))
+    const { signal } = controlador;
+    enCurso.current = true;
+
+    buscar(argumento, signal, forzar)
+      .then((datos) => {
+        if (signal.aborted) return;
+        enCurso.current = false;
+        setResultado({ argumento, refresco, datos, error: null });
+      })
       .catch((err) => {
-        if (err.name === 'AbortError') return;
-        setResultado({ argumento, datos: null, error: err.message });
+        if (signal.aborted || err.name === 'AbortError') return;
+        enCurso.current = false;
+        setResultado({ argumento, refresco, datos: null, error: err.message });
       });
 
-    return () => controlador.abort();
-  }, [buscar, argumento, habilitado]);
+    return () => {
+      controlador.abort();
+      enCurso.current = false;
+    };
+  }, [buscar, argumento, habilitado, refresco]);
 
-  const vigente = resultado?.argumento === argumento;
+  // Vuelve a consultar (actualizar o reintentar). Se ignora si ya hay una
+  // consulta en curso, para no encimar pedidos.
+  const recargar = useCallback(() => {
+    if (enCurso.current) return;
+    setRefresco((n) => n + 1);
+  }, []);
+
+  const mismoArgumento = resultado?.argumento === argumento;
+  const vigente = mismoArgumento && resultado.refresco === refresco;
+
   return {
-    datos: vigente ? resultado.datos : null,
+    datos: mismoArgumento ? resultado.datos : null,
     error: vigente ? resultado.error : null,
     cargando: habilitado && !vigente,
+    recargar,
   };
 }
 
 export function useAlbumesDeArtista(nombreArtista) {
-  const { datos, error, cargando } = useConsulta(buscarAlbumes, nombreArtista);
-  return { albumes: datos ?? VACIO, cargando, error };
+  const { datos, error, cargando, recargar } = useConsulta(
+    buscarAlbumes,
+    nombreArtista,
+  );
+  return { albumes: datos ?? VACIO, cargando, error, recargar };
 }
 
 export function useTracksDeAlbum(rgId, habilitado) {
-  const { datos, error, cargando } = useConsulta(
+  const { datos, error, cargando, recargar } = useConsulta(
     buscarTracks,
     rgId,
     habilitado,
   );
-  return { tracks: datos ?? VACIO, cargando, error };
+  return { tracks: datos ?? VACIO, cargando, error, recargar };
 }
