@@ -320,7 +320,24 @@
   overflow-wrap: anywhere;
   font-weight: 500;
 }
+.api__album-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
 
+.api__album-links a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.7;
+}
+
+.api__album-links a:hover {
+  opacity: 1;
+}
 /* ===================================================
    Créditos
    =================================================== */

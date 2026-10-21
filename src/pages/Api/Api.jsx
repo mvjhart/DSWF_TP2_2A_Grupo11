@@ -72,6 +72,10 @@ function AlbumCard({ album }) {
     expandido,
   );
 
+const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    `${album.artista} ${album.titulo}`
+  )}`;
+
   return (
     <li className="api__album">
       <Portada album={album} />
@@ -80,6 +84,12 @@ function AlbumCard({ album }) {
         {album.artista}
         {album.fecha && ` · ${album.fecha.slice(0, 4)}`}
       </p>
+
+      <div className="api__album-links">
+        <a href={urlYouTube} target="_blank" rel="noopener noreferrer">
+          Escuchar en YouTube
+        </a>
+      </div>
 
       <button
         type="button"
