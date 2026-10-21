@@ -24,6 +24,8 @@ src/
 │   └── ...
 ├── hooks/
 │   └── useMediaQuery.js
+├── context/
+│   └── ThemeProvider.jsx
 ├── App.jsx
 ├── router.jsx
 ├── main.jsx
@@ -181,6 +183,20 @@ La carpeta `hooks/` se incorpora cuando exista al menos un hook que justifique s
 2. **Efectos y limpieza:** la lógica requiere gestionar efectos, suscripciones o cancelaciones, y extraerla permite simplificar el componente y evitar errores de ciclo de vida.
 
 La extracción debe responder a una necesidad real y mantener una responsabilidad clara, evitando abstracciones innecesarias.
+
+## Context
+
+Contiene contextos de React y sus proveedores (`Provider`), que permiten compartir estado y funcionalidades entre componentes sin tener que pasar props por múltiples niveles (*prop drilling*).
+
+Cada contexto se organiza en archivos propios dentro de `context/`, agrupando la definición del contexto y su proveedor cuando corresponda. Los hooks personalizados que facilitan su consumo se mantienen en `hooks/`.
+
+La carpeta `context/` se incorpora cuando exista al menos un estado o conjunto de funcionalidades compartidas que justifique su creación según alguno de estos criterios:
+
+1. **Estado compartido entre componentes:** dos o más componentes necesitan acceder al mismo estado y actualizarlo, sin depender de una relación directa entre padre e hijo.
+2. **Responsabilidad global o transversal:** la lógica debe estar disponible en distintas partes de la aplicación y conviene centralizar su gestión para evitar duplicaciones o estados inconsistentes.
+
+La extracción debe responder a una necesidad real, mantener una responsabilidad clara y evitar el uso de Context para estados locales que pueden resolverse dentro de un componente o mediante props.
+
 
 ## Criterio para ampliar la arquitectura
 
