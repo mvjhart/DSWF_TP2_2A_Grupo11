@@ -8,7 +8,7 @@
   border-radius: 12px;
   background: var(--color-superficie);
   box-shadow: 0 2px 8px var(--color-sombra);
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 .info-tabs__nav {
