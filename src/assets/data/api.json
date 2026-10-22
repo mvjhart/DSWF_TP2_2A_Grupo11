@@ -1,5 +1,8 @@
 {
-  "docsUrl": "https://musicbrainz.org/doc/MusicBrainz_API",
+  "encabezado": {
+    "titulo": "API pública: MusicBrainz",
+    "descripcion": "La música es lo que más se repite en los perfiles del equipo, así que elegimos MusicBrainz, una base de datos musical abierta y mantenida por una comunidad."
+  },
   "secciones": [
     {
       "id": 1,
@@ -20,7 +23,11 @@
       "seccion": "3",
       "nombre": "Cuidado",
       "titulo": "Cómo cuidamos el servicio",
-      "texto": "MusicBrainz permite una consulta por segundo. Por eso la aplicación espacia sus pedidos y guarda cada respuesta en caché durante la sesión: repetir una búsqueda o reabrir un álbum no vuelve a llamar a la API."
+      "texto": "MusicBrainz permite una consulta por segundo. Por eso la aplicación espacia sus pedidos y guarda cada respuesta en caché durante la sesión: repetir una búsqueda o reabrir un álbum no vuelve a llamar a la API.",
+      "adjunto": {
+        "nombre": "Documentación oficial de la API de MusicBrainz",
+        "url": "https://musicbrainz.org/doc/MusicBrainz_API"
+      }
     }
   ]
 }

@@ -4,9 +4,11 @@ import {
   useTracksDeAlbum,
 } from "../../hooks/useMusicBrainz";
 import { StatusMessage } from "../../components/ControlesFil/ControlesFil";
+import { InfoTabs } from '../../components/InfoTabs/InfoTabs';
+import { PageHeader } from "../../components/PageHeader/PageHeader.jsx";
+import contenidoApi from '../../assets/data/api.json';
 import "./Api.css";
 
-const API_DOCS_URL = "https://musicbrainz.org/doc/MusicBrainz_API";
 const COVER_BASE = "https://coverartarchive.org/release-group";
 
 const ARTISTAS_SUGERIDOS = ["Slowdive", "Radiohead", "BTS", "Bad Bunny"];
@@ -146,45 +148,15 @@ function Api() {
 
   return (
     <main className="api">
-      <header className="api__encabezado">
-        <h1>API pública: MusicBrainz</h1>
-        <p>
-          La música es lo que más se repite en los perfiles del equipo, así que
-          elegimos MusicBrainz, una base de datos musical abierta y mantenida
-          por una comunidad.
-        </p>
-      </header>
 
-      <section className="api__explicacion" aria-labelledby="api-info">
-        <h2 id="api-info">Qué es y qué información aporta</h2>
-        <p>
-          MusicBrainz expone un servicio web que se consulta directo desde el
-          navegador y no requiere claves. Devuelve datos de artistas, álbumes,
-          lanzamientos y canciones. Además usamos Cover Art Archive, el proyecto
-          hermano que aloja las portadas.
-        </p>
-
-        <h3>Qué datos mostramos</h3>
-        <p>
-          Consultamos los álbumes de estudio de un artista y mostramos la
-          portada, el título, el artista y el año. Al hacer click en un álbum se
-          puede consultar su lista de canciones.
-        </p>
-
-        <h3>Cómo cuidamos el servicio</h3>
-        <p>
-          MusicBrainz permite una consulta por segundo. Por eso la aplicación
-          espacia sus pedidos y guarda cada respuesta en caché durante la
-          sesión: repetir una búsqueda o reabrir un álbum no vuelve a llamar a
-          la API.
-        </p>
-
-        <p>
-          <a href={API_DOCS_URL} target="_blank" rel="noopener noreferrer">
-            Documentación oficial de la API de MusicBrainz
-          </a>
-        </p>
-      </section>
+      {/*Header de Api*/}
+      <PageHeader
+        title={contenidoApi.encabezado.titulo}
+        description={contenidoApi.encabezado.descripcion}
+      />
+      
+      {/* Detalles de Api*/}
+      <InfoTabs secciones={contenidoApi.secciones} />
 
       <section className="api__resultados" aria-labelledby="api-resultados">
         <div className="api__resultados-encabezado">
