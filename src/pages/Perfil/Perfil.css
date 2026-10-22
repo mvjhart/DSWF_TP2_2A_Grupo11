@@ -1,0 +1,41 @@
+.perfil {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.perfil__volver {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.perfil__volver:hover {
+  color: var(--color-texto);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.perfil__volver:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.perfil--no-encontrado {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.perfil--no-encontrado h1 {
+  margin-bottom: 0.75rem;
+}
+
+.perfil--no-encontrado p {
+  max-width: 50ch;
+  margin: 0 auto 1.5rem;
+  color: var(--color-texto-suave);
+}

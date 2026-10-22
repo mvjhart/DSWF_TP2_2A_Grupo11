@@ -1,0 +1,96 @@
+.profile-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+}
+
+.profile-identity__nombre {
+  margin: 0.75rem 0 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.profile-identity__datos {
+  margin: 0;
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+}
+
+.profile-identity__tags {
+  margin-top: 0.5rem;
+}
+
+.profile-identity__tag {
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background-color: var(--tono-fondo, var(--color-hover));
+  color: var(--tono-texto, var(--color-texto));
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.profile-identity__tag--pendiente {
+  background-color: var(--color-tag-neutro-fondo, transparent);
+  color: var(--color-tag-neutro-texto, var(--color-texto-suave));
+  border: 1px dashed var(--color-borde);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.profile-identity__rol {
+  margin: 0;
+  max-width: 60ch;
+  font-size: 0.95rem;
+  color: var(--color-texto);
+  font-weight: 600;
+}
+
+.profile-identity__descripcion {
+  margin: 0.25rem 0 0;
+  max-width: 60ch;
+  line-height: 1.6;
+  color: var(--color-texto);
+}
+
+.profile-identity__pendiente {
+  color: var(--color-texto-suave);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.profile-identity__github {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.55rem 1.1rem;
+  border: 2px solid var(--color-texto);
+  border-radius: 0.5rem;
+  color: var(--color-texto);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.profile-identity__github:hover {
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+}
+
+.profile-identity__github:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-identity__github {
+    transition: none;
+  }
+}

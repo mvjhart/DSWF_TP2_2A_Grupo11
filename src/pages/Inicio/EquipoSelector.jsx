@@ -1,23 +1,11 @@
 import { useId, useRef, useState } from "react";
 import { Link } from "react-router";
 import MemberAvatar from "../../components/MemberAvatar/MemberAvatar";
+import { esPendiente } from "../../utils/esPendiente";
 import "./EquipoSelector.css";
-
-// Colores de la paleta de etiquetas (index.css) que se reparten entre las
-// personas, en el orden en que aparecen en integrantes.json.
-const TONOS = ["violeta", "verde", "ambar", "celeste"];
 
 const MENSAJE_SIN_PRESENTACION =
   "Su presentación todavía no está lista. Mientras tanto, podés ver su perfil.";
-
-// Los datos que todavía no se cargaron en el JSON empiezan con "PENDIENTE".
-function esPendiente(valor) {
-  return (
-    typeof valor !== "string" ||
-    valor.trim() === "" ||
-    valor.startsWith("PENDIENTE")
-  );
-}
 
 // El slug es el nombre de pila en minúsculas (victoria, candelaria, ...).
 function nombreCorto(slug) {
@@ -51,7 +39,7 @@ function EquipoSelector({ integrantes }) {
 
   const idPanel = `${idBase}-panel`;
   const idTab = (slug) => `${idBase}-tab-${slug}`;
-  const tonoActivo = TONOS[indiceActivo % TONOS.length];
+  const tonoActivo = activo.tono ?? "neutro";
   const habilidades = agruparHabilidades(activo.habilidades);
   const tieneDetalle = !esPendiente(activo.rol) || habilidades.length > 0;
 
@@ -98,7 +86,7 @@ function EquipoSelector({ integrantes }) {
         aria-label="Integrantes del equipo"
         onKeyDown={manejarTeclas}
       >
-        {integrantes.map((integrante, indice) => {
+        {integrantes.map((integrante) => {
           const esActivo = integrante.slug === activo.slug;
 
           return (
@@ -119,7 +107,7 @@ function EquipoSelector({ integrantes }) {
               <MemberAvatar
                 nombre={integrante.nombre}
                 imagen={integrante.imagen}
-                tono={TONOS[indice % TONOS.length]}
+                tono={integrante.tono ?? "neutro"}
               />
               <span>{nombreCorto(integrante.slug)}</span>
             </button>
@@ -183,10 +171,7 @@ function EquipoSelector({ integrantes }) {
             </dl>
           )}
 
-          <Link
-            className="equipo__enlace"
-            to={`/integrantes/${activo.slug}`}
-          >
+          <Link className="equipo__enlace" to={`/integrantes/${activo.slug}`}>
             Ver el perfil de {nombreCorto(activo.slug)}
           </Link>
         </div>
