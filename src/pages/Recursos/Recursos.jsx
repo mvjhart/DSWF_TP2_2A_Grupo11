@@ -51,21 +51,48 @@ const integrantesDisponibles = [
   .map((slug) => ({ slug, nombre: nombrePorSlug[slug] ?? slug }))
   .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
 
+const CAMPOS_BUSQUEDA = ["titulo", "artista", "comentario", "sinopsis"];
+
+// Minúsculas y sin tildes, para que "totalitar" encuentre "Totalitär".
+function normalizar(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+// Solo busca en textos reales: los marcadores PENDIENTE no cuentan.
+function coincideConBusqueda(favorito, consulta) {
+  if (consulta === "") return true;
+  return CAMPOS_BUSQUEDA.some(
+    (campo) =>
+      tieneTexto(favorito[campo]) &&
+      normalizar(favorito[campo]).includes(consulta),
+  );
+}
+
 function Recursos() {
   const [tipoSeleccionado, setTipoSeleccionado] = useState(TODOS);
   const [integranteSeleccionado, setIntegranteSeleccionado] = useState(TODOS);
+  const [busqueda, setBusqueda] = useState("");
+
+  const consulta = normalizar(busqueda.trim());
 
   const favoritosFiltrados = favoritosVisibles.filter(
     (favorito) =>
       (tipoSeleccionado === TODOS || favorito.tipo === tipoSeleccionado) &&
       (integranteSeleccionado === TODOS ||
-        favorito.memberSlug === integranteSeleccionado),
+        favorito.memberSlug === integranteSeleccionado) &&
+      coincideConBusqueda(favorito, consulta),
   );
 
   const hayFiltros =
-    tipoSeleccionado !== TODOS || integranteSeleccionado !== TODOS;
+    busqueda !== "" ||
+    tipoSeleccionado !== TODOS ||
+    integranteSeleccionado !== TODOS;
 
   function restablecerFiltros() {
+    setBusqueda("");
     setTipoSeleccionado(TODOS);
     setIntegranteSeleccionado(TODOS);
   }
@@ -77,7 +104,19 @@ function Recursos() {
         Colección de películas y álbumes favoritos del equipo.
       </p>
 
-      <section className="recursos__filtros" aria-label="Filtros de favoritos">
+      <section
+        className="recursos__filtros"
+        aria-label="Búsqueda y filtros de favoritos"
+      >
+        <label className="recursos__filtro recursos__busqueda">
+          <span className="recursos__filtro-label">Buscar</span>
+          <input
+            type="search"
+            value={busqueda}
+            onChange={(evento) => setBusqueda(evento.target.value)}
+            placeholder="Título, artista o comentario"
+          />
+        </label>
         <label className="recursos__filtro">
           <span className="recursos__filtro-label">Tipo</span>
           <select
@@ -126,7 +165,10 @@ function Recursos() {
 
       {favoritosFiltrados.length === 0 && (
         <section className="recursos__vacia" role="status">
-          <p>No hay favoritos que coincidan con los filtros seleccionados.</p>
+          <p>
+            No hay favoritos que coincidan con la búsqueda y los filtros
+            seleccionados.
+          </p>
           <button type="button" onClick={restablecerFiltros}>
             Ver todos los favoritos
           </button>
