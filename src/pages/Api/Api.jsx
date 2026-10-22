@@ -1,43 +1,22 @@
-import { useId, useState } from 'react';
+import { useId, useState } from "react";
 import {
   useAlbumesDeArtista,
   useTracksDeAlbum,
-} from '../../hooks/useMusicBrainz';
-import './Api.css';
+} from "../../hooks/useMusicBrainz";
+import { StatusMessage } from "../../components/ControlesFil/ControlesFil";
+import "./Api.css";
 
-const API_DOCS_URL = 'https://musicbrainz.org/doc/MusicBrainz_API';
-const COVER_BASE = 'https://coverartarchive.org/release-group';
+const API_DOCS_URL = "https://musicbrainz.org/doc/MusicBrainz_API";
+const COVER_BASE = "https://coverartarchive.org/release-group";
 
-const ARTISTAS_SUGERIDOS = ['Slowdive', 'Radiohead', 'BTS', 'Bad Bunny'];
+const ARTISTAS_SUGERIDOS = ["Slowdive", "Radiohead", "BTS", "Bad Bunny"];
 const ARTISTA_INICIAL = ARTISTAS_SUGERIDOS[0];
 
 function formatearDuracion(ms) {
   const totalSeg = Math.round(ms / 1000);
   const min = Math.floor(totalSeg / 60);
-  const seg = String(totalSeg % 60).padStart(2, '0');
+  const seg = String(totalSeg % 60).padStart(2, "0");
   return `${min}:${seg}`;
-}
-
-function Estado({
-  children,
-  error = false,
-  compacto = false,
-  onReintentar = null,
-}) {
-  const clases = ['api__estado'];
-  if (error) clases.push('api__estado--error');
-  if (compacto) clases.push('api__estado--compacto');
-
-  return (
-    <div className={clases.join(' ')} role={error ? 'alert' : 'status'}>
-      <p>{children}</p>
-      {onReintentar && (
-        <button type="button" onClick={onReintentar}>
-          Reintentar
-        </button>
-      )}
-    </div>
-  );
 }
 
 function Portada({ album }) {
@@ -72,8 +51,8 @@ function AlbumCard({ album }) {
     expandido,
   );
 
-const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    `${album.artista} ${album.titulo}`
+  const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    `${album.artista} ${album.titulo}`,
   )}`;
 
   return (
@@ -98,7 +77,7 @@ const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComp
         aria-expanded={expandido}
         aria-controls={panelId}
       >
-        {expandido ? 'Ocultar canciones' : 'Ver canciones'}
+        {expandido ? "Ocultar canciones" : "Ver canciones"}
       </button>
 
       {expandido && (
@@ -109,14 +88,22 @@ const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComp
           aria-label={`Canciones de ${album.titulo}`}
           tabIndex={0}
         >
-          {cargando && <Estado compacto>Cargando canciones...</Estado>}
+          {cargando && (
+            <StatusMessage compacto>Cargando canciones...</StatusMessage>
+          )}
           {error && (
-            <Estado error compacto onReintentar={recargar}>
+            <StatusMessage
+              error
+              compacto
+              accion={{ etiqueta: "Reintentar", onClick: recargar }}
+            >
               {error}
-            </Estado>
+            </StatusMessage>
           )}
           {!cargando && !error && tracks.length === 0 && (
-            <Estado compacto>No hay información de canciones.</Estado>
+            <StatusMessage compacto>
+              No hay información de canciones.
+            </StatusMessage>
           )}
 
           {tracks.length > 0 && (
@@ -173,15 +160,15 @@ function Api() {
         <p>
           MusicBrainz expone un servicio web que se consulta directo desde el
           navegador y no requiere claves. Devuelve datos de artistas, álbumes,
-          lanzamientos y canciones. Además usamos Cover Art Archive, el
-          proyecto hermano que aloja las portadas.
+          lanzamientos y canciones. Además usamos Cover Art Archive, el proyecto
+          hermano que aloja las portadas.
         </p>
 
         <h3>Qué datos mostramos</h3>
         <p>
           Consultamos los álbumes de estudio de un artista y mostramos la
-          portada, el título, el artista y el año. Al hacer click en un álbum
-          se puede consultar su lista de canciones.
+          portada, el título, el artista y el año. Al hacer click en un álbum se
+          puede consultar su lista de canciones.
         </p>
 
         <h3>Cómo cuidamos el servicio</h3>
@@ -208,7 +195,7 @@ function Api() {
             onClick={recargar}
             disabled={cargando}
           >
-            {cargando && albumes.length > 0 ? 'Actualizando...' : 'Actualizar'}
+            {cargando && albumes.length > 0 ? "Actualizando..." : "Actualizar"}
           </button>
         </div>
 
@@ -241,18 +228,21 @@ function Api() {
         </ul>
 
         {cargando && albumes.length === 0 && (
-          <Estado>Consultando MusicBrainz...</Estado>
+          <StatusMessage>Consultando MusicBrainz...</StatusMessage>
         )}
         {error && (
-          <Estado error onReintentar={recargar}>
+          <StatusMessage
+            error
+            accion={{ etiqueta: "Reintentar", onClick: recargar }}
+          >
             {error}
-          </Estado>
+          </StatusMessage>
         )}
         {!cargando && !error && albumes.length === 0 && (
-          <Estado>
+          <StatusMessage>
             No encontramos álbumes de estudio para &quot;{artista}&quot;. Probá
             con otro nombre.
-          </Estado>
+          </StatusMessage>
         )}
 
         {albumes.length > 0 && (

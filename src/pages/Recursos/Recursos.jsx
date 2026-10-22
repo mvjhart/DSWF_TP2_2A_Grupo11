@@ -2,6 +2,12 @@ import { useState } from "react";
 import favoritos from "../../assets/data/favoritos.json";
 import integrantes from "../../assets/data/integrantes.json";
 import AccordionItem from "../../components/AccordionItem/AccordionItem";
+import {
+  FilterBar,
+  FilterSelect,
+  SearchInput,
+  StatusMessage,
+} from "../../components/ControlesFil/ControlesFil";
 import "./Recursos.css";
 
 const MARCA_PENDIENTE = "PENDIENTE";
@@ -39,17 +45,17 @@ const TODOS = "todos";
 
 // Opciones de los filtros: salen de los registros visibles, sin repetidos,
 // para que ninguna opción devuelva cero resultados por sí sola.
-const tiposDisponibles = [
+const OPCIONES_TIPO = [
   ...new Set(favoritosVisibles.map((favorito) => favorito.tipo)),
-].sort((a, b) =>
-  (etiquetasTipo[a] ?? a).localeCompare(etiquetasTipo[b] ?? b, "es"),
-);
+]
+  .map((tipo) => ({ value: tipo, label: etiquetasTipo[tipo] ?? tipo }))
+  .sort((a, b) => a.label.localeCompare(b.label, "es"));
 
-const integrantesDisponibles = [
+const OPCIONES_INTEGRANTE = [
   ...new Set(favoritosVisibles.map((favorito) => favorito.memberSlug)),
 ]
-  .map((slug) => ({ slug, nombre: nombrePorSlug[slug] ?? slug }))
-  .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+  .map((slug) => ({ value: slug, label: nombrePorSlug[slug] ?? slug }))
+  .sort((a, b) => a.label.localeCompare(b.label, "es"));
 
 const CAMPOS_BUSQUEDA = ["titulo", "artista", "comentario", "sinopsis"];
 
@@ -104,76 +110,45 @@ function Recursos() {
         Colección de películas y álbumes favoritos del equipo.
       </p>
 
-      <section
-        className="recursos__filtros"
-        aria-label="Búsqueda y filtros de favoritos"
+      <FilterBar
+        ariaLabel="Búsqueda y filtros de favoritos"
+        onReset={restablecerFiltros}
+        hayCambios={hayFiltros}
+        contador={`${favoritosFiltrados.length} de ${favoritosVisibles.length} favoritos`}
       >
-        <label className="recursos__filtro recursos__busqueda">
-          <span className="recursos__filtro-label">Buscar</span>
-          <input
-            type="search"
-            value={busqueda}
-            onChange={(evento) => setBusqueda(evento.target.value)}
-            placeholder="Título, artista o comentario"
-          />
-        </label>
-        <label className="recursos__filtro">
-          <span className="recursos__filtro-label">Tipo</span>
-          <select
-            value={tipoSeleccionado}
-            onChange={(evento) => setTipoSeleccionado(evento.target.value)}
-          >
-            <option value={TODOS}>Todos</option>
-            {tiposDisponibles.map((tipo) => (
-              <option key={tipo} value={tipo}>
-                {etiquetasTipo[tipo] ?? tipo}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="recursos__filtro">
-          <span className="recursos__filtro-label">Integrante</span>
-          <select
-            value={integranteSeleccionado}
-            onChange={(evento) =>
-              setIntegranteSeleccionado(evento.target.value)
-            }
-          >
-            <option value={TODOS}>Todos</option>
-            {integrantesDisponibles.map(({ slug, nombre }) => (
-              <option key={slug} value={slug}>
-                {nombre}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <button
-          type="button"
-          className="recursos__restablecer"
-          onClick={restablecerFiltros}
-          disabled={!hayFiltros}
-        >
-          Restablecer
-        </button>
-
-        <p className="recursos__contador" aria-live="polite">
-          {`${favoritosFiltrados.length} de ${favoritosVisibles.length} favoritos`}
-        </p>
-      </section>
+        <SearchInput
+          value={busqueda}
+          onChange={setBusqueda}
+          placeholder="Título, artista o comentario"
+        />
+        <FilterSelect
+          label="Tipo"
+          value={tipoSeleccionado}
+          onChange={setTipoSeleccionado}
+          todos={{ value: TODOS, label: "Todos" }}
+          options={OPCIONES_TIPO}
+        />
+        <FilterSelect
+          label="Integrante"
+          value={integranteSeleccionado}
+          onChange={setIntegranteSeleccionado}
+          todos={{ value: TODOS, label: "Todos" }}
+          options={OPCIONES_INTEGRANTE}
+        />
+      </FilterBar>
 
       {favoritosFiltrados.length === 0 && (
-        <section className="recursos__vacia" role="status">
-          <p>
-            No hay favoritos que coincidan con la búsqueda y los filtros
-            seleccionados.
-          </p>
-          <button type="button" onClick={restablecerFiltros}>
-            Ver todos los favoritos
-          </button>
-        </section>
+        <StatusMessage
+          accion={{
+            etiqueta: "Ver todos los favoritos",
+            onClick: restablecerFiltros,
+          }}
+        >
+          No hay favoritos que coincidan con la búsqueda y los filtros
+          seleccionados.
+        </StatusMessage>
       )}
+
       <div className="recursos__lista">
         {favoritosFiltrados.map((favorito) => {
           const generos = (favorito.generos ?? []).filter(tieneTexto);
