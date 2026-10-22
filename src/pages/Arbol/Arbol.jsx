@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import ArbolNodo from "./ArbolNodo.jsx";
 import InspectorNodo from "./InspectorNodo.jsx";
 import { aplanarArbol, raiz } from "./arbolUtils.js";
+import { PageHeader } from "../../components/PageHeader/PageHeader.jsx";
 import "./Arbol.css";
 
 function Arbol() {
@@ -56,14 +57,11 @@ function Arbol() {
     <main className="arbol-pagina">
       <div className="arbol-visor">
         <div className="arbol-visor__contenido">
-          <header className="arbol-pagina__encabezado">
-            <h1>Árbol de renderizado</h1>
-            <p>
-              Explorá la estructura de componentes de React y seleccioná un nodo
-              para consultar sus detalles.
-            </p>
-          </header>
-
+          <PageHeader
+            title="Árbol de renderizado"
+            description="Explorá la estructura de componentes de React y seleccioná un nodo
+              para consultar sus detalles."
+          />
           <ul
             className="arbol-leyenda sr-only"
             aria-label="Leyenda de tipos de nodos"
