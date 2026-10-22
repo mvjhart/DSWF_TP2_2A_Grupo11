@@ -1,0 +1,26 @@
+{
+  "docsUrl": "https://musicbrainz.org/doc/MusicBrainz_API",
+  "secciones": [
+    {
+      "id": 1,
+      "seccion": "1",
+      "nombre": "Qué es",
+      "titulo": "Qué es y qué información aporta",
+      "texto": "MusicBrainz expone un servicio web que se consulta directo desde el navegador y no requiere claves. Devuelve datos de artistas, álbumes, lanzamientos y canciones. Además usamos Cover Art Archive, el proyecto hermano que aloja las portadas."
+    },
+    {
+      "id": 2,
+      "seccion": "2",
+      "nombre": "Datos",
+      "titulo": "Qué datos mostramos",
+      "texto": "Consultamos los álbumes de estudio de un artista y mostramos la portada, el título, el artista y el año. Al hacer click en un álbum se puede consultar su lista de canciones."
+    },
+    {
+      "id": 3,
+      "seccion": "3",
+      "nombre": "Cuidado",
+      "titulo": "Cómo cuidamos el servicio",
+      "texto": "MusicBrainz permite una consulta por segundo. Por eso la aplicación espacia sus pedidos y guarda cada respuesta en caché durante la sesión: repetir una búsqueda o reabrir un álbum no vuelve a llamar a la API."
+    }
+  ]
+}
