@@ -1,3 +1,4 @@
+import { useState } from "react";
 import favoritos from "../../assets/data/favoritos.json";
 import integrantes from "../../assets/data/integrantes.json";
 import AccordionItem from "../../components/AccordionItem/AccordionItem";
@@ -34,7 +35,68 @@ function esRegistroCompleto(favorito) {
 // Los datos son estáticos: se filtra una sola vez al cargar el módulo.
 const favoritosVisibles = favoritos.filter(esRegistroCompleto);
 
+const TODOS = "todos";
+
+// Opciones de los filtros: salen de los registros visibles, sin repetidos,
+// para que ninguna opción devuelva cero resultados por sí sola.
+const tiposDisponibles = [
+  ...new Set(favoritosVisibles.map((favorito) => favorito.tipo)),
+].sort((a, b) =>
+  (etiquetasTipo[a] ?? a).localeCompare(etiquetasTipo[b] ?? b, "es"),
+);
+
+const integrantesDisponibles = [
+  ...new Set(favoritosVisibles.map((favorito) => favorito.memberSlug)),
+]
+  .map((slug) => ({ slug, nombre: nombrePorSlug[slug] ?? slug }))
+  .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+
+const CAMPOS_BUSQUEDA = ["titulo", "artista", "comentario", "sinopsis"];
+
+// Minúsculas y sin tildes, para que "totalitar" encuentre "Totalitär".
+function normalizar(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+// Solo busca en textos reales: los marcadores PENDIENTE no cuentan.
+function coincideConBusqueda(favorito, consulta) {
+  if (consulta === "") return true;
+  return CAMPOS_BUSQUEDA.some(
+    (campo) =>
+      tieneTexto(favorito[campo]) &&
+      normalizar(favorito[campo]).includes(consulta),
+  );
+}
+
 function Recursos() {
+  const [tipoSeleccionado, setTipoSeleccionado] = useState(TODOS);
+  const [integranteSeleccionado, setIntegranteSeleccionado] = useState(TODOS);
+  const [busqueda, setBusqueda] = useState("");
+
+  const consulta = normalizar(busqueda.trim());
+
+  const favoritosFiltrados = favoritosVisibles.filter(
+    (favorito) =>
+      (tipoSeleccionado === TODOS || favorito.tipo === tipoSeleccionado) &&
+      (integranteSeleccionado === TODOS ||
+        favorito.memberSlug === integranteSeleccionado) &&
+      coincideConBusqueda(favorito, consulta),
+  );
+
+  const hayFiltros =
+    busqueda !== "" ||
+    tipoSeleccionado !== TODOS ||
+    integranteSeleccionado !== TODOS;
+
+  function restablecerFiltros() {
+    setBusqueda("");
+    setTipoSeleccionado(TODOS);
+    setIntegranteSeleccionado(TODOS);
+  }
+
   return (
     <main className="recursos" aria-labelledby="recursos-titulo">
       <h1 id="recursos-titulo">Favoritos</h1>
@@ -42,11 +104,78 @@ function Recursos() {
         Colección de películas y álbumes favoritos del equipo.
       </p>
 
-      {/* G.4 y G.5: acá se enchufan la búsqueda, el filtro, el contador y el
-          estado sin resultados. */}
+      <section
+        className="recursos__filtros"
+        aria-label="Búsqueda y filtros de favoritos"
+      >
+        <label className="recursos__filtro recursos__busqueda">
+          <span className="recursos__filtro-label">Buscar</span>
+          <input
+            type="search"
+            value={busqueda}
+            onChange={(evento) => setBusqueda(evento.target.value)}
+            placeholder="Título, artista o comentario"
+          />
+        </label>
+        <label className="recursos__filtro">
+          <span className="recursos__filtro-label">Tipo</span>
+          <select
+            value={tipoSeleccionado}
+            onChange={(evento) => setTipoSeleccionado(evento.target.value)}
+          >
+            <option value={TODOS}>Todos</option>
+            {tiposDisponibles.map((tipo) => (
+              <option key={tipo} value={tipo}>
+                {etiquetasTipo[tipo] ?? tipo}
+              </option>
+            ))}
+          </select>
+        </label>
 
+        <label className="recursos__filtro">
+          <span className="recursos__filtro-label">Integrante</span>
+          <select
+            value={integranteSeleccionado}
+            onChange={(evento) =>
+              setIntegranteSeleccionado(evento.target.value)
+            }
+          >
+            <option value={TODOS}>Todos</option>
+            {integrantesDisponibles.map(({ slug, nombre }) => (
+              <option key={slug} value={slug}>
+                {nombre}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <button
+          type="button"
+          className="recursos__restablecer"
+          onClick={restablecerFiltros}
+          disabled={!hayFiltros}
+        >
+          Restablecer
+        </button>
+
+        <p className="recursos__contador" aria-live="polite">
+          {`${favoritosFiltrados.length} de ${favoritosVisibles.length} favoritos`}
+        </p>
+      </section>
+
+      {favoritosFiltrados.length === 0 && (
+        <section className="recursos__vacia" role="status">
+          <p>
+            No hay favoritos que coincidan con la búsqueda y los filtros
+            seleccionados.
+          </p>
+          <button type="button" onClick={restablecerFiltros}>
+            Ver todos los favoritos
+          </button>
+        </section>
+      )}
       <div className="recursos__lista">
-        {favoritosVisibles.map((favorito) => {
+        {favoritosFiltrados.map((favorito) => {
           const generos = (favorito.generos ?? []).filter(tieneTexto);
           const duenio = nombrePorSlug[favorito.memberSlug];
 

@@ -8,6 +8,114 @@
   color: var(--color-texto-suave);
   margin-bottom: 2rem;
 }
+/* ===================================================
+   Filtros
+   =================================================== */
+
+.recursos__filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+}
+
+.recursos__filtro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.recursos__filtro-label {
+  color: var(--color-texto-suave);
+}
+
+.recursos__filtro select,
+.recursos__filtro input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.recursos__filtro select:focus-visible,
+.recursos__filtro input:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.recursos__filtro input::placeholder {
+  color: var(--color-texto-suave);
+}
+
+/* El buscador ocupa el espacio libre de la barra y baja de línea
+   en pantallas angostas. */
+.recursos__busqueda {
+  flex: 1 1 14rem;
+}
+
+.recursos__busqueda input {
+  width: 100%;
+}
+
+.recursos__restablecer,
+.recursos__vacia button {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-acento);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-texto);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recursos__restablecer:hover:not(:disabled),
+.recursos__vacia button:hover {
+  background: var(--color-hover);
+}
+
+.recursos__restablecer:focus-visible,
+.recursos__vacia button:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.recursos__restablecer:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.recursos__contador {
+  margin-left: auto;
+  align-self: center;
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+}
+
+/* ===================================================
+   Estado sin resultados
+   =================================================== */
+
+.recursos__vacia {
+  padding: 2rem;
+  text-align: center;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+}
+
+.recursos__vacia p {
+  margin-bottom: 1rem;
+  color: var(--color-texto-suave);
+}
 
 /* ===================================================
    Lista de favoritos
