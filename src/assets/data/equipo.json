@@ -1,0 +1,27 @@
+{
+  "nombre": "Grupo 11",
+  "comision": "Comisión A, IFTS Nº 29",
+  "descripcion": "Somos cuatro estudiantes que construimos este sitio juntos. Acá encontrás quiénes somos, la música y el cine que nos gustan, las herramientas con las que trabajamos y el registro de cómo lo hicimos.",
+  "secciones": [
+    {
+      "to": "/recursos",
+      "titulo": "Favoritos",
+      "descripcion": "Las películas y los álbumes que más nos gustan, de cada integrante."
+    },
+    {
+      "to": "/api",
+      "titulo": "API pública",
+      "descripcion": "Los álbumes de cualquier artista, consultados en MusicBrainz."
+    },
+    {
+      "to": "/arbol",
+      "titulo": "Árbol de renderizado",
+      "descripcion": "Cómo se organizan los componentes de React de esta aplicación."
+    },
+    {
+      "to": "/bitacora",
+      "titulo": "Bitácora",
+      "descripcion": "Qué hicimos, qué decidimos y qué problemas resolvimos, desde el TP1."
+    }
+  ]
+}
