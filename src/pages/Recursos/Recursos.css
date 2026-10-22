@@ -1,0 +1,86 @@
+.recursos {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.recursos__intro {
+  color: var(--color-texto-suave);
+  margin-bottom: 2rem;
+}
+
+/* ===================================================
+   Lista de favoritos
+   =================================================== */
+
+.recursos__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ===================================================
+   Encabezado de cada favorito
+   =================================================== */
+
+.recursos__artista,
+.recursos__anio {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+}
+
+.recursos__tipo {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.recursos__tipo--album {
+  background: var(--color-tag-violeta-fondo);
+  color: var(--color-tag-violeta-texto);
+}
+
+.recursos__tipo--pelicula {
+  background: var(--color-tag-coral-fondo);
+  color: var(--color-tag-coral-texto);
+}
+
+/* ===================================================
+   Contenido desplegable
+   =================================================== */
+
+.recursos__detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1.4rem 1.2rem;
+  color: var(--color-texto-suave);
+  line-height: 1.6;
+}
+
+.recursos__detalle strong {
+  color: var(--color-texto);
+}
+
+.recursos__generos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.recursos__genero {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: var(--color-tag-neutro-fondo);
+  color: var(--color-tag-neutro-texto);
+}
+
+.recursos__duenio {
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+}
