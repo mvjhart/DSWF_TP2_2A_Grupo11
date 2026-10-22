@@ -1,18 +1,28 @@
 /* src/pages/Arbol/InspectorNodo.css */
 
-/* Inspector: debajo del árbol en escritorio. */
+/* ==================================================
+   1. TARJETA PRINCIPAL DEL INSPECTOR
+   ================================================== */
+
 .arbol-inspector {
   flex: 0 0 auto;
+  width: 100%;
+  max-width: 60rem;
   min-width: 0;
+  box-sizing: border-box;
+  align-self: center;
   padding: 1rem;
   border: 1px solid var(--color-borde);
-  border-bottom: 0;
-  border-radius: 0;
+  border-radius: 0.75rem;
   background-color: var(--color-superficie);
-  /* box-shadow: 0 0.25rem 0.75rem var(--color-sombra); */
+  box-shadow: 0 4px 12px var(--color-sombra);
 }
 
-/* Parte superior: identidad y resumen en columnas. */
+/* ==================================================
+   2. ENCABEZADO: IDENTIDAD Y RESUMEN
+   ================================================== */
+
+/* Distribución horizontal de la parte superior. */
 .arbol-inspector__superior {
   display: flex;
   align-items: flex-start;
@@ -20,11 +30,13 @@
   gap: 1rem;
 }
 
+/* Área de identificación del nodo. */
 .arbol-inspector__identidad {
   flex: 1 1 auto;
   min-width: 0;
 }
 
+/* Nombre del nodo, indicador de tipo y etiqueta. */
 .arbol-inspector__encabezado {
   display: flex;
   flex-wrap: wrap;
@@ -32,6 +44,19 @@
   gap: 0.625rem;
 }
 
+/* Nombre del nodo. */
+.arbol-inspector__encabezado h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   3. INDICADOR VISUAL DEL TIPO DE NODO
+   ================================================== */
+
+/* Punto identificador: estilo y color predeterminados. */
 .arbol-inspector__punto {
   display: inline-block;
   flex: 0 0 auto;
@@ -41,6 +66,7 @@
   background-color: var(--color-tag-neutro-texto);
 }
 
+/* Color según el tipo de nodo. */
 .arbol-inspector__punto--aplicacion {
   background-color: var(--color-tag-violeta-texto);
 }
@@ -65,13 +91,11 @@
   background-color: var(--color-tag-ambar-texto);
 }
 
-.arbol-inspector__encabezado h2 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
+/* ==================================================
+   4. INFORMACIÓN DEL NODO: ARCHIVO Y DESCRIPCIÓN
+   ================================================== */
 
+/* Ruta del archivo asociado al nodo. */
 .arbol-inspector__archivo {
   display: inline-block;
   max-width: 100%;
@@ -85,6 +109,7 @@
   overflow-wrap: anywhere;
 }
 
+/* Descripción del nodo. */
 .arbol-inspector__descripcion {
   margin: 0.375rem 0 0;
   color: var(--color-texto-suave);
@@ -93,7 +118,11 @@
   overflow-wrap: anywhere;
 }
 
-/* Padre y cantidad de hijos: columna fija a la derecha. */
+/* ==================================================
+   5. RESUMEN: NODO PADRE Y CANTIDAD DE HIJOS
+   ================================================== */
+
+/* Columna de resumen a la derecha del encabezado. */
 .arbol-inspector__resumen {
   display: grid;
   flex: 0 0 auto;
@@ -106,6 +135,7 @@
   text-align: right;
 }
 
+/* Distribución de cada dato del resumen. */
 .arbol-inspector__resumen > div {
   display: flex;
   justify-content: flex-end;
@@ -113,6 +143,7 @@
   min-width: 0;
 }
 
+/* Etiquetas del resumen y títulos de las secciones inferiores. */
 .arbol-inspector__resumen dt,
 .arbol-inspector__seccion h3 {
   margin: 0;
@@ -121,6 +152,7 @@
   font-weight: 700;
 }
 
+/* Etiqueta de cada dato. */
 .arbol-inspector__resumen dt {
   flex: 0 0 auto;
 }
@@ -129,6 +161,7 @@
   content: ":";
 }
 
+/* Valor de cada dato del resumen. */
 .arbol-inspector__resumen dd {
   min-width: 0;
   margin: 0;
@@ -137,7 +170,11 @@
   overflow-wrap: anywhere;
 }
 
-/* Parte inferior: props e hijos. */
+/* ==================================================
+   6. CONTENIDO INFERIOR: PROPS E HIJOS
+   ================================================== */
+
+/* Distribución en dos columnas. */
 .arbol-inspector__inferior {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -147,16 +184,23 @@
   border-top: 1px solid var(--color-borde);
 }
 
+/* Cada sección de contenido. */
 .arbol-inspector__seccion {
   min-width: 0;
 }
 
+/* Títulos de las secciones, por ejemplo, Props e Hijos. */
 .arbol-inspector__seccion h3 {
   margin-bottom: 0.25rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
+/* ==================================================
+   7. LISTAS DE PROPS E HIJOS
+   ================================================== */
+
+/* Contenedor de etiquetas de la lista. */
 .arbol-inspector__lista {
   display: flex;
   flex-wrap: wrap;
@@ -166,6 +210,7 @@
   list-style: none;
 }
 
+/* Apariencia de cada elemento de la lista. */
 .arbol-inspector__lista li {
   max-width: 100%;
   padding: 0.125rem 0.375rem;
@@ -178,42 +223,55 @@
   overflow-wrap: anywhere;
 }
 
+/* Código dentro de un elemento de la lista. */
 .arbol-inspector__lista code {
   font-size: inherit;
 }
 
+/* Mensaje mostrado cuando no hay datos para listar. */
 .arbol-inspector__vacio {
   margin: 0;
   color: var(--color-texto-suave);
   font-size: 0.6875rem;
 }
 
-/* En móvil, el inspector ocupa su propio espacio en el layout. */
+/* ==================================================
+   8. RESPONSIVE: TABLETS Y MÓVILES
+   ================================================== */
+
+/* El inspector conserva su lugar en el layout y tiene
+   desplazamiento propio cuando su contenido es alto. */
 @media (max-width: 768px) {
   .arbol-inspector {
-    position: static;
+    position: relative;
     inset: auto;
     z-index: auto;
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     width: 100%;
-    min-height: 0;
+    max-width: none;
+    align-self: stretch;
     max-height: 40dvh;
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
-
-    padding: 1rem;
-    background-color: var(--color-superficie);
+    border-radius: 0;
     box-shadow: none;
+    border-bottom: none;
   }
 
+  /* Reduce la separación del encabezado en móvil. */
   .arbol-inspector__superior {
     gap: 0.75rem;
   }
 }
 
-/* En móvil estrecho, las secciones inferiores se apilan. */
+/* ==================================================
+   9. RESPONSIVE: SECCIONES INFERIORES EN MÓVIL
+   ================================================== */
+
+/* Apila las secciones cuando el espacio horizontal
+   ya no alcanza para mostrarlas en dos columnas. */
 @media (max-width: 640px) {
   .arbol-inspector__inferior {
     grid-template-columns: minmax(0, 1fr);
@@ -221,27 +279,53 @@
   }
 }
 
-/* Ajustes de espacio para pantallas muy estrechas. */
+/* ==================================================
+   10. RESPONSIVE: PANTALLAS MUY ESTRECHAS
+   ================================================== */
+
 @media (max-width: 480px) {
+  /* Reduce el espacio interno de la tarjeta. */
   .arbol-inspector {
     padding: 0.875rem 1rem;
   }
 
+  /* Compacta la separación del encabezado. */
   .arbol-inspector__superior {
     gap: 0.5rem;
   }
 
+  /* Reduce el espacio entre el resumen y su borde. */
   .arbol-inspector__resumen {
     padding-left: 0.625rem;
   }
 }
 
-/* En escritorio, el inspector llega hasta los bordes del main. */
+/* ==================================================
+   11. RESPONSIVE: SEPARACIÓN LATERAL EN ESCRITORIO
+   ================================================== */
+
 @media (min-width: 769px) {
   .arbol-inspector {
-    width: auto;
-    margin-right: 0;
-    border-right: 0;
-    border-left: 0;
+    width: calc(100% - 7rem);
+  }
+}
+
+/* ==================================================
+   12. ANIMACIONES
+   ================================================== */
+
+/* Pulso suave del indicador visual del nodo. */
+.arbol-inspector__punto {
+  animation: inspector-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes inspector-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
   }
 }

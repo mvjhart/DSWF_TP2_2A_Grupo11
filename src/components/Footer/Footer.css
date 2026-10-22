@@ -1,25 +1,58 @@
 .footer {
-  display: flex;
-  padding: 1rem 2rem;
-  justify-content: center;
+  display: grid;
+  /* Creamos 3 columnas: la 1ra y la 3ra miden lo mismo, la del medio se adapta al contenido */
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
   border-top: 1px solid var(--color-borde);
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  color: var(--color-texto-suave);
 }
 
-.footer p {
+/* El espaciador invisible de la izquierda equilibra el grid */
+.footer__spacer {
+  justify-self: start;
+}
+
+/* Centro exacto */
+.footer__center {
   display: flex;
-  gap: 0.7em;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
 }
 
-.footer p > span::after {
+.footer__center > span::after {
   content: "|";
   margin-left: 0.75em;
   margin-right: 0.5em;
   color: var(--color-borde);
 }
 
-/* Móvil */
+/* Derecha absoluta */
+.footer__right {
+  justify-self: end;
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
+}
+
+/* --- Versión Mobile (se apila ordenado si la pantalla es muy chica) --- */
 @media (max-width: 768px) {
   .footer {
-    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Ocultamos por completo el bloque derecho en mobile */
+  .footer__right {
+    display: none;
+  }
+
+  .footer__center {
+    justify-self: center;
+    gap: 0.5rem;
   }
 }
