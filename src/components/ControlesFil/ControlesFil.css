@@ -1,0 +1,166 @@
+/* ===================================================
+   Controles compartidos por Bitácora, Recursos y Api.
+   =================================================== */
+
+/* Barra de filtros: contenedor + botón Restablecer + contador. */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+}
+
+.filter-bar__restablecer {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-acento);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.filter-bar__restablecer:hover:not(:disabled) {
+  background: var(--color-hover);
+}
+
+.filter-bar__restablecer:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.filter-bar__restablecer:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.filter-bar__contador {
+  margin-left: auto;
+  align-self: center;
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+}
+
+/* Select con etiqueta. */
+
+.filter-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.filter-select__label {
+  color: var(--color-texto-suave);
+}
+
+.filter-select select {
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.filter-select select:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* Input de búsqueda con etiqueta. */
+
+.search-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex: 1 1 14rem;
+}
+
+.search-input__label {
+  color: var(--color-texto-suave);
+}
+
+.search-input input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font: inherit;
+  cursor: pointer;
+}
+
+.search-input input::placeholder {
+  color: var(--color-texto-suave);
+}
+
+.search-input input:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+/* Mensaje de estado: carga, error, vacío. */
+
+.status-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+}
+
+.status-message p {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+.status-message button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-acento);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.status-message button:hover {
+  background: var(--color-hover);
+}
+
+.status-message button:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}
+
+.status-message--error {
+  border-left: 3px solid #ef4444;
+}
+
+.status-message--compacto {
+  margin: 0.4rem 0;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.78rem;
+  text-align: left;
+  justify-content: flex-start;
+}
