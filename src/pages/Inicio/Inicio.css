@@ -1,0 +1,151 @@
+.inicio {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+.inicio h2 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.inicio__lead {
+  max-width: 60ch;
+  margin-top: 0.5rem;
+  color: var(--color-texto-suave);
+}
+
+/* ---- Presentación ---- */
+
+.inicio__hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(1.5rem, 6vw, 4rem);
+}
+
+/* El número del equipo, como contorno detrás del texto. */
+.inicio__numero {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -0.05em;
+  transform: translateY(-50%);
+
+  font-size: clamp(12rem, 38vw, 26rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+
+  color: transparent;
+  -webkit-text-stroke: 2px
+    color-mix(in srgb, var(--color-acento) 35%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+.inicio__titulo {
+  font-size: clamp(3.25rem, 11vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.inicio__comision {
+  margin-top: 0.75rem;
+  color: var(--color-texto-suave);
+  font-size: 1.1rem;
+}
+
+.inicio__descripcion {
+  max-width: 52ch;
+  margin-top: 1.5rem;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.inicio__cta {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.85rem 1.5rem;
+
+  border-radius: 0.5rem;
+  background-color: var(--color-acento);
+  color: #062c30;
+
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 150ms ease;
+}
+
+.inicio__cta:hover {
+  filter: brightness(1.08);
+}
+
+.inicio__cta:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: 3px;
+}
+
+/* ---- Secciones del sitio ---- */
+
+.inicio__indice {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--color-borde);
+  list-style: none;
+}
+
+.inicio__indice li {
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.inicio__fila {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) 1fr;
+  gap: 0.25rem 2rem;
+  align-items: baseline;
+  padding: 1.25rem 0.5rem;
+
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+.inicio__fila:hover {
+  background-color: var(--color-hover);
+}
+
+.inicio__fila:focus-visible {
+  outline: 2px solid var(--color-texto);
+  outline-offset: -2px;
+}
+
+.inicio__fila-titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.inicio__fila-texto {
+  color: var(--color-texto-suave);
+}
+
+@media (max-width: 640px) {
+  .inicio {
+    gap: 3rem;
+  }
+
+  .inicio__fila {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Equipo ---- */
+
+.inicio__equipo {
+  scroll-margin-top: 1rem;
+}

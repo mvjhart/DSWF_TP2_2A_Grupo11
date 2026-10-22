@@ -1,0 +1,73 @@
+/*
+  Tonos: cualquier elemento con data-tono define --tono-fondo y --tono-texto
+  a partir de la paleta de etiquetas de index.css, que ya cambia con el tema.
+  Así el avatar y los elementos que lo acompañan comparten el mismo color.
+*/
+[data-tono="celeste"] {
+  --tono-fondo: var(--color-tag-celeste-fondo);
+  --tono-texto: var(--color-tag-celeste-texto);
+}
+
+[data-tono="violeta"] {
+  --tono-fondo: var(--color-tag-violeta-fondo);
+  --tono-texto: var(--color-tag-violeta-texto);
+}
+
+[data-tono="ambar"] {
+  --tono-fondo: var(--color-tag-ambar-fondo);
+  --tono-texto: var(--color-tag-ambar-texto);
+}
+
+[data-tono="coral"] {
+  --tono-fondo: var(--color-tag-coral-fondo);
+  --tono-texto: var(--color-tag-coral-texto);
+}
+
+[data-tono="verde"] {
+  --tono-fondo: var(--color-tag-verde-fondo);
+  --tono-texto: var(--color-tag-verde-texto);
+}
+
+[data-tono="rosa"] {
+  --tono-fondo: var(--color-tag-rosa-fondo);
+  --tono-texto: var(--color-tag-rosa-texto);
+}
+
+[data-tono="neutro"] {
+  --tono-fondo: var(--color-tag-neutro-fondo);
+  --tono-texto: var(--color-tag-neutro-texto);
+}
+
+.member-avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  border-radius: 50%;
+  background-color: var(--tono-fondo, var(--color-hover));
+  color: var(--tono-texto, var(--color-texto));
+
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+}
+
+.member-avatar--m {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.15rem;
+}
+
+.member-avatar--l {
+  width: 6rem;
+  height: 6rem;
+  font-size: 2rem;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
