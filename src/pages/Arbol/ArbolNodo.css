@@ -1,0 +1,203 @@
+/* src/pages/Arbol/ArbolNodo.css */
+
+/* Estructura jerárquica. */
+.arbol-lista,
+.arbol-nodo__hijos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cada rama se desplaza hacia la derecha y conserva sus conectores. */
+.arbol-nodo__hijos {
+  position: relative;
+  margin-left: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.arbol-nodo__hijos > .arbol-nodo {
+  position: relative;
+}
+
+/* Tramo horizontal curvo que conecta con cada nodo hijo. */
+.arbol-nodo__hijos > .arbol-nodo::before {
+  content: "";
+  position: absolute;
+  top: 0.875rem;
+  left: -1.25rem;
+  width: 0.875rem;
+  height: 0.625rem;
+  border-left: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  border-bottom-left-radius: 0.5rem;
+  pointer-events: none;
+}
+
+/* Tramo vertical que une los hermanos. */
+.arbol-nodo__hijos > .arbol-nodo:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  bottom: -0.25rem;
+  left: -1.25rem;
+  border-left: 1px solid var(--color-borde);
+  pointer-events: none;
+}
+
+.arbol-nodo {
+  min-width: max-content;
+}
+
+/* Fila de cada nodo. */
+.arbol-nodo__fila {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 2rem;
+  margin: 0.125rem 0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  transition: background-color 120ms ease;
+}
+
+.arbol-nodo__fila:hover {
+  background-color: var(--color-hover);
+}
+
+.arbol-nodo__fila--seleccionada {
+  outline: 1px solid var(--color-acento);
+  outline-offset: -1px;
+  background-color: var(--color-activo);
+}
+
+/* Controles de expansión. */
+.arbol-nodo__expansor,
+.arbol-nodo__espaciador {
+  display: inline-flex;
+  flex: 0 0 1.25rem;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.arbol-nodo__expansor {
+  padding: 0;
+  border: 1px solid var(--color-borde);
+  border-radius: 50%;
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arbol-nodo__expansor:hover {
+  background-color: var(--color-hover);
+}
+
+/* Punto de color que identifica el tipo de nodo. */
+.arbol-nodo__punto {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-tag-neutro-texto);
+}
+
+.arbol-nodo__punto--aplicacion {
+  background-color: var(--color-tag-violeta-texto);
+}
+
+.arbol-nodo__punto--componentes {
+  background-color: var(--color-tag-rosa-texto);
+}
+
+.arbol-nodo__punto--pagina {
+  background-color: var(--color-tag-verde-texto);
+}
+
+.arbol-nodo__punto--layout {
+  background-color: var(--color-tag-celeste-texto);
+}
+
+.arbol-nodo__punto--ui {
+  background-color: var(--color-tag-neutro-texto);
+}
+
+.arbol-nodo__punto--router {
+  background-color: var(--color-tag-ambar-texto);
+}
+
+/* Nombre del nodo. */
+.arbol-nodo__nombre {
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-texto);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.arbol-nodo__nombre:hover {
+  color: var(--color-acento);
+}
+
+/* Etiqueta del tipo de nodo. */
+.arbol-nodo__tipo {
+  flex-shrink: 0;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.arbol-nodo__tipo--aplicacion {
+  color: var(--color-tag-violeta-texto);
+  background-color: var(--color-tag-violeta-fondo);
+}
+
+.arbol-nodo__tipo--componentes {
+  color: var(--color-tag-rosa-texto);
+  background-color: var(--color-tag-rosa-fondo);
+}
+
+.arbol-nodo__tipo--pagina {
+  color: var(--color-tag-verde-texto);
+  background-color: var(--color-tag-verde-fondo);
+}
+
+.arbol-nodo__tipo--layout {
+  color: var(--color-tag-celeste-texto);
+  background-color: var(--color-tag-celeste-fondo);
+}
+
+.arbol-nodo__tipo--ui {
+  color: var(--color-tag-neutro-texto);
+  background-color: var(--color-tag-neutro-fondo);
+}
+
+.arbol-nodo__tipo--router {
+  color: var(--color-tag-ambar-texto);
+  background-color: var(--color-tag-ambar-fondo);
+}
+
+.arbol-nodo__tipo--sin-tipo {
+  color: var(--color-tag-neutro-texto);
+  background-color: var(--color-tag-neutro-fondo);
+}
+
+/* Foco accesible. */
+.arbol-nodo__expansor:focus-visible,
+.arbol-nodo__nombre:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 2px;
+}

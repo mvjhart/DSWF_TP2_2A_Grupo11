@@ -1,4 +1,3 @@
-
 {
   "components": {
     "theme-toggle": {
@@ -51,9 +50,7 @@
       "type": "Componentes",
       "file": "src/context/ThemeProvider.jsx",
       "description": "Gestiona el estado global del tema, sincroniza el atributo data-theme, persiste la selección en localStorage y proporciona tema y alternarTema mediante ThemeContext.",
-      "props": [
-        "children"
-      ],
+      "props": ["children"],
       "hooks": [
         {
           "name": "useState",
@@ -87,12 +84,7 @@
       "type": "Componentes",
       "file": "src/components/AccordionItem/AccordionItem.jsx",
       "description": "Muestra una entrada desplegable con un encabezado y un panel de contenido.",
-      "props": [
-        "title",
-        "headerContent",
-        "children",
-        "defaultOpen"
-      ],
+      "props": ["title", "headerContent", "children", "defaultOpen"],
       "hooks": [
         {
           "name": "useState",
@@ -162,12 +154,7 @@
         "type": "Componentes",
         "file": "src/components/Header/Header.jsx",
         "description": "Cabecera móvil con controles para abrir la navegación y cambiar el tema.",
-        "props": [
-          "menuAbierto",
-          "onToggleMenu",
-          "botonMenuRef",
-          "inert"
-        ],
+        "props": ["menuAbierto", "onToggleMenu", "botonMenuRef", "inert"],
         "children": [
           {
             "id": "boton-menu",
@@ -194,12 +181,7 @@
         "type": "Componentes",
         "file": "src/components/Sidebar/Sidebar.jsx",
         "description": "Navegación lateral adaptable a escritorio y móvil, con enlaces a las páginas de la aplicación.",
-        "props": [
-          "isOpen",
-          "onNavigate",
-          "sidebarRef",
-          "esMovil"
-        ],
+        "props": ["isOpen", "onNavigate", "sidebarRef", "esMovil"],
         "hooks": [
           {
             "name": "useState",
@@ -428,11 +410,7 @@
                             "type": "Componentes",
                             "componentRef": "accordion-item",
                             "description": "Representa cada registro de la bitácora.",
-                            "props": [
-                              "title",
-                              "headerContent",
-                              "children"
-                            ],
+                            "props": ["title", "headerContent", "children"],
                             "repeat": "entradasFiltradas.map",
                             "children": []
                           }
