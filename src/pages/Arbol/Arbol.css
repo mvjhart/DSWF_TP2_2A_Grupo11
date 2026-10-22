@@ -216,7 +216,6 @@
 
 /* Escritorio: el encabezado y el árbol se desplazan juntos. */
 @media (min-width: 769px) {
-
   .arbol-visor {
     box-sizing: border-box;
     padding-bottom: 1rem;
@@ -227,7 +226,7 @@
     max-width: 64rem;
     margin-inline: auto;
     box-sizing: border-box;
-    
+
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;

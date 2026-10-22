@@ -109,7 +109,7 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family:'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }

@@ -1,6 +1,6 @@
 import "./Footer.css";
 import GithubLink from "../GithubLink/GithubLink";
-import equipo from "../../assets/data/equipo.json"
+import equipo from "../../assets/data/equipo.json";
 
 function Footer() {
   return (

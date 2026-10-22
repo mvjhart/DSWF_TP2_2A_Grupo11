@@ -147,7 +147,6 @@
   background-color: var(--color-tag-ambar-texto);
 }
 
-
 /* ==================================================
    6. NOMBRE DEL NODO
    ================================================== */
@@ -214,7 +213,6 @@
 /* ==================================================
    8. ESTADOS INTERACTIVOS Y ACCESIBILIDAD
    ================================================== */
-
 
 /* Efectos hover solo en dispositivos que admiten hover. */
 @media (hover: hover) {

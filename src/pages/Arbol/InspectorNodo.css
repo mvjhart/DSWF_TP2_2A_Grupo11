@@ -1,6 +1,5 @@
 /* src/pages/Arbol/InspectorNodo.css */
 
-
 /* ==================================================
    1. TARJETA PRINCIPAL DEL INSPECTOR
    ================================================== */
@@ -18,7 +17,6 @@
   background-color: var(--color-superficie);
   box-shadow: 0 4px 12px var(--color-sombra);
 }
-
 
 /* ==================================================
    2. ENCABEZADO: IDENTIDAD Y RESUMEN
@@ -53,7 +51,6 @@
   font-weight: 700;
   overflow-wrap: anywhere;
 }
-
 
 /* ==================================================
    3. INDICADOR VISUAL DEL TIPO DE NODO
@@ -94,7 +91,6 @@
   background-color: var(--color-tag-ambar-texto);
 }
 
-
 /* ==================================================
    4. INFORMACIÓN DEL NODO: ARCHIVO Y DESCRIPCIÓN
    ================================================== */
@@ -121,7 +117,6 @@
   line-height: 1.625;
   overflow-wrap: anywhere;
 }
-
 
 /* ==================================================
    5. RESUMEN: NODO PADRE Y CANTIDAD DE HIJOS
@@ -175,7 +170,6 @@
   overflow-wrap: anywhere;
 }
 
-
 /* ==================================================
    6. CONTENIDO INFERIOR: PROPS E HIJOS
    ================================================== */
@@ -201,7 +195,6 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-
 
 /* ==================================================
    7. LISTAS DE PROPS E HIJOS
@@ -242,7 +235,6 @@
   font-size: 0.6875rem;
 }
 
-
 /* ==================================================
    8. RESPONSIVE: TABLETS Y MÓVILES
    ================================================== */
@@ -274,7 +266,6 @@
   }
 }
 
-
 /* ==================================================
    9. RESPONSIVE: SECCIONES INFERIORES EN MÓVIL
    ================================================== */
@@ -287,7 +278,6 @@
     gap: 0.75rem;
   }
 }
-
 
 /* ==================================================
    10. RESPONSIVE: PANTALLAS MUY ESTRECHAS

@@ -34,7 +34,7 @@
 /* Derecha absoluta */
 .footer__right {
   justify-self: end;
-  font-size: clamp(0.55rem, 1.0vw, 0.7rem);
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
 }
 
 /* --- Versión Mobile (se apila ordenado si la pantalla es muy chica) --- */
