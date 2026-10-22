@@ -40,8 +40,7 @@
 .api__buscador button,
 .api__sugeridos button,
 .api__album-toggle,
-.api__actualizar,
-.api__estado button {
+.api__actualizar {
   padding: 0.5rem 0.9rem;
   border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
   border-radius: 6px;
@@ -54,8 +53,7 @@
 .api__buscador button:hover,
 .api__sugeridos button:hover,
 .api__album-toggle:hover,
-.api__actualizar:hover,
-.api__estado button:hover {
+.api__actualizar:hover {
   background: color-mix(in srgb, currentColor 10%, transparent);
 }
 
@@ -111,7 +109,7 @@
   list-style: none;
 }
 
-.api__sugeridos button[aria-pressed='true'] {
+.api__sugeridos button[aria-pressed="true"] {
   border-color: currentColor;
   background: color-mix(in srgb, currentColor 18%, transparent);
   font-weight: 600;
@@ -135,40 +133,6 @@
 
 .api__actualizar {
   font-size: 0.85rem;
-}
-
-/* ===================================================
-   Estados
-   =================================================== */
-
-.api__estado {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-  margin: 1rem 0;
-  padding: 0.8rem 1rem;
-  border-left: 3px solid currentColor;
-  background: color-mix(in srgb, currentColor 8%, transparent);
-}
-
-.api__estado--error {
-  border-left-color: #ef4444;
-}
-
-.api__estado p {
-  margin: 0;
-}
-
-.api__estado button {
-  padding: 0.3rem 0.7rem;
-  font-size: 0.85rem;
-}
-
-.api__estado--compacto {
-  margin: 0.4rem 0;
-  padding: 0.5rem 0.7rem;
-  font-size: 0.78rem;
 }
 
 /* ===================================================
@@ -320,6 +284,7 @@
   overflow-wrap: anywhere;
   font-weight: 500;
 }
+
 .api__album-links {
   display: flex;
   flex-wrap: wrap;
@@ -338,6 +303,7 @@
 .api__album-links a:hover {
   opacity: 1;
 }
+
 /* ===================================================
    Créditos
    =================================================== */

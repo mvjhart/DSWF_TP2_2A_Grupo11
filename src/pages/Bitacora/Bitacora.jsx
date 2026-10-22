@@ -1,6 +1,11 @@
 import { useMemo, useState } from "react";
 import bitacora from "../../assets/data/bitacora.json";
 import AccordionItem from "../../components/AccordionItem/AccordionItem";
+import {
+  FilterBar,
+  FilterSelect,
+  StatusMessage,
+} from "../../components/ControlesFil/ControlesFil";
 import "./Bitacora.css";
 
 const coloresPorCategoria = {
@@ -39,6 +44,16 @@ const CATEGORIA_TODAS = "Todas";
 const ORDEN_ASC = "asc";
 const ORDEN_DESC = "desc";
 
+const OPCIONES_TP = [
+  { value: "TP1", label: "TP1" },
+  { value: "TP2", label: "TP2" },
+];
+
+const OPCIONES_ORDEN = [
+  { value: ORDEN_ASC, label: "Más antiguos primero" },
+  { value: ORDEN_DESC, label: "Más recientes primero" },
+];
+
 function Bitacora() {
   const [tpSeleccionado, setTpSeleccionado] = useState(TP_TODOS);
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
@@ -49,6 +64,15 @@ function Bitacora() {
     const unicas = [...new Set(bitacora.map((entrada) => entrada.categoria))];
     return unicas.sort((a, b) => a.localeCompare(b, "es"));
   }, []);
+
+  const opcionesCategoria = useMemo(
+    () =>
+      categoriasDisponibles.map((categoria) => ({
+        value: categoria,
+        label: categoria,
+      })),
+    [categoriasDisponibles],
+  );
 
   const entradasFiltradas = useMemo(() => {
     return bitacora
@@ -85,70 +109,43 @@ function Bitacora() {
         soluciones, desde TP1 hasta la migración a React en TP2.
       </p>
 
-      <section
-        className="bitacora__filtros"
-        aria-label="Filtros y orden de la bitácora"
+      <FilterBar
+        ariaLabel="Filtros y orden de la bitácora"
+        onReset={restablecerTodo}
+        hayCambios={hayCambios}
+        contador={`${entradasFiltradas.length} de ${bitacora.length} registro${bitacora.length === 1 ? "" : "s"}`}
       >
-        <label className="bitacora__filtro">
-          <span className="bitacora__filtro-label">TP</span>
-          <select
-            value={tpSeleccionado}
-            onChange={(evento) => setTpSeleccionado(evento.target.value)}
-          >
-            <option value={TP_TODOS}>Todos</option>
-            <option value="TP1">TP1</option>
-            <option value="TP2">TP2</option>
-          </select>
-        </label>
-
-        <label className="bitacora__filtro">
-          <span className="bitacora__filtro-label">Categoría</span>
-          <select
-            value={categoriaSeleccionada}
-            onChange={(evento) => setCategoriaSeleccionada(evento.target.value)}
-          >
-            <option value={CATEGORIA_TODAS}>Todas</option>
-            {categoriasDisponibles.map((categoria) => (
-              <option key={categoria} value={categoria}>
-                {categoria}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="bitacora__filtro">
-          <span className="bitacora__filtro-label">Orden</span>
-          <select
-            value={ordenFecha}
-            onChange={(evento) => setOrdenFecha(evento.target.value)}
-          >
-            <option value={ORDEN_ASC}>Más antiguos primero</option>
-            <option value={ORDEN_DESC}>Más recientes primero</option>
-          </select>
-        </label>
-
-        <button
-          type="button"
-          className="bitacora__restablecer"
-          onClick={restablecerTodo}
-          disabled={!hayCambios}
-        >
-          Restablecer
-        </button>
-
-        <p className="bitacora__contador" aria-live="polite">
-          {entradasFiltradas.length} de {bitacora.length} registro
-          {bitacora.length === 1 ? "" : "s"}
-        </p>
-      </section>
+        <FilterSelect
+          label="TP"
+          value={tpSeleccionado}
+          onChange={setTpSeleccionado}
+          todos={{ value: TP_TODOS, label: "Todos" }}
+          options={OPCIONES_TP}
+        />
+        <FilterSelect
+          label="Categoría"
+          value={categoriaSeleccionada}
+          onChange={setCategoriaSeleccionada}
+          todos={{ value: CATEGORIA_TODAS, label: "Todas" }}
+          options={opcionesCategoria}
+        />
+        <FilterSelect
+          label="Orden"
+          value={ordenFecha}
+          onChange={setOrdenFecha}
+          options={OPCIONES_ORDEN}
+        />
+      </FilterBar>
 
       {entradasFiltradas.length === 0 ? (
-        <section className="bitacora__vacia" role="status">
-          <p>No hay registros que coincidan con los filtros seleccionados.</p>
-          <button type="button" onClick={restablecerTodo}>
-            Ver todos los registros
-          </button>
-        </section>
+        <StatusMessage
+          accion={{
+            etiqueta: "Ver todos los registros",
+            onClick: restablecerTodo,
+          }}
+        >
+          No hay registros que coincidan con los filtros seleccionados.
+        </StatusMessage>
       ) : (
         <div className="bitacora__lista">
           {entradasFiltradas.map((entrada) => (
