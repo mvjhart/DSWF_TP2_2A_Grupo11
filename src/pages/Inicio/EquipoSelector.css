@@ -79,11 +79,6 @@
   line-height: 1.1;
 }
 
-.equipo__ciudad {
-  margin-top: 0.25rem;
-  color: var(--color-texto-suave);
-}
-
 .equipo__tag {
   display: inline-block;
   margin-top: 0.75rem;
@@ -97,41 +92,12 @@
   font-weight: 700;
 }
 
-.equipo__descripcion {
+.equipo__rol {
   max-width: 60ch;
   margin-top: 1rem;
   line-height: 1.6;
-}
-
-.equipo__detalle {
-  display: grid;
-  gap: 0.9rem;
-  margin-top: 1.25rem;
-}
-
-.equipo__detalle dt {
-  margin-bottom: 0.25rem;
-  color: var(--color-texto-suave);
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
-.equipo__detalle dd {
-  margin: 0;
-}
-
-.equipo__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  list-style: none;
-}
-
-.equipo__chips li {
-  padding: 0.2rem 0.65rem;
-  border: 1px solid var(--color-borde);
-  border-radius: 999px;
-  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-texto);
 }
 
 .equipo__enlace {
