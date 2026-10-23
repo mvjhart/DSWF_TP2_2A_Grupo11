@@ -1,21 +1,21 @@
 .github-link {
-  color: var(--color-texto);
+  color: var(--color-footer-texto);
   text-decoration: none;
   transition: color 200ms ease;
 }
 
 .github-link:hover {
-  color: var(--color-activo);
+  color: var(--color-acento);
 }
 
 .github-link:focus-visible {
-  outline: 2px solid var(--color-texto);
+  outline: 2px solid var(--color-footer-texto);
   outline-offset: 3px;
 }
 
 .github-link__icon {
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
 }

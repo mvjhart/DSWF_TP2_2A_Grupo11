@@ -10,10 +10,10 @@
   height: 44px;
   padding: 0;
 
-  border: 1px solid var(--color-borde);
+  border: 1px solid var(--color-theme-toggle-borde);
   border-radius: 50%;
-  background-color: var(--color-boton-tema);
-  color: var(--color-texto);
+  background-color: var(--color-theme-toggle-fondo);
+  color: var(--color-theme-toggle-texto);
 
   cursor: pointer;
 
@@ -24,8 +24,8 @@
 }
 
 .theme-toggle:hover {
-  background-color: var(--color-boton-tema-hover);
-  box-shadow: 0 0 10px var(--color-sombra);
+  background-color: var(--color-theme-toggle-hover);
+  box-shadow: 0 0 10px var(--color-theme-toggle-sombra);
 }
 
 .theme-toggle:focus-visible {

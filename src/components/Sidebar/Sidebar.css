@@ -7,8 +7,9 @@
   min-height: 100vh;
   padding: 1.5rem;
 
-  border-right: 1px solid var(--color-borde);
-  background-color: var(--color-superficie);
+  border-right: 1px solid var(--color-sidebar-borde);
+  background-color: var(--color-sidebar-fondo);
+  color: var(--color-sidebar-texto);
 }
 
 /* Encabezado de la barra lateral */
@@ -44,11 +45,11 @@
 }
 
 .sidebar nav a:hover {
-  background-color: var(--color-hover);
+  background-color: var(--color-sidebar-hover);
 }
 
 .sidebar nav a.active {
-  background-color: var(--color-activo);
+  background-color: var(--color-sidebar-activo);
   font-weight: 600;
 }
 
@@ -58,10 +59,10 @@
   margin-left: auto;
   padding: 0.65rem 1rem;
 
-  border: 1px solid var(--color-boton-tema);
+  border: 1px solid var(--color-sidebar-cerrar-borde);
   border-radius: 0.375rem;
-  background-color: var(--color-borde);
-  color: inherit;
+  background-color: var(--color-sidebar-cerrar-fondo);
+  color: var(--color-sidebar-cerrar-texto);
 
   cursor: pointer;
 }

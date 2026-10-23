@@ -34,3 +34,24 @@
   margin: 0;
   max-width: 65ch;
 }
+
+/* NOT FOUND */
+
+/* Redefinición del subrayado del PageHeader solo en esta vista */
+.not-found__header .page-header h1::after {
+  background-color: var(--color-tag-coral-texto);
+  left: 50%;
+  transform: translateX(-50%); /* Centramos el subrayado */
+}
+
+/* Reorientamos el PageHeader al centro para la vista 404 */
+.not-found__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.not-found__header p:first-of-type {
+  text-align: center;
+}

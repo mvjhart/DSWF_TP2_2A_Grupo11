@@ -2,11 +2,40 @@
 
 /************* TEMAS START *************/
 
+:root {
+  /* API: colores auxiliares */
+  --color-texto-sobre-acento: #ffffff;
+  --color-sombra-acento: rgb(0 173 181 / 25%);
+  --color-sombra-acento-hover: rgb(0 173 181 / 35%);
+
+  /* Modal */
+  --color-sombra-modal: rgb(0 0 0 / 30%);
+  --color-fondo-backdrop: rgb(0 0 0 / 60%);
+
+  /* ========================================
+   THEME TOGGLE
+   ======================================== */
+
+  --color-theme-toggle-fondo: var(--color-boton-tema);
+  --color-theme-toggle-texto: var(--color-texto);
+  --color-theme-toggle-borde: var(--color-borde);
+  --color-theme-toggle-hover: var(--color-boton-tema-hover);
+  --color-theme-toggle-sombra: var(--color-sombra);
+
+  /* ========================================
+   GITHUB LINK
+   ======================================== */
+
+  --color-github-link: var(--color-texto);
+  --color-github-link-hover: var(--color-acento);
+  --color-github-link-foco: var(--color-texto);
+}
+
 :root,
 [data-theme="claro"] {
   color-scheme: light;
 
-  --color-fondo: #fff;
+  --color-fondo: #f9fafb;
   --color-superficie: #fff;
   --color-texto: #1f2937;
   --color-borde: #d1d5db;
@@ -41,6 +70,31 @@
 
   --color-tag-neutro-fondo: rgb(148 163 184 / 18%);
   --color-tag-neutro-texto: #475569;
+
+  /* ========================================
+   SIDEBAR
+   ======================================== */
+
+  /* Opción: azul pizarra */
+
+  --color-sidebar-fondo: #334155;
+  --color-sidebar-texto: #f8fafc;
+  --color-sidebar-borde: #475569;
+  --color-sidebar-hover: #3f4f65;
+  --color-sidebar-activo: #475569;
+  --color-sidebar-cerrar-fondo: #475569;
+  --color-sidebar-cerrar-texto: #f8fafc;
+  --color-sidebar-cerrar-borde: #64748b;
+
+  /* ========================================
+   FOOTER 
+   ======================================== */
+
+  /* Opción: azul pizarra oscuro */
+
+  --color-footer-fondo: #1e293b;
+  --color-footer-texto: #f8fafc;
+  --color-footer-borde: #374151;
 }
 
 [data-theme="oscuro"] {
@@ -81,6 +135,23 @@
 
   --color-tag-neutro-fondo: rgb(148 163 184 / 20%);
   --color-tag-neutro-texto: #cbd5e1;
+
+  /* Sidebar */
+  --color-sidebar-fondo: #1f2937;
+  --color-sidebar-texto: #f3f4f6;
+  --color-sidebar-borde: #374151;
+  --color-sidebar-hover: #374151;
+  --color-sidebar-activo: #4b5563;
+
+  /* Botón de cierre de Sidebar */
+  --color-sidebar-cerrar-fondo: #374151;
+  --color-sidebar-cerrar-texto: #f3f4f6;
+  --color-sidebar-cerrar-borde: #1f2937;
+
+  /* Footer */
+  --color-footer-fondo: #0b1220;
+  --color-footer-texto: #f3f4f6;
+  --color-footer-borde: #374151;
 }
 
 /************* TEMAS END *************/

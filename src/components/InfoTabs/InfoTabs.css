@@ -42,7 +42,9 @@
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .info-tabs__btn:hover {
@@ -124,7 +126,7 @@
     padding: 0.6rem;
     justify-content: center;
   }
-  
+
   /* Oculta visualmente el texto en móviles pero lo mantiene para lectores de pantalla */
   .info-tabs__btn span {
     position: absolute;
