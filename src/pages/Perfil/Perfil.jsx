@@ -24,10 +24,17 @@ function PerfilContenido({ integrante }) {
   const tono = integrante.tono ?? "neutro";
 
   const grupos = TABS.map((tab) => {
+    // 1. Filtramos por integrante, por tipo Y SOLO los que tienen featured: true
     const todos = favoritos.filter(
-      (f) => f.memberSlug === slug && f.tipo === tab.tipo,
+      (f) =>
+        f.memberSlug === slug && f.tipo === tab.tipo && f.featured === true,
     );
-    const reales = todos.filter((f) => !esPendiente(f.titulo));
+
+    // 2. Filtramos los PENDIENTES y los ordenamos usando 'order'
+    const reales = todos
+      .filter((f) => !esPendiente(f.titulo))
+      .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
     return { ...tab, reales, pendientes: todos.length - reales.length };
   });
 

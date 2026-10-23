@@ -14,10 +14,12 @@ const IMAGENES_LOCALES = import.meta.glob(
 function resolverPortada(portada) {
   if (esPendiente(portada)) return null;
   if (/^https?:\/\//.test(portada)) return portada;
-  
-  const rutaNormalizada = portada.replace(/^src\/assets\/images\//, "").replace(/^\//, "");
+
+  const rutaNormalizada = portada
+    .replace(/^src\/assets\/images\//, "")
+    .replace(/^\//, "");
   const url = IMAGENES_LOCALES[`/src/assets/images/${rutaNormalizada}`];
-  
+
   return url ?? null;
 }
 
@@ -38,8 +40,10 @@ function FavoriteItemCard({ favorito }) {
       <div
         className="fav-card__portada"
         style={
-          urlPortada 
-            ? { backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%), url("${urlPortada}")` } 
+          urlPortada
+            ? {
+                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%), url("${urlPortada}")`,
+              }
             : undefined
         }
       >

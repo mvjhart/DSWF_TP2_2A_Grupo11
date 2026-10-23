@@ -1,7 +1,6 @@
 [
   {
     "slug": "victoria",
-    "tono": "violeta",
     "nombre": "María Victoria Mariani",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 35,
@@ -19,7 +18,6 @@
   },
   {
     "slug": "candelaria",
-    "tono": "rosa",
     "nombre": "Candelaria Chazarreta",
     "ciudad": "Santiago del Estero, Argentina",
     "edad": 27,
@@ -50,7 +48,6 @@
   },
   {
     "slug": "federico",
-    "tono": "ambar",
     "nombre": "Federico Acosta Maneiro",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 32,
@@ -86,7 +83,6 @@
   },
   {
     "slug": "marcos",
-    "tono": "verde",
     "nombre": "Marcos Aquino",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 28,

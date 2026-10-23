@@ -16,14 +16,14 @@
   overflow: hidden;
   border: 1px solid var(--color-borde);
   border-radius: 0.75rem;
-  
+
   /* Gradiente por defecto si no hay imagen */
   background: linear-gradient(
     160deg,
     var(--tono-fondo, var(--color-tarjeta)),
     var(--color-tarjeta)
   );
-  
+
   /* Ajustes para que la imagen encaje perfecto */
   background-size: cover;
   background-position: center;
