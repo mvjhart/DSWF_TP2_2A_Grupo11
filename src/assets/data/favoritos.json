@@ -235,6 +235,7 @@
     "anio": 1993,
     "comentario": "Una cumbre absoluta e indiscutible del shoegaze, donde texturas sonoras celestiales, guitarras envueltas en delay y las voces entrelazadas de Neil Halstead y Rachel Goswell se funden en un mar de melancolía, belleza e introspección inolvidable luego de su romance.",
     "generos": ["Shoegaze", "Dream-Pop"],
+    "portada":"federico/souvlaki.jpg",
     "featured": true,
     "order": 1
   },
@@ -306,6 +307,7 @@
     "comentario": "El tiempo lo destruye todo",
     "sinopsis": "Marcus y Pierre emprenden la busqueda de los autores de la violación de Alex, la pareja de Marcus.",
     "generos": ["Drama"],
+    "portada": "federico/irreversible.webp",
     "featured": false
   },
   {

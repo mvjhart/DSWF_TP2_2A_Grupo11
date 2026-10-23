@@ -1,0 +1,134 @@
+.fav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ===================================================
+   Portada (soporta imagen y tiene gradiente de fondo)
+   =================================================== */
+.fav-card__portada {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem 0.75rem 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+  
+  /* Gradiente por defecto si no hay imagen */
+  background: linear-gradient(
+    160deg,
+    var(--tono-fondo, var(--color-tarjeta)),
+    var(--color-tarjeta)
+  );
+  
+  /* Ajustes para que la imagen encaje perfecto */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fav-card--album .fav-card__portada {
+  aspect-ratio: 1;
+}
+
+.fav-card--pelicula .fav-card__portada {
+  aspect-ratio: 2 / 3;
+}
+
+/* ===================================================
+   Surcos de vinilo decorativos
+   Solo se dibujan si es un álbum y NO tiene imagen
+   =================================================== */
+.fav-card--album:not(.fav-card--con-imagen) .fav-card__portada::before {
+  content: "";
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  width: 46%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 4px,
+    var(--tono-texto, var(--color-borde)) 4px 5px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ===================================================
+   Badges (Tipo y Año)
+   =================================================== */
+.fav-card__tipo,
+.fav-card__anio {
+  position: absolute;
+  top: 0.75rem;
+  color: var(--tono-texto, var(--color-texto-suave));
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.fav-card__tipo {
+  left: 0.75rem;
+}
+
+.fav-card__anio {
+  right: 0.75rem;
+}
+
+/* Si hay imagen, forzamos los badges a blanco con sombra para que se lean */
+.fav-card--con-imagen .fav-card__tipo,
+.fav-card--con-imagen .fav-card__anio {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ===================================================
+   Título
+   =================================================== */
+.fav-card__titulo {
+  position: relative;
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  z-index: 1;
+}
+
+/* Si hay imagen, el título también va en blanco para contrastar */
+.fav-card--con-imagen .fav-card__titulo {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ===================================================
+   Cuerpo (Artista, Géneros)
+   =================================================== */
+.fav-card__cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fav-card__cuerpo p {
+  margin: 0;
+}
+
+.fav-card__artista {
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.fav-card__generos {
+  color: var(--color-texto-suave);
+  font-size: 0.75rem;
+}

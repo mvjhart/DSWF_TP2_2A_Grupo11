@@ -1,8 +1,7 @@
 import { esPendiente } from "../../utils/esPendiente";
 import "./SkillsList.css";
 
-// Agrupa las habilidades filtrando categorías e items pendientes.
-// Devuelve solo las categorías que tienen al menos un item válido.
+// Devuelve solo las categorías con al menos un item válido.
 function agrupar(habilidades = []) {
   return habilidades
     .map(({ categoria, items }) => ({
@@ -24,9 +23,7 @@ function SkillsList({ habilidades }) {
       </h2>
 
       {grupos.length === 0 ? (
-        <p className="skills-list__pendiente">
-          Habilidades en construcción.
-        </p>
+        <p className="skills-list__pendiente">Habilidades en construcción.</p>
       ) : (
         <div className="skills-list__grupos">
           {grupos.map(({ categoria, items }) => (
