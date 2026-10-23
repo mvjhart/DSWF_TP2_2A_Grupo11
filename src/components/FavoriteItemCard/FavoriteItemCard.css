@@ -103,10 +103,16 @@
   z-index: 1;
 }
 
-/* Si hay imagen, el título también va en blanco para contrastar */
-.fav-card--con-imagen .fav-card__titulo {
+.fav-card--con-imagen .fav-card__tipo,
+.fav-card--con-imagen .fav-card__anio {
   color: #ffffff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* El título va en blanco SOLO si está dentro de la portada (sin imagen) */
+.fav-card__portada .fav-card__titulo {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* ===================================================
