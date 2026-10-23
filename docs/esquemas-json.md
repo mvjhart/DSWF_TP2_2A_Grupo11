@@ -133,7 +133,7 @@ Un registro de un tipo no incluye los campos del otro. Para agregar un tipo nuev
 - Todo integrante tiene `github` con la URL completa de su perfil.
 - Los `id` de `favoritos.json` son únicos.
 - Todo `memberSlug` coincide con un `slug` existente en `integrantes.json`.
-- Cada integrante tiene como máximo tres favoritos con `featured: true`, con `order` del 1 al 3 sin repetirse.
+- Cada integrante puede tener hasta tres álbumes y tres películas con `featured: true`, con `order` del 1 al 3 sin repetirse dentro de cada tipo.
 - Todo registro de tipo `album` tiene `artista`.
 
 ## Datos pendientes
