@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import useMediaQuery from "./hooks/useMediaQuery";
+import ScrollToTopButton from "./components/ScrollToTopButton/ScrollToTopButton";
 import "./App.css";
 
 function App() {
@@ -62,6 +63,8 @@ function App() {
 
   return (
     <div className="app-layout">
+      <ScrollToTopButton />
+
       <Header
         menuAbierto={menuVisible}
         onToggleMenu={alternarMenu}
