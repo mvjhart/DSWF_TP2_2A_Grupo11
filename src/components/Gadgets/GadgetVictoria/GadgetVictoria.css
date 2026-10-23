@@ -1,0 +1,169 @@
+.paleta {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1rem 2rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 1rem;
+  background: linear-gradient(
+    160deg,
+    var(--tono-fondo, var(--color-tarjeta)),
+    var(--color-tarjeta) 70%
+  );
+  text-align: center;
+}
+
+.paleta__titulo {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.paleta__texto {
+  max-width: 50ch;
+  margin: 0 auto 1.25rem;
+  color: var(--color-texto-suave);
+}
+
+/* ===================================================
+   Colores
+   =================================================== */
+
+.paleta__colores {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  margin: 0 auto 1.25rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+  list-style: none;
+}
+
+.paleta__color {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 4rem;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 200ms ease;
+}
+
+.paleta__hex,
+.paleta__bloqueo {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid currentcolor;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.paleta__hex {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.03em;
+}
+
+.paleta__hex:hover,
+.paleta__bloqueo:hover {
+  background: rgb(127 127 127 / 25%);
+}
+
+.paleta__hex:focus-visible,
+.paleta__bloqueo:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+/* Un color bloqueado se distingue también sin depender del color */
+.paleta__color--bloqueado .paleta__bloqueo {
+  border-width: 2px;
+  background: currentcolor;
+}
+
+.paleta__color--bloqueado .paleta__bloqueo:hover {
+  background: currentcolor;
+}
+
+/* Al estar relleno con el color del texto, el texto pasa a verse con el fondo del color */
+.paleta__color--bloqueado .paleta__bloqueo {
+  color: transparent;
+  position: relative;
+}
+
+.paleta__color--bloqueado .paleta__bloqueo::before {
+  content: "Bloqueado";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--paleta-fondo, #fff);
+  mix-blend-mode: difference;
+}
+
+.paleta__oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.paleta__boton {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--tono-texto, var(--color-texto));
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--tono-texto, var(--color-texto));
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.paleta__boton:hover {
+  background: var(--tono-texto, var(--color-texto));
+  color: var(--color-fondo);
+}
+
+.paleta__boton:focus-visible {
+  outline: 2px solid var(--color-secundario);
+  outline-offset: 3px;
+}
+
+.paleta__aviso {
+  min-height: 1.5em;
+  margin: 1rem 0 0;
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .paleta__colores {
+    flex-direction: row;
+  }
+
+  .paleta__color {
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 11rem;
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paleta__color,
+  .paleta__hex,
+  .paleta__bloqueo,
+  .paleta__boton {
+    transition: none;
+  }
+}
