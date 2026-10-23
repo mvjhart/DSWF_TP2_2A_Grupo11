@@ -439,7 +439,8 @@
     "generos": ["Reggaetón", "Latin Trap", "Salsa"],
     "portada": "/marcos/debi-tirar-mas-fotos.webp",
     "alt": "Portada del álbum 'DeBÍ TiRAR MáS FOToS' de Bad Bunny",
-    "featured": false
+    "featured": true,
+    "order": 3
   },
   {
     "id": "fav-033",
@@ -465,7 +466,8 @@
     "generos": ["Rock Nacional", "Rock Alternativo"],
     "portada": "/marcos/momo-sampler.webp",
     "alt": "Portada del álbum 'Momo Sampler' de Patricio Rey y sus Redonditos de Ricota",
-    "featured": false
+    "featured": true,
+    "order": 2
   },
   {
     "id": "fav-035",
@@ -505,7 +507,8 @@
     "generos": ["Comedia", "Romance", "Fantasía"],
     "portada": "/marcos/cuestion-de-tiempo.webp",
     "alt": "Portada de la película 'Cuestión de tiempo'",
-    "featured": false
+    "featured": true,
+    "order": 3
   },
   {
     "id": "fav-038",
@@ -546,6 +549,6 @@
     "portada": "/marcos/el-secreto-de-sus-ojos.webp",
     "alt": "Portada de la película 'El secreto de sus ojos'",
     "featured": true,
-    "order": 3
+    "order": 1
   }
 ]
