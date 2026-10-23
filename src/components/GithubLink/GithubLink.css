@@ -1,11 +1,12 @@
 .github-link {
+
   color: var(--color-texto);
   text-decoration: none;
   transition: color 200ms ease;
 }
 
 .github-link:hover {
-  color: var(--color-activo);
+  color: var(--color-acento);
 }
 
 .github-link:focus-visible {

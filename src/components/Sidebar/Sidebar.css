@@ -7,8 +7,9 @@
   min-height: 100vh;
   padding: 1.5rem;
 
-  border-right: 1px solid var(--color-borde);
-  background-color: var(--color-superficie);
+  border-right: 1px solid var(--color-sidebar-borde);
+  background-color: var(--color-sidebar-fondo);
+  color: var(--color-sidebar-texto);
 }
 
 /* Encabezado de la barra lateral */

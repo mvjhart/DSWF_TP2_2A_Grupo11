@@ -3,6 +3,7 @@
 /************* TEMAS START *************/
 
 :root {
+
   /* API: colores auxiliares */
   --color-texto-sobre-acento: #ffffff;
   --color-sombra-acento: rgb(0 173 181 / 25%);
@@ -17,7 +18,7 @@
 [data-theme="claro"] {
   color-scheme: light;
 
-  --color-fondo: #fff;
+  --color-fondo: #f3f4f6;
   --color-superficie: #fff;
   --color-texto: #1f2937;
   --color-borde: #d1d5db;
@@ -52,6 +53,16 @@
 
   --color-tag-neutro-fondo: rgb(148 163 184 / 18%);
   --color-tag-neutro-texto: #475569;
+
+    /* Sidebar */
+  --color-sidebar-fondo: #ffffff;
+  --color-sidebar-texto: #1f2937;
+  --color-sidebar-borde: #d1d5db;
+
+    /* Footer */
+  --color-footer-fondo: #e5e7eb;
+  --color-footer-texto: #1f2937;
+  --color-footer-borde: #d1d5db;
 }
 
 [data-theme="oscuro"] {
@@ -92,6 +103,16 @@
 
   --color-tag-neutro-fondo: rgb(148 163 184 / 20%);
   --color-tag-neutro-texto: #cbd5e1;
+
+   /* Sidebar */
+  --color-sidebar-fondo: #1f2937;
+  --color-sidebar-texto: #f3f4f6;
+  --color-sidebar-borde: #374151;
+
+  /* Footer */
+  --color-footer-fondo: #0b1220;
+  --color-footer-texto: #f3f4f6;
+  --color-footer-borde: #374151;
 }
 
 /************* TEMAS END *************/
