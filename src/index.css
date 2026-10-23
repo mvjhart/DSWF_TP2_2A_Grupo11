@@ -2,6 +2,17 @@
 
 /************* TEMAS START *************/
 
+:root {
+  /* API: colores auxiliares */
+  --color-texto-sobre-acento: #ffffff;
+  --color-sombra-acento: rgb(0 173 181 / 25%);
+  --color-sombra-acento-hover: rgb(0 173 181 / 35%);
+
+  /* Modal */
+  --color-sombra-modal: rgb(0 0 0 / 30%);
+  --color-fondo-backdrop: rgb(0 0 0 / 60%);
+}
+
 :root,
 [data-theme="claro"] {
   color-scheme: light;

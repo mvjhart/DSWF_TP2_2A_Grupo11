@@ -1,0 +1,43 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+/* Variante Principal (Estilo por defecto) */
+.btn--primary {
+  color: var(--color-texto-sobre-acento);
+  background-color: var(--color-acento);
+  box-shadow: 0 4px 14px var(--color-sombra-acento);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--color-sombra-acento-hover);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+/* Variante Secundaria / Outline (Por si necesitas en un futuro) */
+.btn--outline {
+  color: var(--color-texto);
+  background-color: transparent;
+  border: 1px solid var(--color-borde);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-texto-suave);
+}
