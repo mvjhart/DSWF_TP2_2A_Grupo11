@@ -1,12 +1,28 @@
 import { useRef, useState } from "react";
 import { Link, useParams } from "react-router";
+import { NotFound } from "../../pages/NotFound/NotFound";
 import integrantes from "../../assets/data/integrantes.json";
 import favoritos from "../../assets/data/favoritos.json";
 import { esPendiente } from "../../utils/esPendiente";
+import ProfileNavigation from "../../components/ProfileNavigation/ProfileNavigation";
+// Componentes del perfil
 import ProfileIdentity from "../../components/ProfileIdentity/ProfileIdentity";
 import SkillsList from "../../components/SkillsList/SkillsList";
 import FavoriteItemCard from "../../components/FavoriteItemCard/FavoriteItemCard";
+// Gadgets de interacción
+import GadgetFederico from "../../components/Gadgets/GadgetFederico/GadgetFederico";
+import GadgetCandelaria from "../../components/Gadgets/GadgetCandelaria/GadgetCandelaria";
+import GadgetMarcos from "../../components/Gadgets/GadgetMarcos/GadgetMarcos";
+import GadgetVictoria from "../../components/Gadgets/GadgetVictoria/GadgetVictoria";
+
 import "./Perfil.css";
+
+const GADGETS = {
+  federico: GadgetFederico,
+  candelaria: GadgetCandelaria,
+  marcos: GadgetMarcos,
+  victoria: GadgetVictoria,
+};
 
 const TABS = [
   { id: "albumes", tipo: "album", etiqueta: "Álbumes" },
@@ -23,14 +39,16 @@ function PerfilContenido({ integrante }) {
   const { slug } = integrante;
   const tono = integrante.tono ?? "neutro";
 
+  const Gadget = GADGETS[slug];
+
   const grupos = TABS.map((tab) => {
-    // 1. Filtramos por integrante, por tipo Y SOLO los que tienen featured: true
+    // 1. Filtramos por integrante, por tipo y solo los que tienen featured: true
     const todos = favoritos.filter(
       (f) =>
         f.memberSlug === slug && f.tipo === tab.tipo && f.featured === true,
     );
 
-    // 2. Filtramos los PENDIENTES y los ordenamos usando 'order'
+    // 2. Descartamos los pendientes y ordenamos con 'order'
     const reales = todos
       .filter((f) => !esPendiente(f.titulo))
       .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
@@ -137,6 +155,21 @@ function PerfilContenido({ integrante }) {
           </div>
         ))}
       </section>
+
+      {/* Gadget interactivo propio de cada integrante */}
+      {Gadget && (
+        <Gadget
+          integrante={integrante}
+          favoritos={favoritos.filter(
+            (f) => f.memberSlug === slug && f.featured === true,
+          )}
+        />
+      )}
+
+      {/* Navegación entre integrantes al pie */}
+      <div className="perfil__nav-container">
+        <ProfileNavigation integrantes={integrantes} currentSlug={slug} />
+      </div>
     </main>
   );
 }
@@ -145,15 +178,16 @@ function Perfil() {
   const { slug } = useParams();
   const integrante = integrantes.find((i) => i.slug === slug);
 
+  // Si el integrante no existe, usamos el componente NotFound configurable
   if (!integrante) {
     return (
-      <main className="perfil perfil--no-encontrado">
-        <h1>Perfil no encontrado</h1>
-        <p>No existe un integrante con ese identificador.</p>
-        <Link to="/" className="perfil__volver">
-          Volver al inicio
-        </Link>
-      </main>
+      <NotFound
+        badge="Perfil No Encontrado"
+        title="Integrante inexistente"
+        description={`No pudimos encontrar a ningún integrante registrado con el identificador "${slug}".`}
+        buttonText="Volver al inicio"
+        buttonTo="/"
+      />
     );
   }
 
