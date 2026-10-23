@@ -1,124 +1,41 @@
 /*
-  Esta hoja no depende de colores fijos: hereda el color de texto de la app
-  y deriva fondos y bordes con color-mix(currentColor), así que se adapta
-  sola al tema claro y oscuro. Cuando estén los tokens de M.2 se pueden
-  reemplazar los color-mix por variables.
+  Estilos de la página de consulta de álbumes.
+  Adaptado a la paleta de temas, Poppins y responsive para móviles (350px).
 */
 
+/* ===================================================
+   Estructura general de la página
+   =================================================== */
+
 .api {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
   max-width: 1000px;
+  min-width: 0;
   margin: 0 auto;
   padding: 2rem 1.25rem 3rem;
 }
 
-.api__encabezado p,
-.api__explicacion p {
-  max-width: 70ch;
-}
-
-.api__explicacion,
 .api__resultados {
   margin-top: 2.5rem;
 }
 
-.api__explicacion h3 {
-  margin: 1.25rem 0 0.4rem;
-  font-size: 1rem;
-}
-
-.api__explicacion a {
-  color: inherit;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 /* ===================================================
-   Botones (buscador, sugeridos y "Ver canciones")
+   Accesibilidad general (Focus)
    =================================================== */
-
-.api__buscador button,
-.api__sugeridos button,
-.api__album-toggle,
-.api__actualizar,
-.api__estado button {
-  padding: 0.5rem 0.9rem;
-  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-
-.api__buscador button:hover,
-.api__sugeridos button:hover,
-.api__album-toggle:hover,
-.api__actualizar:hover,
-.api__estado button:hover {
-  background: color-mix(in srgb, currentColor 10%, transparent);
-}
-
-.api__buscador button:disabled,
-.api__actualizar:disabled {
-  opacity: 0.6;
-  cursor: progress;
-}
 
 .api input:focus-visible,
 .api button:focus-visible,
 .api a:focus-visible,
-.api__tracks:focus-visible {
-  outline: 2px solid currentColor;
+.api__modal button:focus-visible {
+  outline: 2px solid var(--color-acento);
   outline-offset: 2px;
 }
 
 /* ===================================================
-   Buscador
-   =================================================== */
-
-.api__buscador {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0 0.75rem;
-}
-
-.api__buscador input {
-  flex: 1 1 14rem;
-  min-width: 0;
-  padding: 0.75rem 1rem;
-  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-size: 1rem;
-}
-
-.api__buscador button {
-  padding: 0.75rem 1.25rem;
-  font-weight: 600;
-}
-
-.api__sugeridos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0 0 1.25rem;
-  padding: 0;
-  list-style: none;
-}
-
-.api__sugeridos button[aria-pressed='true'] {
-  border-color: currentColor;
-  background: color-mix(in srgb, currentColor 18%, transparent);
-  font-weight: 600;
-}
-
-/* ===================================================
-   Encabezado de resultados
+   Encabezado de resultados y Botón Actualizar
    =================================================== */
 
 .api__resultados-encabezado {
@@ -127,109 +44,256 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .api__resultados-encabezado h2 {
   margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  color: var(--color-texto);
 }
 
 .api__actualizar {
-  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.api__actualizar:hover {
+  background: var(--color-hover);
+}
+
+.api__actualizar:disabled,
+.api__buscador button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: progress;
 }
 
 /* ===================================================
-   Estados
+   Buscador Responsive (Fila en Escritorio / Apilado en Móvil)
    =================================================== */
 
-.api__estado {
+.api__buscador {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-  margin: 1rem 0;
-  padding: 0.8rem 1rem;
-  border-left: 3px solid currentColor;
-  background: color-mix(in srgb, currentColor 8%, transparent);
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
 }
 
-.api__estado--error {
-  border-left-color: #ef4444;
+/* Contenedor del Label + Input */
+.api__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
 }
 
-.api__estado p {
-  margin: 0;
-}
-
-.api__estado button {
-  padding: 0.3rem 0.7rem;
-  font-size: 0.85rem;
-}
-
-.api__estado--compacto {
-  margin: 0.4rem 0;
-  padding: 0.5rem 0.7rem;
+/* Label chiquito y elegante */
+.api__label {
   font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+  letter-spacing: 0.01em;
+}
+
+.api__campo input {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.api__campo input:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 1px;
+}
+
+/* Botón Gordito */
+.api__buscador button[type="submit"] {
+  padding: 0.7rem 2.25rem;
+  border: 1px solid var(--color-acento);
+  border-radius: 8px;
+  background: var(--color-acento);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgb(0 173 181 / 25%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.api__buscador button[type="submit"]:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgb(0 173 181 / 35%);
+}
+
+.api__buscador button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* ADAPTACIÓN MÓVIL: El botón pasa abajo al 100% de ancho */
+@media (max-width: 600px) {
+  .api__buscador {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .api__buscador button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /* ===================================================
-   Grilla de álbumes
-   align-items: start evita que al abrir una card las
-   demás de su fila se estiren con ella.
+   Artistas sugeridos
+   =================================================== */
+
+.api__sugeridos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.api__sugeridos button {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.api__sugeridos button:hover {
+  background: var(--color-hover);
+  color: var(--color-texto);
+}
+
+.api__sugeridos button[aria-pressed="true"] {
+  background: var(--color-tag-celeste-fondo);
+  color: var(--color-tag-celeste-texto);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+/* ===================================================
+   Grilla de álbumes (Alturas 100% unificadas)
    =================================================== */
 
 .api__grilla {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem 1.25rem;
-  align-items: start;
-  margin: 0;
+  gap: 1.75rem 1.25rem;
+  margin: 1.5rem 0 0 0;
   padding: 0;
   list-style: none;
 }
 
 @media (max-width: 500px) {
   .api__grilla {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.25rem 0.75rem;
   }
 }
 
 /* ===================================================
-   Card de álbum
+   Tarjeta de álbum (Estructura Flex estricta)
    =================================================== */
 
 .api__album {
-  padding: 0.75rem;
-  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.85rem;
+  border: 1px solid var(--color-borde);
   border-radius: 10px;
-  background: color-mix(in srgb, currentColor 4%, transparent);
+  background: var(--color-superficie);
+  box-shadow: 0 2px 4px var(--color-sombra);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.api__album-info {
+  flex: 1; /* Ocupa el espacio superior y empuja el footer hacia abajo */
 }
 
 .api__album h3 {
   margin: 0.5rem 0 0.1rem;
   font-size: 0.95rem;
   line-height: 1.25;
+  color: var(--color-texto);
 }
 
-.api__album > p {
+.api__album > p,
+.api__album-info p {
   margin: 0;
   font-size: 0.85rem;
-  opacity: 0.75;
+  color: var(--color-texto-suave);
+}
+
+.api__album-footer {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .api__album-toggle {
-  margin-top: 0.5rem;
-  padding: 0.35rem 0.7rem;
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-texto);
+  font: inherit;
   font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.api__album-toggle:hover {
+  background: var(--color-hover);
 }
 
 @media (hover: hover) {
   .api__album:hover {
-    border-color: color-mix(in srgb, currentColor 30%, transparent);
-    box-shadow: 0 4px 16px color-mix(in srgb, currentColor 8%, transparent);
+    border-color: var(--color-acento);
+    box-shadow: 0 6px 16px var(--color-sombra);
   }
 
   .api__album:hover .api__portada {
@@ -248,7 +312,7 @@
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 6px;
-  background: color-mix(in srgb, currentColor 12%, transparent);
+  background: var(--color-hover);
   transition: transform 0.25s ease;
 }
 
@@ -256,32 +320,106 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dashed color-mix(in srgb, currentColor 35%, transparent);
+  border: 1px dashed var(--color-borde);
   background: repeating-linear-gradient(
     45deg,
-    color-mix(in srgb, currentColor 8%, transparent) 0 8px,
+    var(--color-hover) 0 8px,
     transparent 8px 16px
   );
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  opacity: 0.7;
+  color: var(--color-texto-suave);
 }
 
 /* ===================================================
-   Panel de canciones
-   La card no cambia de ancho al abrirse: el panel crece
-   hasta una altura máxima y el resto se desplaza dentro.
+   Enlaces de álbum
    =================================================== */
 
-.api__tracks {
-  max-height: 16rem;
-  margin-top: 0.75rem;
-  padding: 0.75rem;
+.api__album-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.api__album-links a {
+  color: var(--color-acento);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.api__album-links a:hover {
+  opacity: 0.8;
+}
+
+/* ===================================================
+   Modal Nativo (<dialog>) y listado de canciones
+   =================================================== */
+
+.api__modal {
+  padding: 0;
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 30%);
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+
+  margin: auto;
+  position: fixed;
+  inset: 0;
+}
+
+.api__modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.api__modal-contenido {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  padding: 1.25rem;
+}
+
+.api__modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 0.75rem;
+}
+
+.api__modal-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--color-texto);
+}
+
+.api__modal-cerrar {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-texto-suave);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.api__modal-cerrar:hover {
+  background: var(--color-hover);
+  color: var(--color-texto);
+}
+
+.api__modal-body {
   overflow-y: auto;
-  overscroll-behavior: contain;
-  border-radius: 6px;
-  background: color-mix(in srgb, currentColor 6%, transparent);
+  max-height: 60vh;
+  padding-right: 0.25rem;
 }
 
 .api__tracks-lista {
@@ -306,7 +444,7 @@
   flex-shrink: 0;
   font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
-  opacity: 0.55;
+  color: var(--color-texto-suave);
 }
 
 .api__track-num {
@@ -319,25 +457,9 @@
   min-width: 0;
   overflow-wrap: anywhere;
   font-weight: 500;
-}
-.api__album-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
+  color: var(--color-texto);
 }
 
-.api__album-links a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  opacity: 0.7;
-}
-
-.api__album-links a:hover {
-  opacity: 1;
-}
 /* ===================================================
    Créditos
    =================================================== */
@@ -345,16 +467,5 @@
 .api__creditos {
   margin-top: 2.5rem;
   font-size: 0.8rem;
-  opacity: 0.75;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .api__album,
-  .api__portada {
-    transition: none;
-  }
-
-  .api__album:hover .api__portada {
-    transform: none;
-  }
+  color: var(--color-texto-suave);
 }

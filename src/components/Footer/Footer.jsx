@@ -1,13 +1,23 @@
 import "./Footer.css";
 import GithubLink from "../GithubLink/GithubLink";
+import equipo from "../../assets/data/equipo.json";
 
 function Footer() {
   return (
     <footer className="footer">
-      <p>
-        <span>&copy; 2026 · Grupo 11 · Comisión A · IFTS Nº 29</span>{" "}
+      {/* Elemento fantasma a la izquierda para balancear el centro exacto */}
+      <div className="footer__spacer"></div>
+
+      {/* Centro: Copyright + GithubLink */}
+      <div className="footer__center">
+        <span>&copy; 2026 · {equipo.nombre}</span>
         <GithubLink />
-      </p>
+      </div>
+
+      {/* Derecha: Institución */}
+      <div className="footer__right">
+        <span className="institution">{equipo.comision}</span>
+      </div>
     </footer>
   );
 }

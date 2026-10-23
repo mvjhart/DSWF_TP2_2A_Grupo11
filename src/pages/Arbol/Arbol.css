@@ -196,21 +196,6 @@
     scrollbar-gutter: auto;
     padding: 0.125rem 0.25rem 1.5rem;
   }
-
-  /* El inspector ocupa su propio espacio, sin superponerse al árbol. */
-  .arbol-inspector {
-    position: relative;
-    inset: auto;
-    z-index: auto;
-    flex: 0 0 auto;
-    width: 100%;
-    max-height: 40dvh;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    box-shadow: none;
-  }
 }
 
 @media (max-width: 480px) {
@@ -231,7 +216,17 @@
 
 /* Escritorio: el encabezado y el árbol se desplazan juntos. */
 @media (min-width: 769px) {
+  .arbol-visor {
+    box-sizing: border-box;
+    padding-bottom: 1rem;
+  }
+
   .arbol-visor__contenido {
+    width: 100%;
+    max-width: 64rem;
+    margin-inline: auto;
+    box-sizing: border-box;
+
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;

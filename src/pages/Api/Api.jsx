@@ -1,43 +1,24 @@
-import { useId, useState } from 'react';
+import { useId, useState, useRef, useEffect } from "react";
 import {
   useAlbumesDeArtista,
   useTracksDeAlbum,
-} from '../../hooks/useMusicBrainz';
-import './Api.css';
+} from "../../hooks/useMusicBrainz";
+import { StatusMessage } from "../../components/ControlesFil/ControlesFil";
+import { InfoTabs } from "../../components/InfoTabs/InfoTabs";
+import { PageHeader } from "../../components/PageHeader/PageHeader.jsx";
+import contenidoApi from "../../assets/data/api.json";
+import "./Api.css";
 
-const API_DOCS_URL = 'https://musicbrainz.org/doc/MusicBrainz_API';
-const COVER_BASE = 'https://coverartarchive.org/release-group';
+const COVER_BASE = "https://coverartarchive.org/release-group";
 
-const ARTISTAS_SUGERIDOS = ['Slowdive', 'Radiohead', 'BTS', 'Bad Bunny'];
+const ARTISTAS_SUGERIDOS = ["Slowdive", "Radiohead", "BTS", "Bad Bunny"];
 const ARTISTA_INICIAL = ARTISTAS_SUGERIDOS[0];
 
 function formatearDuracion(ms) {
   const totalSeg = Math.round(ms / 1000);
   const min = Math.floor(totalSeg / 60);
-  const seg = String(totalSeg % 60).padStart(2, '0');
+  const seg = String(totalSeg % 60).padStart(2, "0");
   return `${min}:${seg}`;
-}
-
-function Estado({
-  children,
-  error = false,
-  compacto = false,
-  onReintentar = null,
-}) {
-  const clases = ['api__estado'];
-  if (error) clases.push('api__estado--error');
-  if (compacto) clases.push('api__estado--compacto');
-
-  return (
-    <div className={clases.join(' ')} role={error ? 'alert' : 'status'}>
-      <p>{children}</p>
-      {onReintentar && (
-        <button type="button" onClick={onReintentar}>
-          Reintentar
-        </button>
-      )}
-    </div>
-  );
 }
 
 function Portada({ album }) {
@@ -65,78 +46,131 @@ function Portada({ album }) {
 }
 
 function AlbumCard({ album }) {
-  const [expandido, setExpandido] = useState(false);
-  const panelId = useId();
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const dialogRef = useRef(null);
+  const botonTriggerRef = useRef(null); // 👈 Referencia para devolver el foco
+  const tituloId = useId(); // 👈 ID único para el título del modal
+
   const { tracks, cargando, error, recargar } = useTracksDeAlbum(
     album.id,
-    expandido,
+    modalAbierto,
   );
 
-const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    `${album.artista} ${album.titulo}`
+  const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    `${album.artista} ${album.titulo}`,
   )}`;
 
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (modalAbierto) {
+      if (!dialog.open) dialog.showModal();
+    } else {
+      if (dialog.open) {
+        dialog.close();
+        // 👈 Al cerrar, devolvemos el foco al botón que abrió el modal
+        botonTriggerRef.current?.focus();
+      }
+    }
+  }, [modalAbierto]);
+
+  function cerrarModal() {
+    setModalAbierto(false);
+  }
+
   return (
-    <li className="api__album">
-      <Portada album={album} />
-      <h3>{album.titulo}</h3>
-      <p>
-        {album.artista}
-        {album.fecha && ` · ${album.fecha.slice(0, 4)}`}
-      </p>
+    <>
+      <li className="api__album">
+        <Portada album={album} />
 
-      <div className="api__album-links">
-        <a href={urlYouTube} target="_blank" rel="noopener noreferrer">
-          Escuchar en YouTube
-        </a>
-      </div>
-
-      <button
-        type="button"
-        className="api__album-toggle"
-        onClick={() => setExpandido((v) => !v)}
-        aria-expanded={expandido}
-        aria-controls={panelId}
-      >
-        {expandido ? 'Ocultar canciones' : 'Ver canciones'}
-      </button>
-
-      {expandido && (
-        <div
-          id={panelId}
-          className="api__tracks"
-          role="region"
-          aria-label={`Canciones de ${album.titulo}`}
-          tabIndex={0}
-        >
-          {cargando && <Estado compacto>Cargando canciones...</Estado>}
-          {error && (
-            <Estado error compacto onReintentar={recargar}>
-              {error}
-            </Estado>
-          )}
-          {!cargando && !error && tracks.length === 0 && (
-            <Estado compacto>No hay información de canciones.</Estado>
-          )}
-
-          {tracks.length > 0 && (
-            <ol className="api__tracks-lista">
-              {tracks.map((track, i) => (
-                <li key={`${track.disco}-${track.posicion}-${i}`}>
-                  <span className="api__track-num">{track.posicion}.</span>
-                  <span className="api__track-titulo">{track.titulo}</span>
-                  {track.duracionMs ? (
-                    <span className="api__track-dur">
-                      {formatearDuracion(track.duracionMs)}
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-          )}
+        <div className="api__album-info">
+          <h3>{album.titulo}</h3>
+          <p>
+            {album.artista}
+            {album.fecha && ` · ${album.fecha.slice(0, 4)}`}
+          </p>
         </div>
-      )}
-    </li>
+
+        <div className="api__album-footer">
+          <div className="api__album-links">
+            <a href={urlYouTube} target="_blank" rel="noopener noreferrer">
+              Escuchar en YouTube
+            </a>
+          </div>
+
+          <button
+            ref={botonTriggerRef} // 👈 Conectamos la referencia aquí
+            type="button"
+            className="api__album-toggle"
+            onClick={() => setModalAbierto(true)}
+          >
+            Ver canciones
+          </button>
+        </div>
+      </li>
+
+      {/* Modal Nativo Accesible */}
+      <dialog
+        ref={dialogRef}
+        className="api__modal"
+        aria-labelledby={tituloId} // 👈 Conectado al título del modal
+        onClose={cerrarModal}
+        onClick={(e) => {
+          if (e.target === dialogRef.current) cerrarModal();
+        }}
+      >
+        <div className="api__modal-contenido">
+          <div className="api__modal-header">
+            <h3 id={tituloId}>{album.titulo}</h3> {/* 👈 ID coincidente */}
+            <button
+              type="button"
+              className="api__modal-cerrar"
+              onClick={cerrarModal}
+              aria-label="Cerrar modal de canciones"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="api__modal-body">
+            {cargando && (
+              <StatusMessage compacto>Cargando canciones...</StatusMessage>
+            )}
+            {error && (
+              <StatusMessage
+                error
+                compacto
+                accion={{ etiqueta: "Reintentar", onClick: recargar }}
+              >
+                {error}
+              </StatusMessage>
+            )}
+            {!cargando && !error && tracks.length === 0 && (
+              <StatusMessage compacto>
+                No hay información de canciones.
+              </StatusMessage>
+            )}
+
+            {tracks.length > 0 && (
+              <ol className="api__tracks-lista">
+                {tracks.map((track, i) => (
+                  <li key={`${track.disco}-${track.posicion}-${i}`}>
+                    <span className="api__track-num">{track.posicion}.</span>
+                    <span className="api__track-titulo">{track.titulo}</span>
+                    {track.duracionMs ? (
+                      <span className="api__track-dur">
+                        {formatearDuracion(track.duracionMs)}
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }
 
@@ -159,45 +193,14 @@ function Api() {
 
   return (
     <main className="api">
-      <header className="api__encabezado">
-        <h1>API pública: MusicBrainz</h1>
-        <p>
-          La música es lo que más se repite en los perfiles del equipo, así que
-          elegimos MusicBrainz, una base de datos musical abierta y mantenida
-          por una comunidad.
-        </p>
-      </header>
+      {/*Header de Api*/}
+      <PageHeader
+        title={contenidoApi.encabezado.titulo}
+        description={contenidoApi.encabezado.descripcion}
+      />
 
-      <section className="api__explicacion" aria-labelledby="api-info">
-        <h2 id="api-info">Qué es y qué información aporta</h2>
-        <p>
-          MusicBrainz expone un servicio web que se consulta directo desde el
-          navegador y no requiere claves. Devuelve datos de artistas, álbumes,
-          lanzamientos y canciones. Además usamos Cover Art Archive, el
-          proyecto hermano que aloja las portadas.
-        </p>
-
-        <h3>Qué datos mostramos</h3>
-        <p>
-          Consultamos los álbumes de estudio de un artista y mostramos la
-          portada, el título, el artista y el año. Al hacer click en un álbum
-          se puede consultar su lista de canciones.
-        </p>
-
-        <h3>Cómo cuidamos el servicio</h3>
-        <p>
-          MusicBrainz permite una consulta por segundo. Por eso la aplicación
-          espacia sus pedidos y guarda cada respuesta en caché durante la
-          sesión: repetir una búsqueda o reabrir un álbum no vuelve a llamar a
-          la API.
-        </p>
-
-        <p>
-          <a href={API_DOCS_URL} target="_blank" rel="noopener noreferrer">
-            Documentación oficial de la API de MusicBrainz
-          </a>
-        </p>
-      </section>
+      {/* Detalles de Api*/}
+      <InfoTabs secciones={contenidoApi.secciones} />
 
       <section className="api__resultados" aria-labelledby="api-resultados">
         <div className="api__resultados-encabezado">
@@ -208,19 +211,23 @@ function Api() {
             onClick={recargar}
             disabled={cargando}
           >
-            {cargando && albumes.length > 0 ? 'Actualizando...' : 'Actualizar'}
+            {cargando && albumes.length > 0 ? "Actualizando..." : "Actualizar"}
           </button>
         </div>
 
         <form className="api__buscador" onSubmit={enviar}>
-          <label htmlFor="api-artista">Artista</label>
-          <input
-            id="api-artista"
-            type="search"
-            value={texto}
-            onChange={(e) => setTexto(e.target.value)}
-            placeholder="Nombre del artista"
-          />
+          <div className="api__campo">
+            <label htmlFor="api-artista" className="api__label">
+              Artista
+            </label>
+            <input
+              id="api-artista"
+              type="search"
+              value={texto}
+              onChange={(e) => setTexto(e.target.value)}
+              placeholder="Nombre del artista"
+            />
+          </div>
           <button type="submit" disabled={cargando}>
             Buscar
           </button>
@@ -241,18 +248,21 @@ function Api() {
         </ul>
 
         {cargando && albumes.length === 0 && (
-          <Estado>Consultando MusicBrainz...</Estado>
+          <StatusMessage>Consultando MusicBrainz...</StatusMessage>
         )}
         {error && (
-          <Estado error onReintentar={recargar}>
+          <StatusMessage
+            error
+            accion={{ etiqueta: "Reintentar", onClick: recargar }}
+          >
             {error}
-          </Estado>
+          </StatusMessage>
         )}
         {!cargando && !error && albumes.length === 0 && (
-          <Estado>
+          <StatusMessage>
             No encontramos álbumes de estudio para &quot;{artista}&quot;. Probá
             con otro nombre.
-          </Estado>
+          </StatusMessage>
         )}
 
         {albumes.length > 0 && (
