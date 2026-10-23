@@ -3,7 +3,6 @@
 /************* TEMAS START *************/
 
 :root {
-
   /* API: colores auxiliares */
   --color-texto-sobre-acento: #ffffff;
   --color-sombra-acento: rgb(0 173 181 / 25%);
@@ -17,21 +16,19 @@
    THEME TOGGLE
    ======================================== */
 
---color-theme-toggle-fondo: var(--color-boton-tema);
---color-theme-toggle-texto: var(--color-texto);
---color-theme-toggle-borde: var(--color-borde);
---color-theme-toggle-hover: var(--color-boton-tema-hover);
---color-theme-toggle-sombra: var(--color-sombra);
+  --color-theme-toggle-fondo: var(--color-boton-tema);
+  --color-theme-toggle-texto: var(--color-texto);
+  --color-theme-toggle-borde: var(--color-borde);
+  --color-theme-toggle-hover: var(--color-boton-tema-hover);
+  --color-theme-toggle-sombra: var(--color-sombra);
 
-
-/* ========================================
+  /* ========================================
    GITHUB LINK
    ======================================== */
 
---color-github-link: var(--color-texto);
---color-github-link-hover: var(--color-acento);
---color-github-link-foco: var(--color-texto);
-
+  --color-github-link: var(--color-texto);
+  --color-github-link-hover: var(--color-acento);
+  --color-github-link-foco: var(--color-texto);
 }
 
 :root,
@@ -74,38 +71,30 @@
   --color-tag-neutro-fondo: rgb(148 163 184 / 18%);
   --color-tag-neutro-texto: #475569;
 
-
-
   /* ========================================
    SIDEBAR
    ======================================== */
 
-/* Opción: azul pizarra */
+  /* Opción: azul pizarra */
 
---color-sidebar-fondo: #334155;
---color-sidebar-texto: #f8fafc;
---color-sidebar-borde: #475569;
---color-sidebar-hover: #3f4f65;
---color-sidebar-activo: #475569;
---color-sidebar-cerrar-fondo: #475569;
---color-sidebar-cerrar-texto: #f8fafc;
---color-sidebar-cerrar-borde: #64748b;
+  --color-sidebar-fondo: #334155;
+  --color-sidebar-texto: #f8fafc;
+  --color-sidebar-borde: #475569;
+  --color-sidebar-hover: #3f4f65;
+  --color-sidebar-activo: #475569;
+  --color-sidebar-cerrar-fondo: #475569;
+  --color-sidebar-cerrar-texto: #f8fafc;
+  --color-sidebar-cerrar-borde: #64748b;
 
-
-
-
-/* ========================================
+  /* ========================================
    FOOTER 
    ======================================== */
 
+  /* Opción: azul pizarra oscuro */
 
-/* Opción: azul pizarra oscuro */
-
---color-footer-fondo: #1e293b;
---color-footer-texto: #f8fafc;
---color-footer-borde: #374151;
-
-
+  --color-footer-fondo: #1e293b;
+  --color-footer-texto: #f8fafc;
+  --color-footer-borde: #374151;
 }
 
 [data-theme="oscuro"] {
@@ -147,7 +136,7 @@
   --color-tag-neutro-fondo: rgb(148 163 184 / 20%);
   --color-tag-neutro-texto: #cbd5e1;
 
-   /* Sidebar */
+  /* Sidebar */
   --color-sidebar-fondo: #1f2937;
   --color-sidebar-texto: #f3f4f6;
   --color-sidebar-borde: #374151;

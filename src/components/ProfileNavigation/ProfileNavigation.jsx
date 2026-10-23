@@ -9,7 +9,8 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
   const [imgErrors, setImgErrors] = useState({});
 
   const currentIndex = integrantes.findIndex((i) => i.slug === currentSlug);
-  const prevIndex = (currentIndex - 1 + integrantes.length) % integrantes.length;
+  const prevIndex =
+    (currentIndex - 1 + integrantes.length) % integrantes.length;
   const nextIndex = (currentIndex + 1) % integrantes.length;
 
   const prevMember = integrantes[prevIndex];
@@ -24,7 +25,10 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
   };
 
   return (
-    <nav className="profile-solar-nav" aria-label="Navegación entre integrantes">
+    <nav
+      className="profile-solar-nav"
+      aria-label="Navegación entre integrantes"
+    >
       {/* Botón Anterior */}
       <Link
         to={`/integrantes/${prevMember.slug}`}
@@ -63,7 +67,10 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
                 aria-label={`Ver perfil de ${item.nombre}`}
               >
                 {/* 1. Iniciales (Siempre presentes de fondo mientras carga o si falla) */}
-                <span className="profile-solar-nav__initials" aria-hidden="true">
+                <span
+                  className="profile-solar-nav__initials"
+                  aria-hidden="true"
+                >
                   {initials}
                 </span>
 

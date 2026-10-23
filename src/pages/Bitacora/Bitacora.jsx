@@ -104,9 +104,11 @@ function Bitacora() {
 
   return (
     <main className="bitacora" aria-labelledby="bitacora-titulo">
-
-      <PageHeader title="Bitácora" description="Registro del proceso de trabajo del equipo: decisiones, dificultades y
-        soluciones, desde TP1 hasta la migración a React en TP2."/>
+      <PageHeader
+        title="Bitácora"
+        description="Registro del proceso de trabajo del equipo: decisiones, dificultades y
+        soluciones, desde TP1 hasta la migración a React en TP2."
+      />
 
       <FilterBar
         ariaLabel="Filtros y orden de la bitácora"

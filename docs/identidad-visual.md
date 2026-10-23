@@ -120,16 +120,16 @@ La paleta busca un equilibrio entre consistencia, legibilidad y diferenciación.
 
 Los colores se centralizan en las variables personalizadas definidas en los estilos globales.
 
-| Grupo | Responsabilidad |
-|---|---|
-| `--color-fondo`, `--color-superficie` | Fondos generales y superficies |
-| `--color-texto`, `--color-borde` | Textos y separadores |
-| `--color-hover`, `--color-activo` | Estados de interacción |
-| `--color-acento` | Color de énfasis |
-| `--color-sidebar-*` | Apariencia de la navegación lateral |
-| `--color-footer-*` | Apariencia del pie de página |
-| `--color-theme-toggle-*` | Apariencia del selector de tema |
-| `--color-github-link-*` | Apariencia del enlace de GitHub |
-| `--color-tag-*-fondo` y `--color-tag-*-texto` | Colores de las etiquetas |
+| Grupo                                         | Responsabilidad                     |
+| --------------------------------------------- | ----------------------------------- |
+| `--color-fondo`, `--color-superficie`         | Fondos generales y superficies      |
+| `--color-texto`, `--color-borde`              | Textos y separadores                |
+| `--color-hover`, `--color-activo`             | Estados de interacción              |
+| `--color-acento`                              | Color de énfasis                    |
+| `--color-sidebar-*`                           | Apariencia de la navegación lateral |
+| `--color-footer-*`                            | Apariencia del pie de página        |
+| `--color-theme-toggle-*`                      | Apariencia del selector de tema     |
+| `--color-github-link-*`                       | Apariencia del enlace de GitHub     |
+| `--color-tag-*-fondo` y `--color-tag-*-texto` | Colores de las etiquetas            |
 
 Los tokens específicos permiten personalizar un componente sin modificar innecesariamente los estilos del resto de la aplicación.

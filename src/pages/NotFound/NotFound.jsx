@@ -8,7 +8,7 @@ export function NotFound({
   description = "Lo sentimos, la ruta que estás buscando no existe o ha sido movida.",
   buttonText = "Volver al inicio",
   buttonTo = "/",
-  code = "404"
+  code = "404",
 }) {
   return (
     <main className="not-found">
@@ -18,17 +18,15 @@ export function NotFound({
 
       <div className="not-found__content">
         <span className="not-found__badge">{badge}</span>
-        
-        <PageHeader 
-          title={title} 
+
+        <PageHeader
+          title={title}
           description={description}
           className="not-found__header"
         />
 
         <div className="not-found__actions">
-          <Button to={buttonTo}>
-            {buttonText}
-          </Button>
+          <Button to={buttonTo}>{buttonText}</Button>
         </div>
       </div>
     </main>

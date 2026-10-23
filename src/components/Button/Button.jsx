@@ -11,7 +11,8 @@ export function Button({
   type = "button",
   ...props
 }) {
-  const buttonClassName = `${baseClass} ${baseClass}--${variant} ${className}`.trim();
+  const buttonClassName =
+    `${baseClass} ${baseClass}--${variant} ${className}`.trim();
 
   // Si tiene la prop 'to', renderiza un Link de React Router
   if (to) {
