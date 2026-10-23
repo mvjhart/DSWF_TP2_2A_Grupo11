@@ -1,27 +1,35 @@
 [
   {
     "slug": "victoria",
+    "tono": "violeta",
     "nombre": "María Victoria Mariani",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 35,
-    "imagen": "PENDIENTE: ruta en src/assets/images/victoria/",
+    "imagen": "../images/victoria/avatar-victoria.webp",
+    "alt": "Imagen de Victoria, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
         "categoria": "Lenguajes",
         "items": ["PHP", "JavaScript", "Kotlin", "Java", "Python"]
+      },
+      {
+        "categoria": "Frameworks",
+        "items": ["Angular", "Laravel", "Vue.js"]
       }
     ],
-    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
-    "tag": "PENDIENTE: etiqueta corta",
-    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "rol": "Principalmente a cargo de la configuración de React, enrutamiento, estructura del árbol de renderizado y layout de navegación.",
+    "tag": "Sidebar & Árbol",
+    "descripcion": "Curiosa, inquisitiva y meticulosa.",
     "github": "https://github.com/mvjhart"
   },
   {
     "slug": "candelaria",
+    "tono": "rosa",
     "nombre": "Candelaria Chazarreta",
     "ciudad": "Santiago del Estero, Argentina",
     "edad": 27,
-    "imagen": "PENDIENTE: ruta en src/assets/images/candelaria/",
+    "imagen": "../images/candelaria/avatar-candelaria.webp",
+    "alt": "Imagen de Candelaria, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
         "categoria": "Lenguajes",
@@ -48,10 +56,12 @@
   },
   {
     "slug": "federico",
+    "tono": "celeste",
     "nombre": "Federico Acosta Maneiro",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 32,
-    "imagen": "PENDIENTE: ruta en src/assets/images/federico/",
+    "imagen": "../images/federico/avatar-federico.webp",
+    "alt": "Imagen de Federico, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
         "categoria": "Lenguajes",
@@ -69,37 +79,39 @@
       },
       {
         "categoria": "Frameworks",
-        "items": ["Spring Boot", "React"]
+        "items": ["Spring Boot", "React", "Vue.js"]
       },
       {
         "categoria": "Herramientas",
         "items": ["Figma", "Postman", "Git", "GitHub"]
       }
     ],
-    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
-    "tag": "PENDIENTE: etiqueta corta",
+    "rol": "Responsable de la estructura de los datos JSON y portada del equipo",
+    "tag": "Datos y Portada",
     "descripcion": "9/12/18 - Gloria Eterna",
     "github": "https://github.com/federicosd06-dev"
   },
   {
     "slug": "marcos",
+    "tono": "verde",
     "nombre": "Marcos Aquino",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 28,
-    "imagen": "PENDIENTE: ruta en src/assets/images/marcos/",
+    "imagen": "../images/marcos/avatar-marcos.webp",
+    "alt": "Imagen de Marcos, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
         "categoria": "Lenguajes",
-        "items": ["HTML5", "CSS3", "JavaScript", "Python", "C#"]
+        "items": ["HTML5", "CSS", "JavaScript", "Python", "C#", "Kotlin"]
       },
       {
         "categoria": "Herramientas",
         "items": ["Figma", "Git", "GitHub"]
       }
     ],
-    "rol": "PENDIENTE: área de la que es responsable (coordina y revisa)",
-    "tag": "PENDIENTE: etiqueta corta",
-    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "rol": "Desarrollo de la sección de favoritos (Recursos) con búsqueda, filtros y estados, y extracción de componentes compartidos de filtros. QA de datos y revisión de consistencia del dataset.",
+    "tag": "QA & Recursos",
+    "descripcion": "Desarrollo la sección de favoritos y me encargo del testing y la revisión de datos. Fan del cine que explora el tiempo y las decisiones.",
     "github": "https://github.com/Marcos028"
   }
 ]
