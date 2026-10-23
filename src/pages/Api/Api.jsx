@@ -1,12 +1,12 @@
-import { useId, useState } from "react";
+import { useId, useState, useRef, useEffect } from "react";
 import {
   useAlbumesDeArtista,
   useTracksDeAlbum,
 } from "../../hooks/useMusicBrainz";
 import { StatusMessage } from "../../components/ControlesFil/ControlesFil";
-import { InfoTabs } from '../../components/InfoTabs/InfoTabs';
+import { InfoTabs } from "../../components/InfoTabs/InfoTabs";
 import { PageHeader } from "../../components/PageHeader/PageHeader.jsx";
-import contenidoApi from '../../assets/data/api.json';
+import contenidoApi from "../../assets/data/api.json";
 import "./Api.css";
 
 const COVER_BASE = "https://coverartarchive.org/release-group";
@@ -46,86 +46,131 @@ function Portada({ album }) {
 }
 
 function AlbumCard({ album }) {
-  const [expandido, setExpandido] = useState(false);
-  const panelId = useId();
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const dialogRef = useRef(null);
+  const botonTriggerRef = useRef(null); // 👈 Referencia para devolver el foco
+  const tituloId = useId(); // 👈 ID único para el título del modal
+
   const { tracks, cargando, error, recargar } = useTracksDeAlbum(
     album.id,
-    expandido,
+    modalAbierto,
   );
 
   const urlYouTube = `https://www.youtube.com/results?search_query=${encodeURIComponent(
     `${album.artista} ${album.titulo}`,
   )}`;
 
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (modalAbierto) {
+      if (!dialog.open) dialog.showModal();
+    } else {
+      if (dialog.open) {
+        dialog.close();
+        // 👈 Al cerrar, devolvemos el foco al botón que abrió el modal
+        botonTriggerRef.current?.focus();
+      }
+    }
+  }, [modalAbierto]);
+
+  function cerrarModal() {
+    setModalAbierto(false);
+  }
+
   return (
-    <li className="api__album">
-      <Portada album={album} />
-      <h3>{album.titulo}</h3>
-      <p>
-        {album.artista}
-        {album.fecha && ` · ${album.fecha.slice(0, 4)}`}
-      </p>
+    <>
+      <li className="api__album">
+        <Portada album={album} />
 
-      <div className="api__album-links">
-        <a href={urlYouTube} target="_blank" rel="noopener noreferrer">
-          Escuchar en YouTube
-        </a>
-      </div>
-
-      <button
-        type="button"
-        className="api__album-toggle"
-        onClick={() => setExpandido((v) => !v)}
-        aria-expanded={expandido}
-        aria-controls={panelId}
-      >
-        {expandido ? "Ocultar canciones" : "Ver canciones"}
-      </button>
-
-      {expandido && (
-        <div
-          id={panelId}
-          className="api__tracks"
-          role="region"
-          aria-label={`Canciones de ${album.titulo}`}
-          tabIndex={0}
-        >
-          {cargando && (
-            <StatusMessage compacto>Cargando canciones...</StatusMessage>
-          )}
-          {error && (
-            <StatusMessage
-              error
-              compacto
-              accion={{ etiqueta: "Reintentar", onClick: recargar }}
-            >
-              {error}
-            </StatusMessage>
-          )}
-          {!cargando && !error && tracks.length === 0 && (
-            <StatusMessage compacto>
-              No hay información de canciones.
-            </StatusMessage>
-          )}
-
-          {tracks.length > 0 && (
-            <ol className="api__tracks-lista">
-              {tracks.map((track, i) => (
-                <li key={`${track.disco}-${track.posicion}-${i}`}>
-                  <span className="api__track-num">{track.posicion}.</span>
-                  <span className="api__track-titulo">{track.titulo}</span>
-                  {track.duracionMs ? (
-                    <span className="api__track-dur">
-                      {formatearDuracion(track.duracionMs)}
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-          )}
+        <div className="api__album-info">
+          <h3>{album.titulo}</h3>
+          <p>
+            {album.artista}
+            {album.fecha && ` · ${album.fecha.slice(0, 4)}`}
+          </p>
         </div>
-      )}
-    </li>
+
+        <div className="api__album-footer">
+          <div className="api__album-links">
+            <a href={urlYouTube} target="_blank" rel="noopener noreferrer">
+              Escuchar en YouTube
+            </a>
+          </div>
+
+          <button
+            ref={botonTriggerRef} // 👈 Conectamos la referencia aquí
+            type="button"
+            className="api__album-toggle"
+            onClick={() => setModalAbierto(true)}
+          >
+            Ver canciones
+          </button>
+        </div>
+      </li>
+
+      {/* Modal Nativo Accesible */}
+      <dialog
+        ref={dialogRef}
+        className="api__modal"
+        aria-labelledby={tituloId} // 👈 Conectado al título del modal
+        onClose={cerrarModal}
+        onClick={(e) => {
+          if (e.target === dialogRef.current) cerrarModal();
+        }}
+      >
+        <div className="api__modal-contenido">
+          <div className="api__modal-header">
+            <h3 id={tituloId}>{album.titulo}</h3> {/* 👈 ID coincidente */}
+            <button
+              type="button"
+              className="api__modal-cerrar"
+              onClick={cerrarModal}
+              aria-label="Cerrar modal de canciones"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="api__modal-body">
+            {cargando && (
+              <StatusMessage compacto>Cargando canciones...</StatusMessage>
+            )}
+            {error && (
+              <StatusMessage
+                error
+                compacto
+                accion={{ etiqueta: "Reintentar", onClick: recargar }}
+              >
+                {error}
+              </StatusMessage>
+            )}
+            {!cargando && !error && tracks.length === 0 && (
+              <StatusMessage compacto>
+                No hay información de canciones.
+              </StatusMessage>
+            )}
+
+            {tracks.length > 0 && (
+              <ol className="api__tracks-lista">
+                {tracks.map((track, i) => (
+                  <li key={`${track.disco}-${track.posicion}-${i}`}>
+                    <span className="api__track-num">{track.posicion}.</span>
+                    <span className="api__track-titulo">{track.titulo}</span>
+                    {track.duracionMs ? (
+                      <span className="api__track-dur">
+                        {formatearDuracion(track.duracionMs)}
+                      </span>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 }
 
@@ -148,13 +193,12 @@ function Api() {
 
   return (
     <main className="api">
-
       {/*Header de Api*/}
       <PageHeader
         title={contenidoApi.encabezado.titulo}
         description={contenidoApi.encabezado.descripcion}
       />
-      
+
       {/* Detalles de Api*/}
       <InfoTabs secciones={contenidoApi.secciones} />
 
@@ -172,14 +216,18 @@ function Api() {
         </div>
 
         <form className="api__buscador" onSubmit={enviar}>
-          <label htmlFor="api-artista">Artista</label>
-          <input
-            id="api-artista"
-            type="search"
-            value={texto}
-            onChange={(e) => setTexto(e.target.value)}
-            placeholder="Nombre del artista"
-          />
+          <div className="api__campo">
+            <label htmlFor="api-artista" className="api__label">
+              Artista
+            </label>
+            <input
+              id="api-artista"
+              type="search"
+              value={texto}
+              onChange={(e) => setTexto(e.target.value)}
+              placeholder="Nombre del artista"
+            />
+          </div>
           <button type="submit" disabled={cargando}>
             Buscar
           </button>
