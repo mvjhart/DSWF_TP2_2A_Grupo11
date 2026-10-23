@@ -58,7 +58,7 @@
   padding: 0.4rem 0.8rem;
   border: 1px solid var(--color-borde);
   border-radius: 6px;
-  background: transparent;
+  background-color: var(--color-superficie);
   color: inherit;
   font: inherit;
   font-size: 0.78rem;
@@ -111,7 +111,7 @@
   padding: 0.7rem 0.95rem;
   border: 1px solid var(--color-borde);
   border-radius: 8px;
-  background: var(--color-fondo);
+  background: var(--color-superficie);
   color: var(--color-texto);
   font: inherit;
   font-size: 0.9rem;
@@ -128,14 +128,14 @@
   border: 1px solid var(--color-acento);
   border-radius: 8px;
   background: var(--color-acento);
-  color: #ffffff;
+  color: var(--color-texto-sobre-acento);
   font: inherit;
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 3px 8px rgb(0 173 181 / 25%);
+  box-shadow: 0 3px 8px var(--color-sombra-acento);
   transition:
     opacity 0.2s ease,
     transform 0.1s ease,
@@ -145,7 +145,7 @@
 .api__buscador button[type="submit"]:hover {
   opacity: 0.92;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgb(0 173 181 / 35%);
+  box-shadow: 0 4px 12px var(--color-sombra-acento-hover);
 }
 
 .api__buscador button[type="submit"]:active {
@@ -186,7 +186,7 @@
   padding: 0.35rem 0.75rem;
   border: 1px solid var(--color-borde);
   border-radius: 6px;
-  background: var(--color-fondo);
+  background: var(--color-superficie);
   color: var(--color-texto-suave);
   font: inherit;
   font-size: 0.78rem;
@@ -363,7 +363,7 @@
   border-radius: 12px;
   background: var(--color-superficie);
   color: var(--color-texto);
-  box-shadow: 0 10px 25px rgb(0 0 0 / 30%);
+  box-shadow: 0 10px 25px var(--color-sombra-modal);
   width: 90%;
   max-width: 450px;
   max-height: 80vh;
@@ -374,7 +374,7 @@
 }
 
 .api__modal::backdrop {
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--color-fondo-backdrop);
   backdrop-filter: blur(2px);
 }
 
