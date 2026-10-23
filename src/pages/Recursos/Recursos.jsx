@@ -8,6 +8,7 @@ import {
   SearchInput,
   StatusMessage,
 } from "../../components/ControlesFil/ControlesFil";
+import {PageHeader} from "../../components/PageHeader/PageHeader";
 import "./Recursos.css";
 
 const MARCA_PENDIENTE = "PENDIENTE";
@@ -105,10 +106,8 @@ function Recursos() {
 
   return (
     <main className="recursos" aria-labelledby="recursos-titulo">
-      <h1 id="recursos-titulo">Favoritos</h1>
-      <p className="recursos__intro">
-        Colección de películas y álbumes favoritos del equipo.
-      </p>
+
+      <PageHeader title="Favoritos" description="Colección de películas y álbumes favoritos del equipo."/>
 
       <FilterBar
         ariaLabel="Búsqueda y filtros de favoritos"
