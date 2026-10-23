@@ -1,7 +1,5 @@
 # Esquemas de datos JSON
 
-Documentación de los dos archivos de datos locales del proyecto (Issue D, subissues D.1 y D.2). Ambos viven en `src/assets/data/`, junto a `bitacora.json`.
-
 | Archivo                            | Contenido                                   | Se usa en                                                        |
 | ---------------------------------- | ------------------------------------------- | ---------------------------------------------------------------- |
 | `src/assets/data/integrantes.json` | Un registro por integrante (4)              | Portada (`/`), perfiles (`/integrantes/:slug`) y enlace a GitHub |
@@ -9,14 +7,9 @@ Documentación de los dos archivos de datos locales del proyecto (Issue D, subis
 
 Los dos archivos se relacionan mediante el `slug` del integrante: cada favorito lo referencia en `memberSlug`. Así la información se escribe una sola vez y se reutiliza en la portada, los perfiles y la colección completa.
 
-## Convenciones
-
-- Las claves están en español y sin tildes, como en `bitacora.json`. Las claves `memberSlug`, `featured` y `order` conservan el nombre acordado en la issue y la discussion; se podrán unificar de idioma más adelante.
-- Los textos que todavía no tienen contenido real comienzan con `PENDIENTE` (y los años sin cargar valen `null`). Ver [Datos pendientes](#datos-pendientes).
-
 ---
 
-## `integrantes.json` (D.1)
+## `integrantes.json`
 
 Un array de objetos, uno por integrante.
 
