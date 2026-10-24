@@ -1,0 +1,131 @@
+.profile-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 1rem;
+  background: linear-gradient(
+    135deg,
+    var(--tono-fondo, var(--color-tarjeta)),
+    var(--color-tarjeta) 70%
+  );
+  text-align: center;
+}
+
+.profile-identity__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.profile-identity__nombre {
+  margin: 0.25rem 0 0;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.profile-identity__datos {
+  margin: 0;
+  color: var(--color-texto-suave);
+  font-size: 1rem;
+}
+
+.profile-identity__tags {
+  margin-top: 0.25rem;
+}
+
+.profile-identity__tag {
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background-color: var(--tono-fondo, var(--color-tarjeta));
+  color: var(--tono-texto, var(--color-texto));
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.profile-identity__tag--pendiente {
+  background-color: transparent;
+  color: var(--color-texto-suave);
+  border: 1px dashed var(--color-borde);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.profile-identity__rol {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--color-texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.profile-identity__descripcion {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+.profile-identity__pendiente {
+  color: var(--color-texto-suave);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.profile-identity__github {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.55rem 1.1rem;
+  border: 2px solid var(--color-texto);
+  border-radius: 0.5rem;
+  color: var(--color-texto);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.profile-identity__github:hover {
+  background-color: var(--color-texto);
+  color: var(--color-fondo);
+}
+
+.profile-identity__github:focus-visible {
+  outline: 2px solid var(--color-secundario);
+  outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .profile-identity {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    text-align: left;
+  }
+
+  .profile-identity__info {
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .profile-identity__rol,
+  .profile-identity__descripcion {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-identity__github {
+    transition: none;
+  }
+}

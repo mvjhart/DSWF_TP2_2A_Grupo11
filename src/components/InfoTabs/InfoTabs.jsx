@@ -1,5 +1,5 @@
-import { useState, useId } from 'react';
-import './InfoTabs.css';
+import { useState, useId } from "react";
+import "./InfoTabs.css";
 
 const iconosSeccion = {
   1: (
@@ -29,7 +29,8 @@ export function InfoTabs({ secciones = [] }) {
 
   if (!secciones.length) return null;
 
-  const tabActiva = secciones.find((tab) => tab.id === activoId) || secciones[0];
+  const tabActiva =
+    secciones.find((tab) => tab.id === activoId) || secciones[0];
 
   return (
     <section className="info-tabs" aria-labelledby={`${baseId}-heading`}>
@@ -37,7 +38,11 @@ export function InfoTabs({ secciones = [] }) {
         Información y detalles
       </h2>
 
-      <div className="info-tabs__nav" role="tablist" aria-label="Secciones de información">
+      <div
+        className="info-tabs__nav"
+        role="tablist"
+        aria-label="Secciones de información"
+      >
         {secciones.map((tab) => {
           const tabId = `${baseId}-tab-${tab.id}`;
           const panelId = `${baseId}-panel-${tab.id}`;
@@ -85,7 +90,11 @@ export function InfoTabs({ secciones = [] }) {
               {/* Renderizado dinámico del adjunto si existe */}
               {tab.adjunto && (
                 <p>
-                  <a href={tab.adjunto.url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={tab.adjunto.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {tab.adjunto.nombre}
                   </a>
                 </p>

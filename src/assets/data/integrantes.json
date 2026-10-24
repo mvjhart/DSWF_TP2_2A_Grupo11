@@ -5,8 +5,8 @@
     "nombre": "María Victoria Mariani",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 35,
-    "imagen": "../images/victoria/avatar-victoria.webp",
-    "alt": "Imagen de Victoria, integrante del equipo de desarrollo del proyecto",
+    "imagen": "src/assets/images/victoria/avatar-victoria.webp",
+    "alt": "Gatita siamesa durmiendo al sol rodeada de libros",
     "habilidades": [
       {
         "categoria": "Lenguajes",
@@ -28,7 +28,7 @@
     "nombre": "Candelaria Chazarreta",
     "ciudad": "Santiago del Estero, Argentina",
     "edad": 27,
-    "imagen": "../images/candelaria/avatar-candelaria.webp",
+    "imagen": "src/assets/images/candelaria/avatar-candelaria.webp",
     "alt": "Imagen de Candelaria, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
@@ -49,9 +49,9 @@
         "items": ["Figma", "Git", "GitHub"]
       }
     ],
-    "rol": "Maquetación de la bitácora, enlaces y recorrido entre secciones",
-    "tag": "Bitácora & Navegación",
-    "descripcion": "PENDIENTE: presentación breve para la portada",
+    "rol": "Bitácora con filtros y estructura de la API.",
+    "tag": "Bitácora & API",
+    "descripcion": "Graphic design is not my passion",
     "github": "https://github.com/kndxt"
   },
   {
@@ -60,7 +60,7 @@
     "nombre": "Federico Acosta Maneiro",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 32,
-    "imagen": "../images/federico/avatar-federico.webp",
+    "imagen": "src/assets/images/federico/avatar-federico.webp",
     "alt": "Imagen de Federico, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {
@@ -97,7 +97,7 @@
     "nombre": "Marcos Aquino",
     "ciudad": "Buenos Aires, Argentina",
     "edad": 28,
-    "imagen": "../images/marcos/avatar-marcos.webp",
+    "imagen": "src/assets/images/marcos/avatar-marcos.webp",
     "alt": "Imagen de Marcos, integrante del equipo de desarrollo del proyecto",
     "habilidades": [
       {

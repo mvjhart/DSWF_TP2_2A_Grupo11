@@ -6,6 +6,7 @@ import {
   FilterSelect,
   StatusMessage,
 } from "../../components/ControlesFil/ControlesFil";
+import { PageHeader } from "../../components/PageHeader/PageHeader";
 import "./Bitacora.css";
 
 const coloresPorCategoria = {
@@ -103,11 +104,11 @@ function Bitacora() {
 
   return (
     <main className="bitacora" aria-labelledby="bitacora-titulo">
-      <h1 id="bitacora-titulo">Bitácora</h1>
-      <p className="bitacora__intro">
-        Registro del proceso de trabajo del equipo: decisiones, dificultades y
-        soluciones, desde TP1 hasta la migración a React en TP2.
-      </p>
+      <PageHeader
+        title="Bitácora"
+        description="Registro del proceso de trabajo del equipo: decisiones, dificultades y
+        soluciones, desde TP1 hasta la migración a React en TP2."
+      />
 
       <FilterBar
         ariaLabel="Filtros y orden de la bitácora"

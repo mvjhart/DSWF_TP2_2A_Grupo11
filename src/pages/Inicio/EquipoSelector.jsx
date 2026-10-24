@@ -1,38 +1,12 @@
 import { useId, useRef, useState } from "react";
 import { Link } from "react-router";
 import MemberAvatar from "../../components/MemberAvatar/MemberAvatar";
+import { esPendiente } from "../../utils/esPendiente";
 import "./EquipoSelector.css";
-
-// Colores de la paleta de etiquetas (index.css) que se reparten entre las
-// personas, en el orden en que aparecen en integrantes.json.
-const TONOS = ["violeta", "verde", "ambar", "celeste"];
-
-const MENSAJE_SIN_PRESENTACION =
-  "Su presentación todavía no está lista. Mientras tanto, podés ver su perfil.";
-
-// Los datos que todavía no se cargaron en el JSON empiezan con "PENDIENTE".
-function esPendiente(valor) {
-  return (
-    typeof valor !== "string" ||
-    valor.trim() === "" ||
-    valor.startsWith("PENDIENTE")
-  );
-}
 
 // El slug es el nombre de pila en minúsculas (victoria, candelaria, ...).
 function nombreCorto(slug) {
   return slug.charAt(0).toUpperCase() + slug.slice(1);
-}
-
-function agruparHabilidades(habilidades = []) {
-  return habilidades
-    .map(({ categoria, items }) => ({
-      categoria,
-      items: items.filter((item) => !esPendiente(item)),
-    }))
-    .filter(
-      ({ categoria, items }) => !esPendiente(categoria) && items.length > 0,
-    );
 }
 
 function EquipoSelector({ integrantes }) {
@@ -51,16 +25,13 @@ function EquipoSelector({ integrantes }) {
 
   const idPanel = `${idBase}-panel`;
   const idTab = (slug) => `${idBase}-tab-${slug}`;
-  const tonoActivo = TONOS[indiceActivo % TONOS.length];
-  const habilidades = agruparHabilidades(activo.habilidades);
-  const tieneDetalle = !esPendiente(activo.rol) || habilidades.length > 0;
+  const tonoActivo = activo.tono ?? "neutro";
 
   function seleccionar(slug) {
     setAnimar(true);
     setSlugActivo(slug);
   }
 
-  // Navegación con teclado entre las pestañas (patrón de tabs de WAI-ARIA).
   function manejarTeclas(evento) {
     const total = integrantes.length;
     let destino;
@@ -98,7 +69,7 @@ function EquipoSelector({ integrantes }) {
         aria-label="Integrantes del equipo"
         onKeyDown={manejarTeclas}
       >
-        {integrantes.map((integrante, indice) => {
+        {integrantes.map((integrante) => {
           const esActivo = integrante.slug === activo.slug;
 
           return (
@@ -120,7 +91,7 @@ function EquipoSelector({ integrantes }) {
                 nombre={integrante.nombre}
                 imagen={integrante.imagen}
                 alt={integrante.alt}
-                tono={TONOS[indice % TONOS.length]}
+                tono={integrante.tono ?? "neutro"}
               />
               <span>{nombreCorto(integrante.slug)}</span>
             </button>
@@ -147,43 +118,16 @@ function EquipoSelector({ integrantes }) {
         <div className="equipo__datos">
           <h3 className="equipo__nombre">{activo.nombre}</h3>
 
-          {!esPendiente(activo.ciudad) && (
-            <p className="equipo__ciudad">{activo.ciudad}</p>
-          )}
-
           {!esPendiente(activo.tag) && (
             <p className="equipo__tag">{activo.tag}</p>
           )}
 
-          <p className="equipo__descripcion">
-            {esPendiente(activo.descripcion)
-              ? MENSAJE_SIN_PRESENTACION
-              : activo.descripcion}
+          {/* ACÁ CAMBIAMOS LA DESCRIPCIÓN POR EL ROL */}
+          <p className="equipo__rol">
+            {esPendiente(activo.rol)
+              ? "Responsabilidad en construcción."
+              : activo.rol}
           </p>
-
-          {tieneDetalle && (
-            <dl className="equipo__detalle">
-              {!esPendiente(activo.rol) && (
-                <div>
-                  <dt>Responsabilidad</dt>
-                  <dd>{activo.rol}</dd>
-                </div>
-              )}
-
-              {habilidades.map(({ categoria, items }) => (
-                <div key={categoria}>
-                  <dt>{categoria}</dt>
-                  <dd>
-                    <ul className="equipo__chips">
-                      {items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          )}
 
           <Link className="equipo__enlace" to={`/integrantes/${activo.slug}`}>
             Ver el perfil de {nombreCorto(activo.slug)}
