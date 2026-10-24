@@ -40,6 +40,7 @@
 }
 
 .paleta__color {
+  position: relative;
   display: flex;
   flex: 1;
   align-items: center;
@@ -83,28 +84,12 @@
 /* Un color bloqueado se distingue también sin depender del color */
 .paleta__color--bloqueado .paleta__bloqueo {
   border-width: 2px;
-  background: currentcolor;
+  background: rgb(127 127 127 / 35%);
+  text-decoration: underline;
 }
 
 .paleta__color--bloqueado .paleta__bloqueo:hover {
-  background: currentcolor;
-}
-
-/* Al estar relleno con el color del texto, el texto pasa a verse con el fondo del color */
-.paleta__color--bloqueado .paleta__bloqueo {
-  color: transparent;
-  position: relative;
-}
-
-.paleta__color--bloqueado .paleta__bloqueo::before {
-  content: "Bloqueado";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--paleta-fondo, #fff);
-  mix-blend-mode: difference;
+  background: rgb(127 127 127 / 50%);
 }
 
 .paleta__oculto {
