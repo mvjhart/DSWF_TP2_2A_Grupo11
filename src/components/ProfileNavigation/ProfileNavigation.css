@@ -89,14 +89,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0; /* Oculta por defecto mientras descarga */
-  transition: opacity 0.25s ease-in-out; /* Transición suave al aparecer */
   z-index: 2;
-}
-
-/* Cuando la imagen termina de cargar */
-.profile-solar-nav__img--loaded {
-  opacity: 1;
 }
 
 .profile-solar-nav__initials {
