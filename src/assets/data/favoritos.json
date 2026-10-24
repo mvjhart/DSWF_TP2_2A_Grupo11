@@ -333,8 +333,7 @@
     "generos": ["Power Violence", "D-Beat"],
     "portada": "/federico/dropdead.webp",
     "alt": "Portada del álbum 'Dropdead / Totalitär' de Dropdead & Totalitär",
-    "featured": true,
-    "order": 1
+    "featured": false
   },
   {
     "id": "fav-025",
@@ -347,8 +346,7 @@
     "generos": ["Shoegaze", "Dream-Pop", "Dub", "Rock Alternativo"],
     "portada": "/federico/sirens-and-satellites.webp",
     "alt": "Portada del álbum 'Sirens and Satellites' de SPC ECHO",
-    "featured": true,
-    "order": 1
+    "featured": false
   },
   {
     "id": "fav-026",
@@ -361,7 +359,8 @@
     "generos": ["Cyberpunk"],
     "portada": "/federico/blade-runner.webp",
     "alt": "Portada de la película 'Blade Runner'",
-    "featured": false
+    "featured": true,
+    "order": 1
   },
   {
     "id": "fav-027",
@@ -372,9 +371,10 @@
     "comentario": "El tiempo lo destruye todo",
     "sinopsis": "Marcus y Pierre emprenden la busqueda de los autores de la violación de Alex, la pareja de Marcus.",
     "generos": ["Drama"],
-    "portada": "../images/federico/irreversible.webp",
+    "portada": "/federico/irreversible.webp",
     "alt": "Portada de la película 'Irreversible'",
-    "featured": false
+    "featured": true,
+    "order": 3
   },
   {
     "id": "fav-028",
@@ -400,7 +400,8 @@
     "generos": ["Terror psicológico", "New French Extremity"],
     "portada": "/federico/martyrs.webp",
     "alt": "Portada de la película 'Martyrs'",
-    "featured": false
+    "featured": true,
+    "order": 2
   },
   {
     "id": "fav-030",
