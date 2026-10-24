@@ -119,6 +119,7 @@ function EquipoSelector({ integrantes }) {
               <MemberAvatar
                 nombre={integrante.nombre}
                 imagen={integrante.imagen}
+                alt={integrante.alt}
                 tono={TONOS[indice % TONOS.length]}
               />
               <span>{nombreCorto(integrante.slug)}</span>
@@ -138,6 +139,7 @@ function EquipoSelector({ integrantes }) {
         <MemberAvatar
           nombre={activo.nombre}
           imagen={activo.imagen}
+          alt={activo.alt}
           tono={tonoActivo}
           tamano="l"
         />
@@ -183,10 +185,7 @@ function EquipoSelector({ integrantes }) {
             </dl>
           )}
 
-          <Link
-            className="equipo__enlace"
-            to={`/integrantes/${activo.slug}`}
-          >
+          <Link className="equipo__enlace" to={`/integrantes/${activo.slug}`}>
             Ver el perfil de {nombreCorto(activo.slug)}
           </Link>
         </div>
