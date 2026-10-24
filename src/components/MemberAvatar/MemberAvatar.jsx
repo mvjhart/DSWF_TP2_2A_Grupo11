@@ -24,7 +24,13 @@ function iniciales(nombre) {
 }
 
 // Es decorativo: el nombre de la persona siempre se muestra al lado.
-function MemberAvatar({ nombre, imagen, tono = "neutro", tamano = "m" }) {
+function MemberAvatar({
+  nombre,
+  imagen,
+  alt = "",
+  tono = "neutro",
+  tamano = "m",
+}) {
   const [fallo, setFallo] = useState(false);
 
   const url = typeof imagen === "string" ? imagenes[`/${imagen}`] : undefined;
@@ -32,7 +38,7 @@ function MemberAvatar({ nombre, imagen, tono = "neutro", tamano = "m" }) {
   return (
     <span className={`member-avatar member-avatar--${tamano}`} data-tono={tono}>
       {url && !fallo ? (
-        <img src={url} alt="" onError={() => setFallo(true)} />
+        <img src={url} alt={alt} onError={() => setFallo(true)} />
       ) : (
         <span aria-hidden="true">{iniciales(nombre)}</span>
       )}

@@ -90,6 +90,7 @@ function EquipoSelector({ integrantes }) {
               <MemberAvatar
                 nombre={integrante.nombre}
                 imagen={integrante.imagen}
+                alt={integrante.alt}
                 tono={integrante.tono ?? "neutro"}
               />
               <span>{nombreCorto(integrante.slug)}</span>
@@ -109,6 +110,7 @@ function EquipoSelector({ integrantes }) {
         <MemberAvatar
           nombre={activo.nombre}
           imagen={activo.imagen}
+          alt={activo.alt}
           tono={tonoActivo}
           tamano="l"
         />
