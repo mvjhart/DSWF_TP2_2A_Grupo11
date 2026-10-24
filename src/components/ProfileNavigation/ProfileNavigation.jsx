@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router";
 import "./ProfileNavigation.css";
 
+// Vite convierte cada imagen en su URL final (con hash en producción).
+// La clave del objeto es la ruta absoluta: "/src/assets/images/..."
+const imagenes = import.meta.glob(
+  "/src/assets/images/**/*.{png,jpg,jpeg,webp,avif,svg}",
+  { eager: true, query: "?url", import: "default" },
+);
+
 export function ProfileNavigation({ integrantes, currentSlug }) {
-  // Estado para controlar qué imágenes ya cargaron
-  const [loadedImgs, setLoadedImgs] = useState({});
   // Estado para imágenes que fallaron al cargar (404 / ruta rota)
   const [imgErrors, setImgErrors] = useState({});
 
@@ -15,10 +20,6 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
 
   const prevMember = integrantes[prevIndex];
   const nextMember = integrantes[nextIndex];
-
-  const handleImgLoad = (slug) => {
-    setLoadedImgs((prev) => ({ ...prev, [slug]: true }));
-  };
 
   const handleImgError = (slug) => {
     setImgErrors((prev) => ({ ...prev, [slug]: true }));
@@ -53,7 +54,12 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
             ? item.slug.charAt(0).toUpperCase() + item.slug.slice(1)
             : item.nombre;
 
-          const isLoaded = loadedImgs[item.slug];
+          // Traducimos la ruta del JSON a la URL que genera Vite
+          const srcImagen =
+            typeof item.imagen === "string"
+              ? imagenes[`/${item.imagen}`]
+              : undefined;
+
           const hasError = imgErrors[item.slug];
 
           return (
@@ -66,7 +72,7 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
                 aria-current={isCurrent ? "page" : undefined}
                 aria-label={`Ver perfil de ${item.nombre}`}
               >
-                {/* 1. Iniciales (Siempre presentes de fondo mientras carga o si falla) */}
+                {/* 1. Iniciales (de fondo; se ven si no hay imagen o falla) */}
                 <span
                   className="profile-solar-nav__initials"
                   aria-hidden="true"
@@ -74,15 +80,12 @@ export function ProfileNavigation({ integrantes, currentSlug }) {
                   {initials}
                 </span>
 
-                {/* 2. Imagen (Aparece suavemente cuando termina de cargar) */}
-                {item.imagen && !hasError && (
+                {/* 2. Imagen (directa, sin fade) */}
+                {srcImagen && !hasError && (
                   <img
-                    src={item.imagen}
+                    src={srcImagen}
                     alt=""
-                    className={`profile-solar-nav__img ${
-                      isLoaded ? "profile-solar-nav__img--loaded" : ""
-                    }`}
-                    onLoad={() => handleImgLoad(item.slug)}
+                    className="profile-solar-nav__img"
                     onError={() => handleImgError(item.slug)}
                   />
                 )}

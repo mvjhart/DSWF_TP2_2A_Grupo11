@@ -36,63 +36,20 @@
         }
       ]
     },
-    "theme-context": {
-      "name": "ThemeContext",
-      "type": "Componentes",
-      "file": "src/context/ThemeContext.js",
-      "description": "Crea y exporta el contexto de React para compartir el estado y las funciones del tema.",
-      "implementation": "createContext(null)",
-      "props": [],
-      "children": []
-    },
-    "theme-provider": {
-      "name": "ThemeProvider",
-      "type": "Componentes",
-      "file": "src/context/ThemeProvider.jsx",
-      "description": "Gestiona el estado global del tema, sincroniza el atributo data-theme, persiste la selección en localStorage y proporciona tema y alternarTema mediante ThemeContext.",
-      "props": ["children"],
-      "hooks": [
-        {
-          "name": "useState",
-          "description": "Mantiene el tema actual e inicializa su valor mediante obtenerTemaInicial."
-        },
-        {
-          "name": "useEffect",
-          "description": "Sincroniza el tema con data-theme y lo guarda en localStorage."
-        },
-        {
-          "name": "useCallback",
-          "description": "Define la función alternarTema, incluyendo la lógica de transición visual."
-        }
-      ],
-      "dependencies": [
-        {
-          "name": "ThemeContext",
-          "file": "src/context/ThemeContext.js",
-          "description": "Contexto que permite compartir tema y alternarTema con los componentes descendientes."
-        },
-        {
-          "name": "flushSync",
-          "source": "react-dom",
-          "description": "Coordina la actualización de React con la transición visual del tema."
-        }
-      ],
-      "children": []
-    },
     "accordion-item": {
       "name": "AccordionItem",
       "type": "Componentes",
       "file": "src/components/AccordionItem/AccordionItem.jsx",
-      "description": "Muestra una entrada desplegable con un encabezado y un panel de contenido.",
+      "description": "Muestra contenido en un panel desplegable que se abre y se cierra desde un encabezado interactivo.",
       "props": ["title", "headerContent", "children", "defaultOpen"],
       "hooks": [
         {
           "name": "useState",
-          "description": "Controla si el panel está abierto o cerrado."
+          "description": "Controla si el panel está abierto o cerrado, con un estado inicial determinado por defaultOpen."
         },
         {
           "name": "useId",
-          "description": "Genera identificadores únicos para relacionar el encabezado con el panel."
+          "description": "Genera identificadores únicos para vincular el botón del encabezado con el panel mediante atributos de accesibilidad."
         }
       ],
       "children": [
@@ -101,7 +58,7 @@
           "name": "Encabezado interactivo",
           "type": "UI",
           "file": "src/components/AccordionItem/AccordionItem.jsx",
-          "description": "Contiene los metadatos opcionales, el título y el indicador de apertura. Al activarlo, alterna el estado del acordeón.",
+          "description": "Permite abrir o cerrar el acordeón. Puede mostrar metadatos, el título y un indicador que cambia entre + y −.",
           "props": [],
           "children": []
         },
@@ -110,8 +67,117 @@
           "name": "Panel desplegable",
           "type": "UI",
           "file": "src/components/AccordionItem/AccordionItem.jsx",
-          "description": "Contiene el contenido recibido mediante children y comunica su estado mediante atributos de accesibilidad.",
+          "description": "Contiene el contenido recibido mediante children y expone su relación con el encabezado mediante atributos de accesibilidad.",
           "props": [],
+          "children": []
+        }
+      ]
+    },
+    "member-avatar": {
+      "name": "MemberAvatar",
+      "type": "Componentes",
+      "file": "src/components/MemberAvatar/MemberAvatar.jsx",
+      "description": "Muestra el avatar de una persona mediante una imagen o sus iniciales cuando la imagen no está disponible.",
+      "props": ["nombre", "imagen", "tono", "tamano"],
+      "hooks": [
+        {
+          "name": "useState",
+          "description": "Controla si la carga de la imagen falló para mostrar las iniciales como alternativa."
+        }
+      ],
+      "children": []
+    },
+    "page-header": {
+      "name": "PageHeader",
+      "type": "Componentes",
+      "file": "src/components/PageHeader/PageHeader.jsx",
+      "description": "Muestra el título y la descripción de una página, con opciones para personalizar sus clases y agregar contenido o atributos al encabezado.",
+      "props": [
+        "title",
+        "description",
+        "className",
+        "baseClass",
+        "children",
+        "...props"
+      ],
+      "children": []
+    },
+    "filter-bar": {
+      "name": "FilterBar",
+      "type": "Componentes",
+      "file": "src/components/ControlesFil/ControlesFil.jsx",
+      "description": "Agrupa controles de filtrado recibidos como children, un botón para restablecer los filtros y un contador de resultados.",
+      "props": ["ariaLabel", "children", "onReset", "hayCambios", "contador"],
+      "children": []
+    },
+    "filter-select": {
+      "name": "FilterSelect",
+      "type": "Componentes",
+      "file": "src/components/ControlesFil/ControlesFil.jsx",
+      "description": "Muestra un selector de opciones controlado por el componente padre y comunica el valor seleccionado mediante onChange.",
+      "props": ["label", "value", "onChange", "options", "todos"],
+      "children": []
+    },
+    "search-input": {
+      "name": "SearchInput",
+      "type": "Componentes",
+      "file": "src/components/ControlesFil/ControlesFil.jsx",
+      "description": "Muestra un campo de búsqueda controlado por el componente padre y comunica el texto ingresado mediante onChange.",
+      "props": ["label", "value", "onChange", "placeholder"],
+      "children": []
+    },
+    "status-message": {
+      "name": "StatusMessage",
+      "type": "Componentes",
+      "file": "src/components/ControlesFil/ControlesFil.jsx",
+      "description": "Muestra mensajes de estado, error o contenido vacío, con opción de agregar una acción.",
+      "props": ["children", "error", "compacto", "accion"],
+      "children": []
+    },
+    "info-tabs": {
+      "name": "InfoTabs",
+      "type": "Componentes",
+      "file": "src/components/InfoTabs/InfoTabs.jsx",
+      "description": "Muestra secciones informativas mediante pestañas interactivas, con contenido dinámico y enlaces a adjuntos opcionales.",
+      "props": ["secciones"],
+      "hooks": [
+        {
+          "name": "useState",
+          "description": "Mantiene el identificador de la pestaña activa y actualiza la selección cuando el usuario elige otra."
+        },
+        {
+          "name": "useId",
+          "description": "Genera un identificador base único para relacionar accesiblemente el encabezado, las pestañas y sus paneles."
+        }
+      ],
+      "children": [
+        {
+          "id": "info-tabs-navegacion",
+          "name": "Navegación por pestañas",
+          "type": "UI",
+          "file": "src/components/InfoTabs/InfoTabs.jsx",
+          "description": "Presenta una pestaña por cada sección recibida mediante secciones. Cada botón indica si está seleccionado y permite activar su contenido asociado.",
+          "props": [],
+          "repeat": "secciones.map",
+          "children": []
+        },
+        {
+          "id": "info-tabs-titulo",
+          "name": "Título de la sección activa",
+          "type": "UI",
+          "file": "src/components/InfoTabs/InfoTabs.jsx",
+          "description": "Muestra el título correspondiente a la pestaña activa.",
+          "props": [],
+          "children": []
+        },
+        {
+          "id": "info-tabs-paneles",
+          "name": "Paneles informativos",
+          "type": "UI",
+          "file": "src/components/InfoTabs/InfoTabs.jsx",
+          "description": "Renderiza el texto de cada sección y, cuando existe un adjunto, un enlace para abrirlo en otra pestaña. Solo muestra el panel correspondiente a la selección activa.",
+          "props": [],
+          "repeat": "secciones.map",
           "children": []
         }
       ]
@@ -149,11 +215,21 @@
     ],
     "children": [
       {
+        "id": "app-scroll-to-top",
+        "name": "Botón para volver arriba",
+        "type": "Componentes",
+        "file": "src/components/ScrollToTopButton/ScrollToTopButton.jsx",
+        "description": "Muestra un botón flotante cuando el desplazamiento supera los 100 píxeles y permite volver suavemente al inicio de la página o del contenedor de contenido.",
+        "props": [],
+        "componentRef": "scroll-to-top-button",
+        "children": []
+      },
+      {
         "id": "header",
         "name": "Header",
         "type": "Componentes",
         "file": "src/components/Header/Header.jsx",
-        "description": "Cabecera móvil con controles para abrir la navegación y cambiar el tema.",
+        "description": "Cabecera móvil que permite abrir la navegación y cambiar el tema de la aplicación.",
         "props": ["menuAbierto", "onToggleMenu", "botonMenuRef", "inert"],
         "children": [
           {
@@ -161,7 +237,7 @@
             "name": "Botón del menú",
             "type": "UI",
             "file": "src/components/Header/Header.jsx",
-            "description": "Permite abrir o cerrar la navegación móvil y comunica su estado mediante atributos de accesibilidad.",
+            "description": "Permite abrir o cerrar el menú de navegación móvil y comunica su estado mediante atributos de accesibilidad.",
             "props": [],
             "children": []
           },
@@ -208,18 +284,9 @@
             "name": "Encabezado del sidebar",
             "type": "UI",
             "file": "src/components/Sidebar/Sidebar.jsx",
-            "description": "Agrupa el título del grupo y el control de tema en escritorio.",
+            "description": "Agrupa la identificación del equipo y el control de tema, que solo se muestra en escritorio.",
             "props": [],
             "children": [
-              {
-                "id": "titulo-grupo",
-                "name": "Grupo 11",
-                "type": "UI",
-                "file": "src/components/Sidebar/Sidebar.jsx",
-                "description": "Identifica al grupo del proyecto.",
-                "props": [],
-                "children": []
-              },
               {
                 "id": "theme-toggle-sidebar",
                 "name": "ThemeToggle",
@@ -306,7 +373,7 @@
             "name": "Outlet",
             "type": "Router",
             "file": "react-router",
-            "description": "Renderiza la página correspondiente a la ruta coincidente.",
+            "description": "Punto de renderizado de las rutas hijas de App; muestra el componente correspondiente a la ruta coincidente.",
             "props": [],
             "children": [
               {
@@ -314,18 +381,81 @@
                 "name": "Inicio",
                 "type": "Página",
                 "file": "src/pages/Inicio/Inicio.jsx",
-                "description": "Presenta el nombre del proyecto y una breve descripción de la aplicación.",
+                "description": "Presenta la información del equipo, las secciones disponibles de la aplicación y los perfiles de sus integrantes.",
                 "props": [],
                 "route": "/",
                 "children": [
                   {
-                    "id": "inicio-contenido",
-                    "name": "Contenido principal",
+                    "id": "inicio-presentacion",
+                    "name": "Presentación del proyecto",
                     "type": "UI",
                     "file": "src/pages/Inicio/Inicio.jsx",
-                    "description": "Muestra el título del proyecto y una breve descripción.",
+                    "description": "Muestra el nombre del equipo, la comisión, la descripción del proyecto y un enlace para ir a la sección del equipo.",
                     "props": [],
                     "children": []
+                  },
+                  {
+                    "id": "inicio-secciones",
+                    "name": "Qué vas a encontrar",
+                    "type": "UI",
+                    "file": "src/pages/Inicio/Inicio.jsx",
+                    "description": "Presenta las secciones de la aplicación con enlaces y descripciones obtenidos de equipo.json.",
+                    "props": [],
+                    "children": []
+                  },
+                  {
+                    "id": "inicio-equipo",
+                    "name": "Conocé al equipo",
+                    "type": "UI",
+                    "file": "src/pages/Inicio/Inicio.jsx",
+                    "description": "Introduce la sección de integrantes y muestra sus perfiles mediante EquipoSelector.",
+                    "props": [],
+                    "hooks": [
+                      {
+                        "name": "useState",
+                        "description": "Gestiona el integrante seleccionado y el estado de animación del panel."
+                      },
+                      {
+                        "name": "useRef",
+                        "description": "Guarda referencias a las pestañas para gestionar el foco durante la navegación por teclado."
+                      },
+                      {
+                        "name": "useId",
+                        "description": "Genera identificadores únicos para relacionar las pestañas con el panel de contenido."
+                      }
+                    ],
+                    "children": [
+                      {
+                        "id": "inicio-equipo-selector",
+                        "name": "EquipoSelector",
+                        "type": "Componentes",
+                        "file": "src/pages/Inicio/EquipoSelector.jsx",
+                        "description": "Permite seleccionar integrantes para consultar sus presentaciones y acceder a sus perfiles.",
+                        "props": ["integrantes"],
+                        "children": [
+                          {
+                            "id": "equipo-selector-avatar-tab",
+                            "name": "MemberAvatar",
+                            "type": "Componentes",
+                            "file": "src/components/MemberAvatar/MemberAvatar.jsx",
+                            "componentRef": "member-avatar",
+                            "description": "Muestra el avatar de cada integrante en las pestañas de selección.",
+                            "props": ["nombre", "imagen", "tono"],
+                            "children": []
+                          },
+                          {
+                            "id": "equipo-selector-avatar-panel",
+                            "name": "MemberAvatar",
+                            "type": "Componentes",
+                            "file": "src/components/MemberAvatar/MemberAvatar.jsx",
+                            "componentRef": "member-avatar",
+                            "description": "Muestra el avatar del integrante seleccionado junto con sus datos.",
+                            "props": ["nombre", "imagen", "tono", "tamano"],
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -334,17 +464,17 @@
                 "name": "Bitácora",
                 "type": "Página",
                 "file": "src/pages/Bitacora/Bitacora.jsx",
-                "description": "Muestra el registro de trabajo del equipo con filtros, orden por fecha y entradas desplegables.",
+                "description": "Permite consultar el registro de trabajo del equipo, filtrar las entradas por trabajo práctico y categoría, y ordenarlas por fecha.",
                 "props": [],
                 "route": "/bitacora",
                 "hooks": [
                   {
                     "name": "useState",
-                    "description": "Gestiona los filtros seleccionados y el orden de las fechas."
+                    "description": "Mantiene los filtros seleccionados para el trabajo práctico, la categoría y el orden cronológico."
                   },
                   {
                     "name": "useMemo",
-                    "description": "Calcula las categorías disponibles y las entradas filtradas."
+                    "description": "Calcula las categorías disponibles, las opciones del filtro de categoría y las entradas filtradas y ordenadas."
                   }
                 ],
                 "data": [
@@ -360,38 +490,78 @@
                 ],
                 "children": [
                   {
-                    "id": "bitacora-introduccion",
-                    "name": "Título e introducción",
-                    "type": "UI",
-                    "file": "src/pages/Bitacora/Bitacora.jsx",
-                    "description": "Presenta la bitácora y explica qué registra el equipo.",
-                    "props": [],
+                    "id": "bitacora-encabezado",
+                    "name": "PageHeader",
+                    "type": "Componentes",
+                    "componentRef": "page-header",
+                    "description": "Presenta el título y la descripción de la bitácora.",
+                    "props": ["title", "description"],
                     "children": []
                   },
                   {
                     "id": "bitacora-filtros",
-                    "name": "Filtros y orden",
-                    "type": "UI",
-                    "file": "src/pages/Bitacora/Bitacora.jsx",
-                    "description": "Permite filtrar por TP y categoría, ordenar por fecha y restablecer los filtros.",
-                    "props": [],
-                    "children": []
+                    "name": "FilterBar",
+                    "type": "Componentes",
+                    "componentRef": "filter-bar",
+                    "description": "Agrupa los filtros, el botón para restablecerlos y el contador de resultados.",
+                    "props": ["ariaLabel", "onReset", "hayCambios", "contador"],
+                    "children": [
+                      {
+                        "id": "bitacora-filtro-tp",
+                        "name": "FilterSelect",
+                        "type": "Componentes",
+                        "componentRef": "filter-select",
+                        "description": "Filtra los registros por trabajo práctico: TP1, TP2 o todos.",
+                        "props": [
+                          "label",
+                          "value",
+                          "onChange",
+                          "todos",
+                          "options"
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "bitacora-filtro-categoria",
+                        "name": "FilterSelect",
+                        "type": "Componentes",
+                        "componentRef": "filter-select",
+                        "description": "Filtra los registros por categoría.",
+                        "props": [
+                          "label",
+                          "value",
+                          "onChange",
+                          "todos",
+                          "options"
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "bitacora-filtro-orden",
+                        "name": "FilterSelect",
+                        "type": "Componentes",
+                        "componentRef": "filter-select",
+                        "description": "Ordena los registros desde los más antiguos hasta los más recientes, o a la inversa.",
+                        "props": ["label", "value", "onChange", "options"],
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "id": "bitacora-contenido",
                     "name": "Registros de la bitácora",
                     "type": "UI",
                     "file": "src/pages/Bitacora/Bitacora.jsx",
-                    "description": "Muestra un mensaje cuando no hay coincidencias o una lista de entradas desplegables.",
+                    "description": "Muestra un mensaje cuando no hay coincidencias o una lista de entradas desplegables cuando existen resultados.",
                     "props": [],
                     "children": [
                       {
                         "id": "bitacora-estado-vacio",
-                        "name": "Estado sin resultados",
-                        "type": "UI",
-                        "file": "src/pages/Bitacora/Bitacora.jsx",
-                        "description": "Informa que no hay registros para los filtros seleccionados y permite restablecerlos.",
-                        "props": [],
+                        "name": "StatusMessage",
+                        "type": "Componentes",
+                        "componentRef": "status-message",
+                        "description": "Informa que no hay registros para los filtros seleccionados y ofrece restablecerlos.",
+                        "props": ["accion", "children"],
                         "conditional": "entradasFiltradas.length === 0",
                         "children": []
                       },
@@ -400,7 +570,7 @@
                         "name": "Lista de registros",
                         "type": "UI",
                         "file": "src/pages/Bitacora/Bitacora.jsx",
-                        "description": "Renderiza un AccordionItem por cada entrada filtrada.",
+                        "description": "Renderiza una entrada desplegable por cada registro filtrado.",
                         "props": [],
                         "conditional": "entradasFiltradas.length > 0",
                         "children": [
@@ -409,7 +579,7 @@
                             "name": "AccordionItem",
                             "type": "Componentes",
                             "componentRef": "accordion-item",
-                            "description": "Representa cada registro de la bitácora.",
+                            "description": "Muestra el título, la fecha, la categoría, el trabajo práctico y el texto de cada registro en un acordeón.",
                             "props": ["title", "headerContent", "children"],
                             "repeat": "entradasFiltradas.map",
                             "children": []
@@ -425,40 +595,233 @@
                 "name": "Perfil",
                 "type": "Página",
                 "file": "src/pages/Perfil/Perfil.jsx",
-                "description": "Busca un integrante por el slug de la URL y muestra su perfil o un mensaje si no existe.",
+                "description": "Busca un integrante mediante el slug de la URL y muestra su identidad, habilidades, favoritos destacados, un gadget interactivo personalizado y navegación entre perfiles. Si el integrante no existe, muestra la página NotFound con un mensaje específico.",
                 "props": [],
                 "route": "/integrantes/:slug",
                 "hooks": [
                   {
                     "name": "useParams",
-                    "description": "Obtiene el parámetro slug de la ruta actual."
+                    "description": "Obtiene el slug de la ruta actual para buscar al integrante correspondiente."
+                  }
+                ],
+                "data": [
+                  {
+                    "name": "integrantes",
+                    "file": "src/assets/data/integrantes.json"
+                  },
+                  {
+                    "name": "favoritos",
+                    "file": "src/assets/data/favoritos.json"
                   }
                 ],
                 "dependencies": [
                   {
                     "name": "Link",
                     "source": "react-router",
-                    "description": "Permite volver al inicio desde el perfil o desde el mensaje de error."
+                    "description": "Permite volver al inicio desde el perfil."
+                  },
+                  {
+                    "name": "NotFound",
+                    "source": "src/pages/NotFound/NotFound.jsx",
+                    "description": "Muestra una página de recurso no encontrado configurable con un mensaje y un enlace de retorno."
                   }
                 ],
+                "constants": ["GADGETS", "TABS"],
+                "utilities": ["textoFaltantes", "esPendiente"],
                 "children": [
                   {
                     "id": "perfil-encontrado",
-                    "name": "Integrante encontrado",
-                    "type": "UI",
+                    "name": "PerfilContenido",
+                    "type": "Componentes",
                     "file": "src/pages/Perfil/Perfil.jsx",
-                    "description": "Muestra el nombre y la descripción del perfil, junto con un enlace para volver al inicio.",
-                    "props": [],
+                    "description": "Organiza el contenido del integrante, calcula sus favoritos destacados por tipo y selecciona el gadget correspondiente a su slug.",
+                    "props": ["integrante"],
                     "conditional": "integrante existe",
-                    "children": []
+                    "hooks": [
+                      {
+                        "name": "useState",
+                        "description": "Mantiene activa la pestaña de favoritos seleccionada."
+                      },
+                      {
+                        "name": "useRef",
+                        "description": "Guarda referencias a los botones de las pestañas para gestionar el foco durante la navegación con el teclado."
+                      }
+                    ],
+                    "children": [
+                      {
+                        "id": "perfil-volver",
+                        "name": "Volver al inicio",
+                        "type": "UI",
+                        "file": "src/pages/Perfil/Perfil.jsx",
+                        "description": "Proporciona un enlace para regresar a la página de inicio.",
+                        "props": [],
+                        "children": []
+                      },
+                      {
+                        "id": "perfil-identidad",
+                        "name": "ProfileIdentity",
+                        "type": "Componentes",
+                        "file": "src/components/ProfileIdentity/ProfileIdentity.jsx",
+                        "description": "Presenta la identidad del integrante.",
+                        "props": ["integrante"],
+                        "children": []
+                      },
+                      {
+                        "id": "perfil-habilidades",
+                        "name": "SkillsList",
+                        "type": "Componentes",
+                        "file": "src/components/SkillsList/SkillsList.jsx",
+                        "description": "Muestra las habilidades del integrante.",
+                        "props": ["habilidades"],
+                        "children": []
+                      },
+                      {
+                        "id": "perfil-favoritos",
+                        "name": "Favoritos del integrante",
+                        "type": "UI",
+                        "file": "src/pages/Perfil/Perfil.jsx",
+                        "description": "Organiza los favoritos destacados en pestañas de álbumes y películas, con navegación por teclado y paneles asociados.",
+                        "props": [],
+                        "children": [
+                          {
+                            "id": "perfil-tabs",
+                            "name": "Pestañas de favoritos",
+                            "type": "UI",
+                            "file": "src/pages/Perfil/Perfil.jsx",
+                            "description": "Permite alternar entre álbumes y películas, muestra la cantidad de favoritos reales de cada tipo y admite navegación mediante las flechas, Home y End.",
+                            "props": [],
+                            "repeat": "grupos.map",
+                            "children": []
+                          },
+                          {
+                            "id": "perfil-paneles",
+                            "name": "Paneles de favoritos",
+                            "type": "UI",
+                            "file": "src/pages/Perfil/Perfil.jsx",
+                            "description": "Muestra el contenido correspondiente a cada pestaña y diferencia entre favoritos disponibles y registros pendientes.",
+                            "props": [],
+                            "repeat": "grupos.map",
+                            "children": [
+                              {
+                                "id": "perfil-lista-favoritos",
+                                "name": "Lista de favoritos",
+                                "type": "UI",
+                                "file": "src/pages/Perfil/Perfil.jsx",
+                                "description": "Presenta una tarjeta por cada favorito destacado que no está pendiente.",
+                                "props": [],
+                                "conditional": "grupo.reales.length > 0",
+                                "repeat": "grupo.reales.map",
+                                "children": [
+                                  {
+                                    "id": "perfil-favorito",
+                                    "name": "FavoriteItemCard",
+                                    "type": "Componentes",
+                                    "file": "src/components/FavoriteItemCard/FavoriteItemCard.jsx",
+                                    "description": "Muestra la información de un favorito individual.",
+                                    "props": ["favorito"],
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "id": "perfil-favoritos-vacios",
+                                "name": "Mensaje de favoritos vacíos",
+                                "type": "UI",
+                                "file": "src/pages/Perfil/Perfil.jsx",
+                                "description": "Indica que los favoritos de ese tipo están en construcción cuando no hay favoritos disponibles.",
+                                "props": [],
+                                "conditional": "grupo.reales.length === 0",
+                                "children": []
+                              },
+                              {
+                                "id": "perfil-favoritos-pendientes",
+                                "name": "Nota de favoritos pendientes",
+                                "type": "UI",
+                                "file": "src/pages/Perfil/Perfil.jsx",
+                                "description": "Informa cuántos favoritos faltan cargar cuando hay favoritos disponibles y también existen registros pendientes.",
+                                "props": [],
+                                "conditional": "grupo.reales.length > 0 && grupo.pendientes > 0",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "perfil-gadget",
+                        "name": "Gadget del integrante",
+                        "type": "Componentes",
+                        "file": "src/pages/Perfil/Perfil.jsx",
+                        "description": "Renderiza el gadget interactivo específico del integrante, cuando existe uno asociado a su slug. Recibe los datos del integrante y sus favoritos destacados.",
+                        "props": ["integrante", "favoritos"],
+                        "conditional": "GADGETS[slug] existe",
+                        "children": [
+                          {
+                            "id": "perfil-gadget-federico",
+                            "name": "GadgetFederico",
+                            "type": "Componentes",
+                            "file": "src/components/Gadgets/GadgetFederico/GadgetFederico.jsx",
+                            "description": "Gadget personalizado para Federico.",
+                            "props": ["integrante", "favoritos"],
+                            "conditional": "slug === \"federico\"",
+                            "children": []
+                          },
+                          {
+                            "id": "perfil-gadget-candelaria",
+                            "name": "GadgetCandelaria",
+                            "type": "Componentes",
+                            "file": "src/components/Gadgets/GadgetCandelaria/GadgetCandelaria.jsx",
+                            "description": "Gadget personalizado para Candelaria.",
+                            "props": ["integrante", "favoritos"],
+                            "conditional": "slug === \"candelaria\"",
+                            "children": []
+                          },
+                          {
+                            "id": "perfil-gadget-marcos",
+                            "name": "GadgetMarcos",
+                            "type": "Componentes",
+                            "file": "src/components/Gadgets/GadgetMarcos/GadgetMarcos.jsx",
+                            "description": "Gadget personalizado para Marcos.",
+                            "props": ["integrante", "favoritos"],
+                            "conditional": "slug === \"marcos\"",
+                            "children": []
+                          },
+                          {
+                            "id": "perfil-gadget-victoria",
+                            "name": "GadgetVictoria",
+                            "type": "Componentes",
+                            "file": "src/components/Gadgets/GadgetVictoria/GadgetVictoria.jsx",
+                            "description": "Gadget personalizado para Victoria.",
+                            "props": ["integrante", "favoritos"],
+                            "conditional": "slug === \"victoria\"",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "id": "perfil-navegacion",
+                        "name": "ProfileNavigation",
+                        "type": "Componentes",
+                        "file": "src/components/ProfileNavigation/ProfileNavigation.jsx",
+                        "description": "Permite navegar entre los perfiles de los integrantes desde el pie de la página.",
+                        "props": ["integrantes", "currentSlug"],
+                        "children": []
+                      }
+                    ]
                   },
                   {
                     "id": "perfil-no-encontrado",
-                    "name": "Integrante no encontrado",
-                    "type": "UI",
-                    "file": "src/pages/Perfil/Perfil.jsx",
-                    "description": "Muestra el error, informa el slug solicitado y ofrece volver al inicio.",
-                    "props": [],
+                    "name": "NotFound",
+                    "type": "Componentes",
+                    "file": "src/pages/NotFound/NotFound.jsx",
+                    "description": "Muestra un estado de perfil inexistente con un título, una explicación que incluye el slug solicitado y un enlace para volver al inicio.",
+                    "props": [
+                      "badge",
+                      "title",
+                      "description",
+                      "buttonText",
+                      "buttonTo"
+                    ],
                     "conditional": "!integrante",
                     "children": []
                   }
@@ -469,18 +832,120 @@
                 "name": "Recursos",
                 "type": "Página",
                 "file": "src/pages/Recursos/Recursos.jsx",
-                "description": "Presenta la colección de favoritos del equipo.",
+                "description": "Permite consultar la colección de películas y álbumes favoritos del equipo, buscar por texto y filtrar por tipo e integrante.",
                 "props": [],
                 "route": "/recursos",
+                "hooks": [
+                  {
+                    "name": "useState",
+                    "description": "Gestiona el texto de búsqueda y los filtros seleccionados por tipo e integrante."
+                  }
+                ],
+                "data": [
+                  {
+                    "name": "favoritos",
+                    "file": "src/assets/data/favoritos.json"
+                  },
+                  {
+                    "name": "integrantes",
+                    "file": "src/assets/data/integrantes.json"
+                  }
+                ],
+                "utilities": [
+                  "tieneTexto",
+                  "esRegistroCompleto",
+                  "normalizar",
+                  "coincideConBusqueda",
+                  "restablecerFiltros"
+                ],
                 "children": [
                   {
-                    "id": "recursos-contenido",
-                    "name": "Contenido principal",
+                    "id": "recursos-encabezado",
+                    "name": "PageHeader",
+                    "type": "Componentes",
+                    "componentRef": "page-header",
+                    "description": "Presenta el título Favoritos y la descripción de la colección.",
+                    "props": ["title", "description"],
+                    "children": []
+                  },
+                  {
+                    "id": "recursos-filtros",
+                    "name": "FilterBar",
+                    "type": "Componentes",
+                    "componentRef": "filter-bar",
+                    "description": "Agrupa la búsqueda, los filtros, la acción para restablecerlos y el contador de resultados.",
+                    "props": ["ariaLabel", "onReset", "hayCambios", "contador"],
+                    "children": [
+                      {
+                        "id": "recursos-busqueda",
+                        "name": "SearchInput",
+                        "type": "Componentes",
+                        "componentRef": "search-input",
+                        "description": "Permite buscar favoritos por título, artista, comentario o sinopsis.",
+                        "props": ["value", "onChange", "placeholder"],
+                        "children": []
+                      },
+                      {
+                        "id": "recursos-filtro-tipo",
+                        "name": "FilterSelect",
+                        "type": "Componentes",
+                        "componentRef": "filter-select",
+                        "description": "Filtra los favoritos por tipo de recurso, como álbum o película.",
+                        "props": [
+                          "label",
+                          "value",
+                          "onChange",
+                          "todos",
+                          "options"
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "recursos-filtro-integrante",
+                        "name": "FilterSelect",
+                        "type": "Componentes",
+                        "componentRef": "filter-select",
+                        "description": "Filtra los favoritos por el integrante al que pertenecen.",
+                        "props": [
+                          "label",
+                          "value",
+                          "onChange",
+                          "todos",
+                          "options"
+                        ],
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "recursos-estado-vacio",
+                    "name": "StatusMessage",
+                    "type": "Componentes",
+                    "componentRef": "status-message",
+                    "description": "Informa que no hay favoritos coincidentes y permite restablecer la búsqueda y los filtros.",
+                    "props": ["accion", "children"],
+                    "conditional": "favoritosFiltrados.length === 0",
+                    "children": []
+                  },
+                  {
+                    "id": "recursos-lista",
+                    "name": "Lista de favoritos",
                     "type": "UI",
                     "file": "src/pages/Recursos/Recursos.jsx",
-                    "description": "Muestra el título de la sección y una descripción de la colección de favoritos.",
+                    "description": "Muestra un acordeón por cada favorito filtrado, con sus metadatos y detalles disponibles.",
                     "props": [],
-                    "children": []
+                    "children": [
+                      {
+                        "id": "recursos-item",
+                        "name": "AccordionItem",
+                        "type": "Componentes",
+                        "componentRef": "accordion-item",
+                        "description": "Presenta el título y los metadatos de cada favorito en el encabezado desplegable, y su información adicional en el panel.",
+                        "props": ["title", "headerContent", "children"],
+                        "repeat": "favoritosFiltrados.map",
+                        "children": []
+                      }
+                    ]
                   }
                 ]
               },
@@ -489,16 +954,258 @@
                 "name": "API pública",
                 "type": "Página",
                 "file": "src/pages/Api/Api.jsx",
-                "description": "Presenta la sección de API pública.",
+                "description": "Permite buscar álbumes de estudio de distintos artistas mediante MusicBrainz, consultar información de los álbumes y visualizar sus canciones.",
                 "props": [],
                 "route": "/api",
+                "hooks": [
+                  {
+                    "name": "useState",
+                    "description": "Mantiene el artista seleccionado para la consulta y el texto ingresado en el buscador."
+                  },
+                  {
+                    "name": "useAlbumesDeArtista",
+                    "file": "src/hooks/useMusicBrainz.js",
+                    "description": "Obtiene los álbumes del artista seleccionado y proporciona el estado de carga, los errores y la función para volver a consultar."
+                  }
+                ],
+                "data": [
+                  {
+                    "name": "contenidoApi",
+                    "file": "src/assets/data/api.json"
+                  }
+                ],
+                "utilities": ["buscar", "enviar", "formatearDuracion"],
+                "constants": [
+                  "COVER_BASE",
+                  "ARTISTAS_SUGERIDOS",
+                  "ARTISTA_INICIAL"
+                ],
                 "children": [
                   {
-                    "id": "api-contenido",
-                    "name": "Contenido principal",
+                    "id": "api-encabezado",
+                    "name": "PageHeader",
+                    "type": "Componentes",
+                    "componentRef": "page-header",
+                    "description": "Presenta el título y la descripción de la sección definidos en api.json.",
+                    "props": ["title", "description"],
+                    "children": []
+                  },
+                  {
+                    "id": "api-informacion",
+                    "name": "InfoTabs",
+                    "type": "Componentes",
+                    "file": "src/components/InfoTabs/InfoTabs.jsx",
+                    "description": "Presenta las secciones informativas de la página mediante pestañas.",
+                    "props": ["secciones"],
+                    "children": []
+                  },
+                  {
+                    "id": "api-resultados",
+                    "name": "Resultados de búsqueda",
                     "type": "UI",
                     "file": "src/pages/Api/Api.jsx",
-                    "description": "Muestra el título de la sección y explica que la información se obtendrá desde una API externa.",
+                    "description": "Agrupa los controles de búsqueda, las sugerencias de artistas, los estados de consulta y los resultados de álbumes.",
+                    "props": [],
+                    "children": [
+                      {
+                        "id": "api-resultados-encabezado",
+                        "name": "Encabezado de resultados",
+                        "type": "UI",
+                        "file": "src/pages/Api/Api.jsx",
+                        "description": "Muestra el artista consultado y permite actualizar los resultados.",
+                        "props": [],
+                        "children": []
+                      },
+                      {
+                        "id": "api-buscador",
+                        "name": "Buscador de artistas",
+                        "type": "UI",
+                        "file": "src/pages/Api/Api.jsx",
+                        "description": "Permite ingresar el nombre de un artista y enviar la consulta mediante el formulario.",
+                        "props": [],
+                        "children": []
+                      },
+                      {
+                        "id": "api-sugeridos",
+                        "name": "Artistas sugeridos",
+                        "type": "UI",
+                        "file": "src/pages/Api/Api.jsx",
+                        "description": "Ofrece accesos rápidos a los artistas sugeridos y señala cuál está seleccionado.",
+                        "props": [],
+                        "children": []
+                      },
+                      {
+                        "id": "api-cargando",
+                        "name": "StatusMessage",
+                        "type": "Componentes",
+                        "componentRef": "status-message",
+                        "description": "Informa que se están consultando los álbumes cuando todavía no hay resultados disponibles.",
+                        "props": ["children"],
+                        "conditional": "cargando && albumes.length === 0",
+                        "children": []
+                      },
+                      {
+                        "id": "api-error",
+                        "name": "StatusMessage",
+                        "type": "Componentes",
+                        "componentRef": "status-message",
+                        "description": "Muestra el error de la consulta y permite reintentarla.",
+                        "props": ["error", "accion", "children"],
+                        "conditional": "error",
+                        "children": []
+                      },
+                      {
+                        "id": "api-sin-resultados",
+                        "name": "StatusMessage",
+                        "type": "Componentes",
+                        "componentRef": "status-message",
+                        "description": "Informa que no se encontraron álbumes para el artista consultado cuando la búsqueda finalizó sin errores.",
+                        "props": ["children"],
+                        "conditional": "!cargando && !error && albumes.length === 0",
+                        "children": []
+                      },
+                      {
+                        "id": "api-grilla",
+                        "name": "Grilla de álbumes",
+                        "type": "UI",
+                        "file": "src/pages/Api/Api.jsx",
+                        "description": "Muestra las tarjetas de los álbumes obtenidos y comunica cuándo se están actualizando los resultados.",
+                        "props": [],
+                        "conditional": "albumes.length > 0",
+                        "repeat": "albumes.map",
+                        "children": [
+                          {
+                            "id": "api-album-card",
+                            "name": "AlbumCard",
+                            "type": "Componentes",
+                            "file": "src/pages/Api/Api.jsx",
+                            "description": "Presenta la portada, los datos del álbum, el enlace para escucharlo en YouTube y el acceso al modal con su lista de canciones.",
+                            "props": ["album"],
+                            "hooks": [
+                              {
+                                "name": "useState",
+                                "description": "Controla si el modal de canciones está abierto."
+                              },
+                              {
+                                "name": "useRef",
+                                "description": "Guarda referencias al diálogo y al botón que lo abre, para gestionar su apertura y devolver el foco al cerrarlo."
+                              },
+                              {
+                                "name": "useId",
+                                "description": "Genera un identificador único para vincular el título del modal con el diálogo."
+                              },
+                              {
+                                "name": "useTracksDeAlbum",
+                                "file": "src/hooks/useMusicBrainz.js",
+                                "description": "Obtiene las canciones del álbum cuando corresponde y proporciona estados de carga, error y reintento."
+                              },
+                              {
+                                "name": "useEffect",
+                                "description": "Sincroniza el estado del modal con la apertura y el cierre del diálogo nativo."
+                              }
+                            ],
+                            "children": [
+                              {
+                                "id": "api-portada",
+                                "name": "Portada",
+                                "type": "Componentes",
+                                "file": "src/pages/Api/Api.jsx",
+                                "description": "Muestra la portada del álbum desde Cover Art Archive o una alternativa cuando falla la carga de la imagen.",
+                                "props": ["album"],
+                                "hooks": [
+                                  {
+                                    "name": "useState",
+                                    "description": "Registra si falló la carga de la portada para mostrar la alternativa."
+                                  }
+                                ],
+                                "children": []
+                              },
+                              {
+                                "id": "api-album-datos",
+                                "name": "Información del álbum",
+                                "type": "UI",
+                                "file": "src/pages/Api/Api.jsx",
+                                "description": "Muestra el título, el artista y, cuando está disponible, el año del álbum.",
+                                "props": [],
+                                "children": []
+                              },
+                              {
+                                "id": "api-album-acciones",
+                                "name": "Acciones del álbum",
+                                "type": "UI",
+                                "file": "src/pages/Api/Api.jsx",
+                                "description": "Incluye el enlace a los resultados de YouTube y el botón para abrir el modal de canciones.",
+                                "props": [],
+                                "children": []
+                              },
+                              {
+                                "id": "api-modal-canciones",
+                                "name": "Modal de canciones",
+                                "type": "UI",
+                                "file": "src/pages/Api/Api.jsx",
+                                "description": "Diálogo nativo que presenta las canciones del álbum, permite cerrarse desde su botón o al hacer clic en el fondo, y devuelve el foco al botón que lo abrió.",
+                                "props": [],
+                                "children": [
+                                  {
+                                    "id": "api-modal-cargando",
+                                    "name": "StatusMessage",
+                                    "type": "Componentes",
+                                    "componentRef": "status-message",
+                                    "description": "Indica que se están cargando las canciones.",
+                                    "props": ["compacto", "children"],
+                                    "conditional": "cargando",
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "api-modal-error",
+                                    "name": "StatusMessage",
+                                    "type": "Componentes",
+                                    "componentRef": "status-message",
+                                    "description": "Muestra el error al consultar las canciones y ofrece reintentar la carga.",
+                                    "props": [
+                                      "error",
+                                      "compacto",
+                                      "accion",
+                                      "children"
+                                    ],
+                                    "conditional": "error",
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "api-modal-sin-tracks",
+                                    "name": "StatusMessage",
+                                    "type": "Componentes",
+                                    "componentRef": "status-message",
+                                    "description": "Informa que no hay información de canciones cuando la consulta termina sin resultados ni errores.",
+                                    "props": ["compacto", "children"],
+                                    "conditional": "!cargando && !error && tracks.length === 0",
+                                    "children": []
+                                  },
+                                  {
+                                    "id": "api-tracks",
+                                    "name": "Lista de canciones",
+                                    "type": "UI",
+                                    "file": "src/pages/Api/Api.jsx",
+                                    "description": "Muestra las canciones del álbum con su posición, título y duración cuando está disponible.",
+                                    "props": [],
+                                    "conditional": "tracks.length > 0",
+                                    "repeat": "tracks.map",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "api-creditos",
+                    "name": "Créditos de las fuentes",
+                    "type": "UI",
+                    "file": "src/pages/Api/Api.jsx",
+                    "description": "Atribuye los datos musicales a MusicBrainz y las portadas a Cover Art Archive.",
                     "props": [],
                     "children": []
                   }
@@ -509,38 +1216,210 @@
                 "name": "Árbol de renderizado",
                 "type": "Página",
                 "file": "src/pages/Arbol/Arbol.jsx",
-                "description": "Presenta la sección destinada a representar la estructura de componentes de React.",
+                "description": "Permite explorar interactivamente la estructura de componentes de React, expandir o contraer ramas y consultar los detalles de los nodos seleccionados.",
                 "props": [],
                 "route": "/arbol",
+                "hooks": [
+                  {
+                    "name": "useMemo",
+                    "description": "Memoriza la lista plana de nodos y los identificadores de los nodos expandibles para evitar recalcularlos en cada renderizado."
+                  },
+                  {
+                    "name": "useState",
+                    "description": "Mantiene los identificadores de las ramas expandidas y los datos del nodo seleccionado, incluida su ruta y el nombre de su padre."
+                  }
+                ],
+                "dependencies": [
+                  "ArbolNodo",
+                  "InspectorNodo",
+                  "arbolUtils.js",
+                  "PageHeader"
+                ],
+                "data": [
+                  "raiz",
+                  "nodos",
+                  "idsExpandibles",
+                  "idsExpandiblesInternos"
+                ],
+                "utilities": ["aplanarArbol"],
+                "conditional": [
+                  "todosAbiertos determina si todas las ramas internas están expandidas.",
+                  "alternarExpansion permite expandir o contraer una rama individual o todas las ramas desde el nodo raíz."
+                ],
                 "children": [
                   {
-                    "id": "arbol-contenido",
-                    "name": "Contenido principal",
+                    "id": "arbol-encabezado",
+                    "name": "Encabezado de la página",
                     "type": "UI",
                     "file": "src/pages/Arbol/Arbol.jsx",
-                    "description": "Muestra el título de la sección y una breve explicación del árbol de renderizado.",
+                    "description": "Presenta el título de la página y una explicación para orientar la exploración del árbol.",
                     "props": [],
+                    "componentRef": "page-header",
                     "children": []
+                  },
+                  {
+                    "id": "arbol-visor-estructura",
+                    "name": "Visor de la estructura",
+                    "type": "UI",
+                    "file": "src/pages/Arbol/Arbol.jsx",
+                    "description": "Contiene el árbol jerárquico interactivo. Permite seleccionar nodos y expandir o contraer sus ramas. La raíz permite expandir o contraer todas las ramas internas.",
+                    "props": [],
+                    "children": [
+                      {
+                        "id": "arbol-lista-nodos",
+                        "name": "Árbol de nodos",
+                        "type": "Componentes",
+                        "file": "src/pages/Arbol/ArbolNodo.jsx",
+                        "description": "Representa cada nodo y sus descendientes de forma recursiva. Muestra el nombre y el tipo del nodo, permite seleccionarlo y, cuando tiene hijos, expandir o contraer su rama.",
+                        "props": [
+                          "nodo",
+                          "path",
+                          "parentName",
+                          "expandedIds",
+                          "selectedPath",
+                          "todosAbiertos",
+                          "onSelect",
+                          "onToggle"
+                        ],
+                        "dependencies": [
+                          "obtenerHijos",
+                          "normalizarTipo",
+                          "raiz"
+                        ],
+                        "conditional": [
+                          "Solo muestra el control de expansión si el nodo tiene hijos.",
+                          "Muestra los descendientes cuando el nodo está expandido.",
+                          "Marca visualmente el nodo seleccionado."
+                        ],
+                        "repeat": "Representación recursiva de los nodos con hijos",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "arbol-inspector",
+                    "name": "Inspector del nodo seleccionado",
+                    "type": "Componentes",
+                    "file": "src/pages/Arbol/InspectorNodo.jsx",
+                    "description": "Presenta la información del nodo seleccionado: nombre, tipo, archivo, descripción, nodo padre, cantidad de hijos, props aceptadas e hijos directos.",
+                    "props": ["seleccion"],
+                    "dependencies": ["obtenerDatosInspector", "normalizarTipo"],
+                    "children": [
+                      {
+                        "id": "arbol-inspector-identidad",
+                        "name": "Identidad y descripción",
+                        "type": "UI",
+                        "file": "src/pages/Arbol/InspectorNodo.jsx",
+                        "description": "Muestra el nombre, tipo, archivo y descripción del nodo, junto con un resumen de su padre y la cantidad de hijos directos.",
+                        "props": [],
+                        "conditional": [
+                          "Muestra la ruta del archivo solo cuando está disponible.",
+                          "Usa una descripción alternativa cuando el nodo no tiene descripción."
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "arbol-inspector-props",
+                        "name": "Props aceptadas",
+                        "type": "UI",
+                        "file": "src/pages/Arbol/InspectorNodo.jsx",
+                        "description": "Lista las props del nodo y muestra un mensaje alternativo cuando no tiene props definidas.",
+                        "props": [],
+                        "repeat": "datos.props.map",
+                        "conditional": [
+                          "Muestra la lista de props cuando hay elementos; de lo contrario, muestra «Sin props»."
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "arbol-inspector-hijos",
+                        "name": "Hijos directos",
+                        "type": "UI",
+                        "file": "src/pages/Arbol/InspectorNodo.jsx",
+                        "description": "Lista los hijos directos del nodo seleccionado o indica que no tiene ninguno.",
+                        "props": [],
+                        "repeat": "datos.children.map",
+                        "conditional": [
+                          "Muestra la lista de hijos cuando hay elementos; de lo contrario, muestra «Sin hijos directos»."
+                        ],
+                        "children": []
+                      }
+                    ]
                   }
                 ]
               },
               {
                 "id": "pagina-not-found",
-                "name": "NotFound",
+                "name": "Página no encontrada",
                 "type": "Página",
                 "file": "src/pages/NotFound/NotFound.jsx",
-                "description": "Muestra un mensaje cuando la ruta solicitada no existe.",
-                "props": [],
+                "description": "Muestra un mensaje de error y una acción para regresar a una ruta válida. También puede reutilizarse para informar que un recurso solicitado, como un perfil, no existe.",
+                "props": [
+                  "badge",
+                  "title",
+                  "description",
+                  "buttonText",
+                  "buttonTo",
+                  "code"
+                ],
                 "route": "*",
+                "dependencies": ["PageHeader", "Button"],
+                "data": [
+                  "badge",
+                  "title",
+                  "description",
+                  "buttonText",
+                  "buttonTo",
+                  "code"
+                ],
                 "children": [
                   {
-                    "id": "not-found-contenido",
-                    "name": "Mensaje de página no encontrada",
+                    "id": "not-found-codigo",
+                    "name": "Código de error decorativo",
                     "type": "UI",
                     "file": "src/pages/NotFound/NotFound.jsx",
-                    "description": "Muestra el error 404 y explica que la ruta solicitada no existe.",
+                    "description": "Muestra el código de error como elemento visual de fondo, oculto a las tecnologías de asistencia.",
                     "props": [],
                     "children": []
+                  },
+                  {
+                    "id": "not-found-contenido",
+                    "name": "Contenido del error",
+                    "type": "UI",
+                    "file": "src/pages/NotFound/NotFound.jsx",
+                    "description": "Agrupa la etiqueta del error, el encabezado descriptivo y la acción para volver a una ruta válida.",
+                    "props": [],
+                    "children": [
+                      {
+                        "id": "not-found-etiqueta",
+                        "name": "Etiqueta del error",
+                        "type": "UI",
+                        "file": "src/pages/NotFound/NotFound.jsx",
+                        "description": "Muestra una etiqueta configurable, como «Error 404» o «Perfil No Encontrado».",
+                        "props": [],
+                        "children": []
+                      },
+                      {
+                        "id": "not-found-encabezado",
+                        "name": "Encabezado del error",
+                        "type": "Componentes",
+                        "file": "src/components/PageHeader/PageHeader.jsx",
+                        "description": "Presenta el título y la descripción del error mediante el componente compartido PageHeader.",
+                        "props": ["title", "description", "className"],
+                        "componentRef": "page-header",
+                        "children": []
+                      },
+                      {
+                        "id": "not-found-accion",
+                        "name": "Acción para regresar",
+                        "type": "Componentes",
+                        "file": "src/components/Button/Button.jsx",
+                        "description": "Ofrece un enlace con apariencia de botón para navegar a la ruta indicada mediante buttonTo.",
+                        "props": ["to", "children"],
+                        "componentRef": "button",
+                        "children": []
+                      }
+                    ]
                   }
                 ]
               }
@@ -548,12 +1427,34 @@
           },
           {
             "id": "footer",
-            "name": "Pie de página",
-            "type": "UI",
-            "file": "src/App.jsx",
-            "description": "Representa el elemento footer que aparece debajo del contenido de la ruta.",
+            "name": "Footer",
+            "type": "Componentes",
+            "file": "src/components/Footer/Footer.jsx",
+            "description": "Muestra el copyright, el enlace al repositorio de GitHub y la comisión del equipo.",
             "props": [],
-            "children": []
+            "children": [
+              {
+                "id": "footer-github-link",
+                "name": "GithubLink",
+                "type": "Componentes",
+                "file": "src/components/GithubLink/GithubLink.jsx",
+                "description": "Muestra un enlace a GitHub. En las rutas de perfil, dirige al repositorio personal del integrante cuando está disponible; en los demás casos, dirige al repositorio del proyecto.",
+                "props": [],
+                "hooks": [
+                  {
+                    "name": "useLocation",
+                    "description": "Obtiene la ruta actual para identificar si se está visitando el perfil de un integrante."
+                  }
+                ],
+                "data": [
+                  {
+                    "name": "integrantes",
+                    "file": "src/assets/data/integrantes.json"
+                  }
+                ],
+                "children": []
+              }
+            ]
           }
         ]
       }

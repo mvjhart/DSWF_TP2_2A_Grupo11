@@ -1,13 +1,7 @@
 import { useState } from "react";
 import "./GadgetVictoria.css";
 
-const PALETA_INICIAL = [
-  "#4C1D95",
-  "#7C3AED",
-  "#A78BFA",
-  "#F472B6",
-  "#FDE68A",
-];
+const PALETA_INICIAL = ["#4C1D95", "#7C3AED", "#A78BFA", "#F472B6", "#FDE68A"];
 
 // h en grados (0-360), s y l entre 0 y 1.
 function hslAHex(h, s, l) {
@@ -82,8 +76,8 @@ export default function GadgetVictoria() {
         Generador de paletas
       </h2>
       <p className="paleta__texto">
-        Generá una paleta, bloqueá los colores que te gusten y volvé a
-        generar. Tocá un código para copiarlo.
+        Generá una paleta, bloqueá los colores que te gusten y volvé a generar.
+        Tocá un código para copiarlo.
       </p>
 
       <ul className="paleta__colores">
@@ -107,6 +101,7 @@ export default function GadgetVictoria() {
                 type="button"
                 className="paleta__bloqueo"
                 onClick={() => alternarBloqueo(indice)}
+                aria-pressed={bloqueado}
               >
                 {bloqueado ? "Bloqueado" : "Bloquear"}
                 <span className="paleta__oculto"> color {indice + 1}</span>
