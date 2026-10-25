@@ -2,6 +2,12 @@ import datosArbol from "../../assets/data/arbol.json";
 
 const { components: definiciones, tree: raiz } = datosArbol;
 
+// Convierte un valor opcional (texto o lista de textos) en una lista.
+function aLista(valor) {
+  if (valor === undefined || valor === null || valor === "") return [];
+  return Array.isArray(valor) ? valor : [valor];
+}
+
 // Resuelve los hijos de un nodo, incluidas las definiciones reutilizables.
 export function obtenerHijos(nodo) {
   if (nodo.children?.length > 0) {
@@ -26,6 +32,11 @@ export function obtenerDatosInspector(nodo) {
     description: nodo.description ?? definicion?.description ?? "",
     props: nodo.props ?? definicion?.props ?? [],
     children: obtenerHijos(nodo),
+    // Datos extra que solo muestra el modal.
+    hooks: nodo.hooks ?? definicion?.hooks ?? [],
+    route: nodo.route ?? "",
+    conditional: aLista(nodo.conditional),
+    repeat: aLista(nodo.repeat),
   };
 }
 
@@ -53,7 +64,7 @@ export function aplanarArbol(nodo, parentName = null, path = nodo.id) {
 export function normalizarTipo(tipo) {
   return tipo
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/\s+/g, "-");
 }

@@ -1,11 +1,45 @@
 import { useMemo, useState } from "react";
 import ArbolNodo from "./ArbolNodo.jsx";
 import InspectorNodo from "./InspectorNodo.jsx";
-import { aplanarArbol, raiz } from "./arbolUtils.js";
+import {
+  aplanarArbol,
+  normalizarTipo,
+  obtenerDatosInspector,
+  raiz,
+} from "./arbolUtils.js";
 import { PageHeader } from "../../components/PageHeader/PageHeader.jsx";
+import useMediaQuery from "../../hooks/useMediaQuery.js";
 import "./Arbol.css";
 
+// La tarjeta de detalles se convierte en modal solo cuando falta espacio:
+// poco ancho (celular vertical) o poco alto (celular horizontal).
+// La coma funciona como "o".
+const MEDIA_MODAL = "(max-width: 768px), (max-height: 520px)";
+
+// Descripción de cada tipo para la leyenda. Solo se muestran los tipos
+// que realmente aparecen en el árbol.
+const DESCRIPCION_TIPOS = [
+  ["Aplicación", "componente raíz de la aplicación."],
+  ["Layout", "componentes que organizan la estructura visual."],
+  ["Página", "componentes que representan páginas o vistas."],
+  ["Componentes", "componentes reutilizables."],
+  ["UI", "elementos de interfaz de usuario."],
+  ["Router", "elementos relacionados con el enrutamiento."],
+];
+
 function Arbol() {
+  const esModal = useMediaQuery(MEDIA_MODAL);
+  const [modalAbierto, setModalAbierto] = useState(false);
+
+  // Si cambia el espacio disponible (por ejemplo, al girar el celular),
+  // el modal se cierra para no quedar abierto fuera de contexto.
+  const [esModalPrevio, setEsModalPrevio] = useState(esModal);
+
+  if (esModalPrevio !== esModal) {
+    setEsModalPrevio(esModal);
+    setModalAbierto(false);
+  }
+
   const nodos = useMemo(() => aplanarArbol(raiz), []);
 
   const idsExpandibles = useMemo(
@@ -13,6 +47,11 @@ function Arbol() {
       nodos
         .filter(({ children }) => children.length > 0)
         .map(({ path }) => path),
+    [nodos],
+  );
+
+  const tiposEnUso = useMemo(
+    () => new Set(nodos.map(({ nodo }) => obtenerDatosInspector(nodo).type)),
     [nodos],
   );
 
@@ -53,6 +92,16 @@ function Arbol() {
     });
   }
 
+  // Selecciona un nodo. Cuando los detalles van en modal, también lo abre
+  // (incluso si el nodo ya estaba seleccionado).
+  function seleccionar(nuevaSeleccion) {
+    setSeleccion(nuevaSeleccion);
+
+    if (esModal) {
+      setModalAbierto(true);
+    }
+  }
+
   return (
     <main className="arbol-pagina">
       <div className="arbol-visor">
@@ -66,42 +115,18 @@ function Arbol() {
             className="arbol-leyenda sr-only"
             aria-label="Leyenda de tipos de nodos"
           >
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda__item--aplicacion">
-                Aplicación
-              </span>
-              : componente raíz de la aplicación.
-            </li>
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda__item--componentes">
-                Componentes
-              </span>
-              : componentes reutilizables.
-            </li>
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda__item--pagina">
-                Página
-              </span>
-              : componentes que representan páginas o vistas.
-            </li>
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda__item--layout">
-                Layout
-              </span>
-              : componentes que organizan la estructura visual.
-            </li>
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda__item--ui">
-                UI
-              </span>
-              : elementos de interfaz de usuario.
-            </li>
-            <li>
-              <span className="arbol-leyenda__item arbol-leyenda--router">
-                Router
-              </span>
-              : elementos relacionados con el enrutamiento.
-            </li>
+            {DESCRIPCION_TIPOS.filter(([tipo]) => tiposEnUso.has(tipo)).map(
+              ([tipo, descripcion]) => (
+                <li key={tipo}>
+                  <span
+                    className={`arbol-leyenda__item arbol-leyenda__item--${normalizarTipo(tipo)}`}
+                  >
+                    {tipo}
+                  </span>
+                  : {descripcion}
+                </li>
+              ),
+            )}
           </ul>
 
           <section
@@ -113,11 +138,13 @@ function Arbol() {
               Estructura
             </h2>
 
-            <p className="arbol-visor__ayuda sr-only">
+            <p id="arbol-arbol-ayuda" className="arbol-visor__ayuda sr-only">
               Árbol jerárquico de componentes. Seleccioná el nombre de un nodo
-              para consultar sus detalles. Los botones más y menos permiten
-              expandir o contraer sus ramas. En el nodo raíz, App, el botón
-              permite expandir o contraer todas las ramas del árbol.
+              para consultar sus detalles
+              {esModal ? ", que se abren en una ventana" : ""}. Los botones más
+              y menos permiten expandir o contraer sus ramas. En el nodo raíz,
+              App, el botón permite expandir o contraer todas las ramas del
+              árbol.
             </p>
 
             <div className="arbol-visor__desplazamiento">
@@ -129,7 +156,8 @@ function Arbol() {
                   expandedIds={expandedIds}
                   selectedPath={seleccion.path}
                   todosAbiertos={todosAbiertos}
-                  onSelect={setSeleccion}
+                  esModal={esModal}
+                  onSelect={seleccionar}
                   onToggle={alternarExpansion}
                 />
               </ul>
@@ -137,7 +165,12 @@ function Arbol() {
           </section>
         </div>
 
-        <InspectorNodo seleccion={seleccion} />
+        <InspectorNodo
+          seleccion={seleccion}
+          modal={esModal}
+          abierto={modalAbierto}
+          onCerrar={() => setModalAbierto(false)}
+        />
       </div>
     </main>
   );

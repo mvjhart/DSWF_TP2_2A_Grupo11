@@ -8,6 +8,7 @@ function ArbolNodo({
   expandedIds,
   selectedPath,
   todosAbiertos,
+  esModal,
   onSelect,
   onToggle,
 }) {
@@ -51,10 +52,14 @@ function ArbolNodo({
           aria-hidden="true"
         />
 
+        {/* Con detalles en modal, el botón abre una ventana, no alterna un
+            estado: por eso no usa aria-pressed. */}
         <button
           className="arbol-nodo__nombre"
           type="button"
-          aria-pressed={seleccionado}
+          aria-pressed={esModal ? undefined : seleccionado}
+          aria-haspopup={esModal ? "dialog" : undefined}
+          aria-current={esModal && seleccionado ? "true" : undefined}
           onClick={() => onSelect({ nodo, path, parentName })}
         >
           {nodo.name ?? "Sin nombre"}
@@ -79,6 +84,7 @@ function ArbolNodo({
                 expandedIds={expandedIds}
                 selectedPath={selectedPath}
                 todosAbiertos={todosAbiertos}
+                esModal={esModal}
                 onSelect={onSelect}
                 onToggle={onToggle}
               />

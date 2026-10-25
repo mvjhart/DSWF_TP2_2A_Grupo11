@@ -1,7 +1,68 @@
 /* src/pages/Arbol/ArbolNodo.css */
 
 /* ==================================================
-   1. ESTRUCTURA JERÁRQUICA DEL ÁRBOL
+   1. MEDIDAS DEL ÁRBOL
+   Todo lo que depende del tamaño (conectores, sangría,
+   zonas táctiles) sale de estas variables para que las
+   líneas siempre queden alineadas con las filas.
+   ================================================== */
+
+.arbol-lista {
+  /* Alto de cada fila. */
+  --arbol-fila: 2rem;
+  /* Diámetro del botón de expansión. */
+  --arbol-expansor: 1.25rem;
+  /* Espacio a la izquierda dentro de la fila. */
+  --arbol-pad: 0.5rem;
+  /* Distancia horizontal entre una rama y sus hijos. */
+  --arbol-sangria: 1.25rem;
+  /* Separación vertical entre filas. */
+  --arbol-aire: 0.125rem;
+  /* Radio de la curva del conector. */
+  --arbol-curva: 0.5rem;
+}
+
+/* Pantallas táctiles: filas de 44 px para tocar con el dedo. */
+@media (pointer: coarse) {
+  .arbol-lista {
+    --arbol-fila: 2.75rem;
+  }
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+  .arbol-lista {
+    --arbol-pad: 0.3rem;
+    --arbol-sangria: 0.75rem;
+  }
+}
+
+/* Celulares (menores a 480px): sangría más compacta para proteger el nivel 5 */
+@media (max-width: 480px) {
+  .arbol-lista {
+    --arbol-pad: 0.2rem;
+    --arbol-sangria: 0.4rem;
+  }
+}
+
+/* Celulares ultra angostos (~350px): sangría mínima justa para acumular 5 niveles */
+@media (max-width: 380px) {
+  .arbol-lista {
+    --arbol-pad: 0.15rem;
+    --arbol-sangria: 0.3rem;
+  }
+}
+
+/* lo reemplazado */
+/* @media (max-width: 768px) {
+  .arbol-lista {
+    --arbol-pad: 0.3rem;
+    --arbol-sangria: 0.5rem;
+  }
+} */
+
+/* ==================================================
+   2. ESTRUCTURA JERÁRQUICA DEL ÁRBOL
    ================================================== */
 
 /* Listas del árbol y de los nodos hijos. */
@@ -12,11 +73,14 @@
   list-style: none;
 }
 
-/* Cada rama se desplaza hacia la derecha. */
+/*
+ * Cada rama se desplaza hacia la derecha. El margen deja la línea
+ * vertical justo debajo del centro del botón de expansión del padre.
+ */
 .arbol-nodo__hijos {
   position: relative;
-  margin-left: 0.75rem;
-  padding-left: 1.25rem;
+  margin-left: calc(var(--arbol-pad) + var(--arbol-expansor) / 2);
+  padding-left: var(--arbol-sangria);
 }
 
 .arbol-nodo__hijos > .arbol-nodo {
@@ -29,36 +93,51 @@
 }
 
 /* ==================================================
-   2. CONECTORES ENTRE NODOS
+   3. CONECTORES ENTRE NODOS
    ================================================== */
 
-/* Tramo horizontal curvo que conecta con cada hijo. */
-.arbol-nodo__hijos > .arbol-nodo::before {
+/* Tramo corto que une el botón del padre con su primer hijo. */
+.arbol-nodo__hijos::before {
   content: "";
   position: absolute;
-  top: 0.875rem;
-  left: -1.25rem;
-  width: 0.875rem;
-  height: 0.625rem;
+  top: calc(
+    -1 * (var(--arbol-fila) / 2 - var(--arbol-expansor) / 2 + var(--arbol-aire) * 2)
+  );
+  left: 0;
+  height: calc(
+    var(--arbol-fila) / 2 - var(--arbol-expansor) / 2 + var(--arbol-aire) * 2
+  );
   border-left: 1px solid var(--color-borde);
-  border-bottom: 1px solid var(--color-borde);
-  border-bottom-left-radius: 0.5rem;
   pointer-events: none;
 }
 
-/* Tramo vertical que une los nodos hermanos. */
+/* Tramo horizontal curvo que llega al centro de la fila de cada hijo. */
+.arbol-nodo__hijos > .arbol-nodo::before {
+  content: "";
+  position: absolute;
+  top: calc(-2 * var(--arbol-aire));
+  left: calc(-1 * var(--arbol-sangria));
+  width: calc(var(--arbol-sangria) - var(--arbol-aire));
+  height: calc(var(--arbol-fila) / 2 + 2 * var(--arbol-aire));
+  border-left: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  border-bottom-left-radius: var(--arbol-curva);
+  pointer-events: none;
+}
+
+/* Tramo vertical que sigue hacia el hermano siguiente. */
 .arbol-nodo__hijos > .arbol-nodo:not(:last-child)::after {
   content: "";
   position: absolute;
-  top: 1.5rem;
-  bottom: -0.25rem;
-  left: -1.25rem;
+  top: calc(var(--arbol-fila) / 2 - var(--arbol-curva));
+  bottom: calc(-2 * var(--arbol-aire));
+  left: calc(-1 * var(--arbol-sangria));
   border-left: 1px solid var(--color-borde);
   pointer-events: none;
 }
 
 /* ==================================================
-   3. FILA DE CADA NODO
+   4. FILA DE CADA NODO
    ================================================== */
 
 .arbol-nodo__fila {
@@ -69,30 +148,33 @@
   gap: 0.4rem;
   width: fit-content;
   max-width: 100%;
-  min-height: 2rem;
-  margin: 0.125rem 0;
-  padding: 0.125rem 0.5rem;
+  min-height: var(--arbol-fila);
+  margin: var(--arbol-aire) 0;
+  padding: 0.125rem var(--arbol-pad);
   border-radius: 999px;
-  transition: background-color 120ms ease;
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease;
 }
 
 /* ==================================================
-   4. CONTROLES DE EXPANSIÓN
+   5. CONTROLES DE EXPANSIÓN
    ================================================== */
 
 /* Espacio reservado para el botón o su reemplazo. */
 .arbol-nodo__expansor,
 .arbol-nodo__espaciador {
   display: inline-flex;
-  flex: 0 0 1.25rem;
+  flex: 0 0 var(--arbol-expansor);
   align-items: center;
   justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: var(--arbol-expansor);
+  height: var(--arbol-expansor);
 }
 
 /* Botón para expandir o contraer ramas. */
 .arbol-nodo__expansor {
+  position: relative;
   padding: 0;
   border: 1px solid var(--color-borde);
   border-radius: 50%;
@@ -103,8 +185,15 @@
   cursor: pointer;
 }
 
+/* Amplía la zona táctil sin cambiar el tamaño visible del botón. */
+.arbol-nodo__expansor::after {
+  content: "";
+  position: absolute;
+  inset: -0.75rem -0.125rem -0.75rem -0.5rem;
+}
+
 /* ==================================================
-   5. INDICADOR VISUAL DEL TIPO DE NODO
+   6. INDICADOR VISUAL DEL TIPO DE NODO
    ================================================== */
 
 .arbol-nodo__punto {
@@ -148,10 +237,13 @@
 }
 
 /* ==================================================
-   6. NOMBRE DEL NODO
+   7. NOMBRE DEL NODO
    ================================================== */
 
 .arbol-nodo__nombre {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
   padding: 0.2rem 0;
   border: 0;
   background: transparent;
@@ -161,10 +253,22 @@
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+ * Toda la fila, desde el punto hasta la etiqueta, selecciona el nodo.
+ * El botón de expansión queda fuera de esta zona.
+ */
+.arbol-nodo__nombre::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 calc(var(--arbol-pad) + var(--arbol-expansor));
+  border-radius: inherit;
 }
 
 /* ==================================================
-   7. ETIQUETA DEL TIPO DE NODO
+   8. ETIQUETA DEL TIPO DE NODO
    ================================================== */
 
 .arbol-nodo__tipo {
@@ -210,13 +314,61 @@
   background-color: var(--color-tag-neutro-fondo);
 }
 
+
+/* Pantallas angostas (<= 480px): gaps y etiquetas compactas. */
+@media (max-width: 480px) {
+  .arbol-nodo__fila {
+    gap: 0.25rem;
+  }
+
+  .arbol-nodo__nombre {
+    font-size: 0.8125rem;
+  }
+
+  .arbol-nodo__tipo {
+    padding: 0.1rem 0.375rem;
+    font-size: 0.625rem;
+  }
+}
+
+/* Celulares ultra angostos (<= 380px / 350px): ajuste final de tipografía y gaps. */
+@media (max-width: 380px) {
+  .arbol-nodo__fila {
+    gap: 0.15rem;
+  }
+
+  .arbol-nodo__nombre {
+    font-size: 0.75rem;
+  }
+
+  .arbol-nodo__tipo {
+    padding: 0.05rem 0.25rem;
+    font-size: 0.58rem;
+  }
+}
+
 /* ==================================================
-   8. ESTADOS INTERACTIVOS Y ACCESIBILIDAD
+   9. ESTADOS INTERACTIVOS Y ACCESIBILIDAD
    ================================================== */
 
-/* Efectos hover solo en dispositivos que admiten hover. */
-@media (hover: hover) {
-  .arbol-nodo__fila:hover {
+/*
+ * Nodo seleccionado. Además del fondo lleva un contorno de acento:
+ * así nunca se confunde con un hover (que solo cambia el fondo)
+ * aunque ambos colores sean parecidos.
+ */
+.arbol-nodo__fila--seleccionada {
+  background-color: var(--color-activo);
+  box-shadow: inset 0 0 0 1.5px var(--color-acento);
+}
+
+/*
+ * Hover solo con puntero preciso (mouse o trackpad). En pantallas
+ * táctiles el navegador deja el :hover "pegado" en el último elemento
+ * tocado y se vería como un segundo nodo seleccionado.
+ * Tampoco se aplica a la fila ya seleccionada.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .arbol-nodo__fila:not(.arbol-nodo__fila--seleccionada):hover {
     background-color: var(--color-hover);
   }
 
@@ -229,9 +381,23 @@
   }
 }
 
-/* Nodo seleccionado. */
-.arbol-nodo__fila--seleccionada {
+/*
+ * Respuesta al toque. :active solo dura mientras el dedo está
+ * apoyado, por lo que no deja ningún estado residual.
+ */
+.arbol-nodo__expansor:active {
   background-color: var(--color-activo);
+}
+
+.arbol-nodo__fila:not(.arbol-nodo__fila--seleccionada):has(
+    .arbol-nodo__nombre:active
+  ) {
+  background-color: var(--color-hover);
+}
+
+/* Evita el destello gris del navegador táctil sobre los controles. */
+.arbol-nodo__expansor {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Indicador de foco visible para navegación por teclado. */
@@ -239,4 +405,14 @@
 .arbol-nodo__nombre:focus-visible {
   outline: 2px solid var(--color-acento);
   outline-offset: 2px;
+}
+
+/* El foco del nombre se dibuja sobre toda la fila, no solo sobre el texto. */
+.arbol-nodo__fila:has(.arbol-nodo__nombre:focus-visible) {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 1px;
+}
+
+.arbol-nodo__nombre:focus-visible {
+  outline: none;
 }
