@@ -12,27 +12,9 @@
   padding: 0;
 }
 
-.arbol-pagina__encabezado,
-.arbol-leyenda {
-  flex-shrink: 0;
-}
-
-.arbol-pagina__encabezado {
-  margin-bottom: 1.25rem;
-}
-
-.arbol-pagina__encabezado h1 {
-  margin: 0 0 0.5rem;
-}
-
-.arbol-pagina__encabezado p {
-  margin: 0;
-  color: var(--color-texto-suave);
-  line-height: 1.6;
-}
-
 /* Leyenda de tipos. */
 .arbol-leyenda {
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -148,6 +130,11 @@
   padding: 0.125rem 0.25rem 1.5rem;
 }
 
+/* Con el modal abierto, el árbol de fondo no debe desplazarse. */
+.arbol-visor:has(.arbol-modal[open]) .arbol-visor__contenido {
+  overflow: hidden;
+}
+
 /* Adaptación a pantallas pequeñas. */
 @media (max-width: 768px) {
   /*
@@ -199,10 +186,6 @@
 }
 
 @media (max-width: 480px) {
-  .arbol-pagina__encabezado {
-    margin-bottom: 1rem;
-  }
-
   .arbol-leyenda {
     gap: 0.375rem;
     margin-bottom: 0.75rem;
@@ -211,6 +194,22 @@
   .arbol-leyenda__item {
     padding: 0.2rem 0.4rem;
     font-size: 0.65rem;
+  }
+
+  /* Reducimos ligeramente el padding lateral en móviles para ganar espacio */
+  .arbol-visor__contenido {
+    padding-inline: 0.75rem;
+  }
+
+  .arbol-visor__desplazamiento {
+    padding-inline: 0;
+  }
+}
+
+/* Ajuste específico para celulares ultra angostos (~350px) */
+@media (max-width: 380px) {
+  .arbol-visor__contenido {
+    padding-inline: 0.5rem;
   }
 }
 
@@ -243,5 +242,19 @@
     overflow: visible;
     overscroll-behavior: auto;
     scrollbar-gutter: auto;
+  }
+}
+
+/*
+ * Celular horizontal (ancho de escritorio pero poco alto): sin tarjeta
+ * fija, el árbol aprovecha todo el alto, así que se reducen los márgenes.
+ */
+@media (min-width: 769px) and (max-height: 520px) {
+  .arbol-visor {
+    padding-bottom: 0.5rem;
+  }
+
+  .arbol-visor__contenido {
+    padding: 1rem 1.25rem 0.5rem;
   }
 }

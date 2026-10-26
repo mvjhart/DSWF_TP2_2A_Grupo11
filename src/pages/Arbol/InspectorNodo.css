@@ -1,12 +1,14 @@
 /* src/pages/Arbol/InspectorNodo.css */
 
 /* ==================================================
-   1. TARJETA PRINCIPAL DEL INSPECTOR
+   1. TARJETA PRINCIPAL DEL INSPECTOR (ESCRITORIO)
+   En pantallas con poco ancho o poco alto esta tarjeta
+   no se muestra: los detalles van en el modal (sección 12).
    ================================================== */
 
 .arbol-inspector {
   flex: 0 0 auto;
-  width: 100%;
+  width: calc(100% - 7rem);
   max-width: 60rem;
   min-width: 0;
   box-sizing: border-box;
@@ -228,6 +230,28 @@
   font-size: inherit;
 }
 
+/* Lista con explicación (hooks): una línea por elemento. */
+.arbol-inspector__detalles {
+  display: grid;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arbol-inspector__detalles li {
+  color: var(--color-texto-suave);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.arbol-inspector__detalles code {
+  color: var(--color-texto);
+  font-size: inherit;
+  font-weight: 600;
+}
+
 /* Mensaje mostrado cuando no hay datos para listar. */
 .arbol-inspector__vacio {
   margin: 0;
@@ -236,82 +260,167 @@
 }
 
 /* ==================================================
-   8. RESPONSIVE: TABLETS Y MÓVILES
+   8. MODAL DE DETALLES (POCO ANCHO O POCO ALTO)
+   Reemplaza a la tarjeta fija. Se abre al tocar un nodo.
    ================================================== */
 
-/* El inspector conserva su lugar en el layout y tiene
-   desplazamiento propio cuando su contenido es alto. */
-@media (max-width: 768px) {
-  .arbol-inspector {
-    position: relative;
-    inset: auto;
-    z-index: auto;
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: none;
-    align-self: stretch;
-    max-height: 40dvh;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    border-radius: 0;
-    box-shadow: none;
-    border-bottom: none;
+.arbol-modal {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(92vw, 34rem);
+  max-width: none;
+  max-height: min(88vh, 40rem);
+  max-height: min(88dvh, 40rem);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  box-shadow: 0 10px 25px var(--color-sombra-modal);
+}
+
+.arbol-modal::backdrop {
+  background: var(--color-fondo-backdrop);
+  backdrop-filter: blur(2px);
+}
+
+/* Columna con barra fija arriba y cuerpo con scroll propio. */
+.arbol-modal__contenido {
+  display: flex;
+  flex-direction: column;
+  max-height: min(88vh, 40rem);
+  max-height: min(88dvh, 40rem);
+}
+
+.arbol-modal__barra {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.arbol-modal__etiqueta {
+  color: var(--color-texto-suave);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Botón de cierre con zona táctil de 44 px. */
+.arbol-modal__cerrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-texto-suave);
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arbol-modal__cerrar:active {
+  background-color: var(--color-activo);
+  color: var(--color-texto);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arbol-modal__cerrar:hover {
+    background-color: var(--color-hover);
+    color: var(--color-texto);
+  }
+}
+
+.arbol-modal__cerrar:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: -2px;
+}
+
+.arbol-modal__cuerpo {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Dentro del modal todo se apila en una sola columna. */
+.arbol-modal .arbol-inspector__superior {
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.arbol-modal .arbol-inspector__resumen {
+  display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  padding: 0.5rem 0 0;
+  border-top: 1px solid var(--color-borde);
+  border-left: 0;
+  text-align: left;
+}
+
+.arbol-modal .arbol-inspector__resumen > div {
+  justify-content: flex-start;
+}
+
+.arbol-modal .arbol-inspector__inferior {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Textos un poco más grandes: el modal tiene espacio de sobra. */
+.arbol-modal .arbol-inspector__descripcion {
+  font-size: 0.8125rem;
+}
+
+.arbol-modal .arbol-inspector__archivo,
+.arbol-modal .arbol-inspector__resumen dd,
+.arbol-modal .arbol-inspector__vacio,
+.arbol-modal .arbol-inspector__detalles li {
+  font-size: 0.75rem;
+}
+
+.arbol-modal .arbol-inspector__resumen dt,
+.arbol-modal .arbol-inspector__seccion h3 {
+  font-size: 0.6875rem;
+}
+
+.arbol-modal .arbol-inspector__lista li {
+  font-size: 0.6875rem;
+}
+
+/* Celular horizontal (poco alto): modal más compacto. */
+@media (max-height: 520px) {
+  .arbol-modal {
+    max-height: 92vh;
+    max-height: 92dvh;
   }
 
-  /* Reduce la separación del encabezado en móvil. */
-  .arbol-inspector__superior {
-    gap: 0.75rem;
+  .arbol-modal__contenido {
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+
+  .arbol-modal__cuerpo {
+    padding: 0.75rem 1rem;
   }
 }
 
 /* ==================================================
-   9. RESPONSIVE: SECCIONES INFERIORES EN MÓVIL
-   ================================================== */
-
-/* Apila las secciones cuando el espacio horizontal
-   ya no alcanza para mostrarlas en dos columnas. */
-@media (max-width: 640px) {
-  .arbol-inspector__inferior {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.75rem;
-  }
-}
-
-/* ==================================================
-   10. RESPONSIVE: PANTALLAS MUY ESTRECHAS
-   ================================================== */
-
-@media (max-width: 480px) {
-  /* Reduce el espacio interno de la tarjeta. */
-  .arbol-inspector {
-    padding: 0.875rem 1rem;
-  }
-
-  /* Compacta la separación del encabezado. */
-  .arbol-inspector__superior {
-    gap: 0.5rem;
-  }
-
-  /* Reduce el espacio entre el resumen y su borde. */
-  .arbol-inspector__resumen {
-    padding-left: 0.625rem;
-  }
-}
-
-/* ==================================================
-   11. RESPONSIVE: SEPARACIÓN LATERAL EN ESCRITORIO
-   ================================================== */
-
-@media (min-width: 769px) {
-  .arbol-inspector {
-    width: calc(100% - 7rem);
-  }
-}
-
-/* ==================================================
-   12. ANIMACIONES
+   9. ANIMACIONES
    ================================================== */
 
 /* Pulso suave del indicador visual del nodo. */

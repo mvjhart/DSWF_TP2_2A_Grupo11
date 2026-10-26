@@ -17,12 +17,12 @@ Todo el contenido generado con IA fue **revisado, adaptado y validado** por los 
 
 ## Tabla por integrante
 
-| Integrante | Aplicación | Modelo | Tareas | Qué generó / revisó / modificó |
-|---|---|---|---|---|
+| Integrante              | Aplicación                                              | Modelo                                                         | Tareas                              | Qué generó / revisó / modificó                                                                    |
+| ----------------------- | ------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
 | Federico Acosta Maneiro | Claude, Claude Code, DeepSeek, Gemini, Meta AI, ChatGPT | Claude Sonnet 4, DeepSeek V3, Gemini 2.0 Flash, Llama 3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
-| María Victoria Mariani | Claude, Claude Code, DeepSeek, Gemini, Meta AI, ChatGPT | Claude Sonnet 4, DeepSeek V3, Gemini 2.0 Flash, Llama 3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
-| Candelaria Chazarreta | Claude, Claude Code, DeepSeek, Gemini, Meta AI, ChatGPT | Claude Sonnet 4, DeepSeek V3, Gemini 2.0 Flash, Llama 3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
-| Marcos Aquino | Claude, Claude Code, DeepSeek, ChatGPT | Claude Sonnet 4, DeepSeek V3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
+| María Victoria Mariani  | Claude, Claude Code, DeepSeek, Gemini, Meta AI, ChatGPT | Claude Sonnet 4, DeepSeek V3, Gemini 2.0 Flash, Llama 3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
+| Candelaria Chazarreta   | Claude, Claude Code, DeepSeek, Gemini, Meta AI, ChatGPT | Claude Sonnet 4, DeepSeek V3, Gemini 2.0 Flash, Llama 3, GPT-4 | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
+| Marcos Aquino           | Claude, Claude Code, DeepSeek, ChatGPT                  | Claude Sonnet 4, DeepSeek V3, GPT-4                            | Código, debug, datos, documentación | Generó y revisó código, datos y documentación; adaptó lo generado a las necesidades del proyecto. |
 
 ## Detalle por integrante
 

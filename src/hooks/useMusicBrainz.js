@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const MB = 'https://musicbrainz.org/ws/2';
+const MB = "https://musicbrainz.org/ws/2";
 const INTERVALO_MS = 1000;
-const PREFIJO_CACHE = 'mb3:';
+const PREFIJO_CACHE = "mb3:";
 const VACIO = [];
 
 // ============================================================
@@ -68,9 +68,9 @@ async function consultar(url, signal) {
   try {
     respuesta = await fetch(url, { signal });
   } catch (err) {
-    if (err.name === 'AbortError') throw err;
+    if (err.name === "AbortError") throw err;
     throw new Error(
-      'No se pudo conectar con MusicBrainz. Revisá tu conexión.',
+      "No se pudo conectar con MusicBrainz. Revisá tu conexión.",
       { cause: err },
     );
   }
@@ -90,7 +90,7 @@ function buscarArtista(nombre, signal) {
   const buscado = nombre.trim().toLowerCase();
 
   return cacheado(`artist:${buscado}`, async () => {
-    const consulta = `artist:"${buscado.replaceAll('"', '')}"`;
+    const consulta = `artist:"${buscado.replaceAll('"', "")}"`;
     const json = await consultar(
       `${MB}/artist?query=${encodeURIComponent(consulta)}&fmt=json&limit=5`,
       signal,
@@ -107,47 +107,55 @@ async function buscarAlbumes(nombreArtista, signal, forzar) {
   const artista = await buscarArtista(nombreArtista, signal);
   if (!artista) return [];
 
-  return cacheado(`albums:${artista.id}`, async () => {
-    const json = await consultar(
-      `${MB}/release-group?artist=${artista.id}&type=album&fmt=json&limit=100`,
-      signal,
-    );
-    const vistos = new Set();
+  return cacheado(
+    `albums:${artista.id}`,
+    async () => {
+      const json = await consultar(
+        `${MB}/release-group?artist=${artista.id}&type=album&fmt=json&limit=100`,
+        signal,
+      );
+      const vistos = new Set();
 
-    return (json['release-groups'] ?? [])
-      .filter((rg) => !rg['secondary-types']?.length)
-      .map((rg) => ({
-        id: rg.id,
-        titulo: rg.title,
-        artista: artista.nombre,
-        fecha: rg['first-release-date'] ?? '',
-      }))
-      .sort((a, b) => (a.fecha || '9999').localeCompare(b.fecha || '9999'))
-      .filter(({ titulo }) => {
-        const clave = titulo.toLowerCase();
-        if (vistos.has(clave)) return false;
-        vistos.add(clave);
-        return true;
-      });
-  }, forzar);
+      return (json["release-groups"] ?? [])
+        .filter((rg) => !rg["secondary-types"]?.length)
+        .map((rg) => ({
+          id: rg.id,
+          titulo: rg.title,
+          artista: artista.nombre,
+          fecha: rg["first-release-date"] ?? "",
+        }))
+        .sort((a, b) => (a.fecha || "9999").localeCompare(b.fecha || "9999"))
+        .filter(({ titulo }) => {
+          const clave = titulo.toLowerCase();
+          if (vistos.has(clave)) return false;
+          vistos.add(clave);
+          return true;
+        });
+    },
+    forzar,
+  );
 }
 
 function buscarTracks(rgId, signal, forzar) {
-  return cacheado(`tracks:${rgId}`, async () => {
-    const json = await consultar(
-      `${MB}/release?release-group=${rgId}&status=official&inc=recordings&fmt=json&limit=1`,
-      signal,
-    );
+  return cacheado(
+    `tracks:${rgId}`,
+    async () => {
+      const json = await consultar(
+        `${MB}/release?release-group=${rgId}&status=official&inc=recordings&fmt=json&limit=1`,
+        signal,
+      );
 
-    return (json.releases?.[0]?.media ?? []).flatMap((media, i) =>
-      (media.tracks ?? []).map((track) => ({
-        posicion: track.number,
-        titulo: track.title,
-        duracionMs: track.length ?? null,
-        disco: media.position ?? i + 1,
-      })),
-    );
-  }, forzar);
+      return (json.releases?.[0]?.media ?? []).flatMap((media, i) =>
+        (media.tracks ?? []).map((track) => ({
+          posicion: track.number,
+          titulo: track.title,
+          duracionMs: track.length ?? null,
+          disco: media.position ?? i + 1,
+        })),
+      );
+    },
+    forzar,
+  );
 }
 
 // ============================================================
@@ -184,7 +192,7 @@ function useConsulta(buscar, argumento, habilitado = true) {
         setResultado({ argumento, refresco, datos, error: null });
       })
       .catch((err) => {
-        if (signal.aborted || err.name === 'AbortError') return;
+        if (signal.aborted || err.name === "AbortError") return;
         enCurso.current = false;
         setResultado({ argumento, refresco, datos: null, error: err.message });
       });
