@@ -170,7 +170,10 @@ function GatoNegro({ disfraz }) {
       focusable="false"
     >
       <path className="test__gato-cola" d="M48 56 C60 56 62 40 54 34" />
-      <path className="test__gato-cuerpo" d="M12 58 C10 40 18 30 30 30 C42 30 50 40 48 58 Z" />
+      <path
+        className="test__gato-cuerpo"
+        d="M12 58 C10 40 18 30 30 30 C42 30 50 40 48 58 Z"
+      />
 
       {disfraz === "vampiro" && (
         <>
@@ -210,9 +213,18 @@ function GatoNegro({ disfraz }) {
 
       {disfraz === "bruja" && (
         <>
-          <ellipse className="test__sombrero" cx="30" cy="15" rx="15" ry="3.2" />
+          <ellipse
+            className="test__sombrero"
+            cx="30"
+            cy="15"
+            rx="15"
+            ry="3.2"
+          />
           <path className="test__sombrero" d="M19.5 15 L31 -9 L40.5 15 Z" />
-          <path className="test__sombrero-cinta" d="M20.5 11.5 L39.5 11.5 L40.4 14.5 L19.6 14.5 Z" />
+          <path
+            className="test__sombrero-cinta"
+            d="M20.5 11.5 L39.5 11.5 L40.4 14.5 L19.6 14.5 Z"
+          />
         </>
       )}
 
@@ -256,7 +268,9 @@ export default function GadgetCandelaria() {
     setRespuestas([]);
   }
 
-  const frase = resultado ? resultado.frase : FRASES_PREGUNTA[respuestas.length];
+  const frase = resultado
+    ? resultado.frase
+    : FRASES_PREGUNTA[respuestas.length];
 
   return (
     <section
@@ -280,11 +294,7 @@ export default function GadgetCandelaria() {
               Tu criatura es: {resultado.titulo}
             </h3>
             <p className="test__descripcion">{resultado.texto}</p>
-            <button
-              type="button"
-              className="test__boton"
-              onClick={reiniciar}
-            >
+            <button type="button" className="test__boton" onClick={reiniciar}>
               Repetir el test
             </button>
           </>
@@ -326,11 +336,7 @@ export default function GadgetCandelaria() {
             </ul>
 
             {respuestas.length > 0 && (
-              <button
-                type="button"
-                className="test__volver"
-                onClick={volver}
-              >
+              <button type="button" className="test__volver" onClick={volver}>
                 Volver a la pregunta anterior
               </button>
             )}

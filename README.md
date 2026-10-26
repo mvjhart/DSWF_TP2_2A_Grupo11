@@ -14,12 +14,12 @@ Aplicación web desarrollada por el Grupo 11 para el Trabajo Práctico 2 de Desa
 
 ## Integrantes
 
-| Integrante | GitHub | Rol |
-|---|---|---|
-| Federico Acosta Maneiro | [@federicosd06-dev](https://github.com/federicosd06-dev) | Estructuración de datos |
-| María Victoria Mariani | [@mvjhart](https://github.com/mvjhart) | Configuración de React, routing, árbol de renderizado y layout |
-| Candelaria Chazarreta | [@kndxt](https://github.com/kndxt) | Bitácora con filtros, estructura de la API y navegación |
-| Marcos Aquino | [@Marcos028](https://github.com/Marcos028) | Recursos (favoritos), componentes compartidos y QA |
+| Integrante              | GitHub                                                   | Rol                                                            |
+| ----------------------- | -------------------------------------------------------- | -------------------------------------------------------------- |
+| Federico Acosta Maneiro | [@federicosd06-dev](https://github.com/federicosd06-dev) | Estructuración de datos                                        |
+| María Victoria Mariani  | [@mvjhart](https://github.com/mvjhart)                   | Configuración de React, routing, árbol de renderizado y layout |
+| Candelaria Chazarreta   | [@kndxt](https://github.com/kndxt)                       | Bitácora con filtros, estructura de la API y navegación        |
+| Marcos Aquino           | [@Marcos028](https://github.com/Marcos028)               | Recursos (favoritos), componentes compartidos y QA             |
 
 ## Descripción del proyecto
 
@@ -31,7 +31,6 @@ Aplicación web del Grupo 11 para el TP2 de DSWF. Migra el proyecto del TP1 (HTM
 - Sección de API pública (MusicBrainz).
 - Árbol de renderizado interactivo.
 - Bitácora del proceso de trabajo.
-
 
 ## Desarrollo
 

@@ -10,12 +10,17 @@ export default function GadgetMarcos() {
       <p>Comprobación de las funcionalidades del perfil.</p>
       <button onClick={() => setDiagnostico(true)}>Ejecutar diagnóstico</button>
       {diagnostico && (
-        <ul className="gadget__resultado" style={{ listStyle: "none", padding: "1rem" }}>
+        <ul
+          className="gadget__resultado"
+          style={{ listStyle: "none", padding: "1rem" }}
+        >
           <li>✓ Responsive</li>
           <li>✓ Multimedia</li>
           <li>✓ Navegación</li>
           <li>✓ JavaScript</li>
-          <li style={{ marginTop: "0.5rem" }}><strong>Diagnóstico finalizado: 5/5 pruebas.</strong></li>
+          <li style={{ marginTop: "0.5rem" }}>
+            <strong>Diagnóstico finalizado: 5/5 pruebas.</strong>
+          </li>
         </ul>
       )}
     </section>

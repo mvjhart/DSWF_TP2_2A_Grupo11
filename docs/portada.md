@@ -12,14 +12,14 @@ Decisiones de diseño y de componentes de la portada (`/`), según los pasos de 
 
 Se revisó `docs/catalogo-componentes.md` aplicando los criterios de `docs/arquitectura.md` (necesidad real, reutilización y responsabilidad clara).
 
-| Candidato                    | Decisión                                | Justificación                                                                                                                              |
-| ---------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `PageHero` (2.1)             | No se crea; el hero vive en `Inicio`    | Solo lo usa la portada. Se reevaluará si otra página repite la misma estructura.                                                           |
-| `SectionHeading` (2.2)       | No se crea                              | Es un `<h2>` con un párrafo, con dos usos en la portada resueltos con estilos. No justifica un componente.                                 |
-| `MemberCard` (3.1)           | No se crea                              | La portada presenta a las personas con el selector de E.2, no con tarjetas. Si los perfiles o la colección lo necesitan, se evalúa allí.   |
-| `MemberAvatar` (nuevo)       | Se crea en `components/MemberAvatar/`   | Se usa dos veces en la portada (selector y panel) con tamaños y tonos distintos, y lo necesitarán los perfiles. Resuelve la imagen faltante con las iniciales. |
-| `EquipoSelector` (nuevo)     | Se crea en `pages/Inicio/`              | Es específico de la portada: recibe la lista de integrantes y no se reutiliza fuera de ella.                                               |
-| Accesos a las secciones      | Se resuelve con datos, sin componente   | Una lista que se recorre con `map` a partir de `equipo.json`.                                                                              |
+| Candidato                | Decisión                              | Justificación                                                                                                                                                  |
+| ------------------------ | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PageHero` (2.1)         | No se crea; el hero vive en `Inicio`  | Solo lo usa la portada. Se reevaluará si otra página repite la misma estructura.                                                                               |
+| `SectionHeading` (2.2)   | No se crea                            | Es un `<h2>` con un párrafo, con dos usos en la portada resueltos con estilos. No justifica un componente.                                                     |
+| `MemberCard` (3.1)       | No se crea                            | La portada presenta a las personas con el selector de E.2, no con tarjetas. Si los perfiles o la colección lo necesitan, se evalúa allí.                       |
+| `MemberAvatar` (nuevo)   | Se crea en `components/MemberAvatar/` | Se usa dos veces en la portada (selector y panel) con tamaños y tonos distintos, y lo necesitarán los perfiles. Resuelve la imagen faltante con las iniciales. |
+| `EquipoSelector` (nuevo) | Se crea en `pages/Inicio/`            | Es específico de la portada: recibe la lista de integrantes y no se reutiliza fuera de ella.                                                                   |
+| Accesos a las secciones  | Se resuelve con datos, sin componente | Una lista que se recorre con `map` a partir de `equipo.json`.                                                                                                  |
 
 ## Datos
 

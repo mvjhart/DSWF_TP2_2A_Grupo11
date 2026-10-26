@@ -169,7 +169,12 @@ function DetalleNodo({ datos, parentName, detallado }) {
   );
 }
 
-function InspectorNodo({ seleccion, modal = false, abierto = false, onCerrar }) {
+function InspectorNodo({
+  seleccion,
+  modal = false,
+  abierto = false,
+  onCerrar,
+}) {
   const { nodo, parentName } = seleccion;
   const datos = obtenerDatosInspector(nodo);
   const dialogRef = useRef(null);

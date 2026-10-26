@@ -101,7 +101,11 @@
   content: "";
   position: absolute;
   top: calc(
-    -1 * (var(--arbol-fila) / 2 - var(--arbol-expansor) / 2 + var(--arbol-aire) * 2)
+    -1 *
+      (
+        var(--arbol-fila) / 2 - var(--arbol-expansor) / 2 + var(--arbol-aire) *
+          2
+      )
   );
   left: 0;
   height: calc(
@@ -313,7 +317,6 @@
   color: var(--color-tag-neutro-texto);
   background-color: var(--color-tag-neutro-fondo);
 }
-
 
 /* Pantallas angostas (<= 480px): gaps y etiquetas compactas. */
 @media (max-width: 480px) {

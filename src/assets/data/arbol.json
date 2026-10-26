@@ -19,12 +19,7 @@
       "type": "Componentes",
       "file": "src/components/AccordionItem/AccordionItem.jsx",
       "description": "Muestra contenido en un panel desplegable que se abre y se cierra desde un encabezado interactivo.",
-      "props": [
-        "title",
-        "headerContent",
-        "children",
-        "defaultOpen"
-      ],
+      "props": ["title", "headerContent", "children", "defaultOpen"],
       "hooks": [
         {
           "name": "useState",
@@ -41,13 +36,7 @@
       "type": "Componentes",
       "file": "src/components/MemberAvatar/MemberAvatar.jsx",
       "description": "Muestra el avatar de una persona mediante una imagen o sus iniciales cuando la imagen no está disponible.",
-      "props": [
-        "nombre",
-        "imagen",
-        "alt",
-        "tono",
-        "tamano"
-      ],
+      "props": ["nombre", "imagen", "alt", "tono", "tamano"],
       "hooks": [
         {
           "name": "useState",
@@ -76,13 +65,7 @@
       "type": "Componentes",
       "file": "src/components/ControlesFil/ControlesFil.jsx",
       "description": "Agrupa controles de filtrado recibidos como children, un botón para restablecer los filtros y un contador de resultados.",
-      "props": [
-        "ariaLabel",
-        "children",
-        "onReset",
-        "hayCambios",
-        "contador"
-      ],
+      "props": ["ariaLabel", "children", "onReset", "hayCambios", "contador"],
       "children": []
     },
     "filter-select": {
@@ -90,13 +73,7 @@
       "type": "Componentes",
       "file": "src/components/ControlesFil/ControlesFil.jsx",
       "description": "Muestra un selector de opciones controlado por el componente padre y comunica el valor seleccionado mediante onChange.",
-      "props": [
-        "label",
-        "value",
-        "onChange",
-        "options",
-        "todos"
-      ],
+      "props": ["label", "value", "onChange", "options", "todos"],
       "children": []
     },
     "search-input": {
@@ -104,12 +81,7 @@
       "type": "Componentes",
       "file": "src/components/ControlesFil/ControlesFil.jsx",
       "description": "Muestra un campo de búsqueda controlado por el componente padre y comunica el texto ingresado mediante onChange.",
-      "props": [
-        "label",
-        "value",
-        "onChange",
-        "placeholder"
-      ],
+      "props": ["label", "value", "onChange", "placeholder"],
       "children": []
     },
     "status-message": {
@@ -117,12 +89,7 @@
       "type": "Componentes",
       "file": "src/components/ControlesFil/ControlesFil.jsx",
       "description": "Muestra mensajes de estado, error o contenido vacío, con opción de agregar una acción.",
-      "props": [
-        "children",
-        "error",
-        "compacto",
-        "accion"
-      ],
+      "props": ["children", "error", "compacto", "accion"],
       "children": []
     },
     "info-tabs": {
@@ -130,9 +97,7 @@
       "type": "Componentes",
       "file": "src/components/InfoTabs/InfoTabs.jsx",
       "description": "Muestra secciones informativas mediante pestañas interactivas, con contenido dinámico y enlaces a adjuntos opcionales.",
-      "props": [
-        "secciones"
-      ],
+      "props": ["secciones"],
       "hooks": [
         {
           "name": "useState",
@@ -191,12 +156,7 @@
         "type": "Componentes",
         "file": "src/components/Header/Header.jsx",
         "description": "Cabecera móvil que permite abrir la navegación y cambiar el tema de la aplicación.",
-        "props": [
-          "menuAbierto",
-          "onToggleMenu",
-          "botonMenuRef",
-          "inert"
-        ],
+        "props": ["menuAbierto", "onToggleMenu", "botonMenuRef", "inert"],
         "children": [
           {
             "id": "theme-toggle-header",
@@ -214,13 +174,7 @@
         "type": "Componentes",
         "file": "src/components/Sidebar/Sidebar.jsx",
         "description": "Navegación lateral adaptable a escritorio y móvil, con enlaces a las páginas de la aplicación.",
-        "props": [
-          "isOpen",
-          "onNavigate",
-          "sidebarRef",
-          "esMovil",
-          "animar"
-        ],
+        "props": ["isOpen", "onNavigate", "sidebarRef", "esMovil", "animar"],
         "children": [
           {
             "id": "theme-toggle-sidebar",
@@ -238,12 +192,7 @@
             "type": "Router",
             "file": "react-router",
             "description": "Un enlace por página, generado desde la lista enlaces; marca la ruta activa.",
-            "props": [
-              "to",
-              "end",
-              "className",
-              "onClick"
-            ],
+            "props": ["to", "end", "className", "onClick"],
             "repeat": "enlaces.map",
             "children": []
           }
@@ -272,9 +221,7 @@
                 "type": "Componentes",
                 "file": "src/pages/Inicio/EquipoSelector.jsx",
                 "description": "Permite seleccionar integrantes para consultar sus presentaciones y acceder a sus perfiles.",
-                "props": [
-                  "integrantes"
-                ],
+                "props": ["integrantes"],
                 "children": [
                   {
                     "id": "equipo-selector-avatar-tab",
@@ -283,12 +230,7 @@
                     "file": "src/components/MemberAvatar/MemberAvatar.jsx",
                     "componentRef": "member-avatar",
                     "description": "Muestra el avatar de cada integrante en las pestañas de selección.",
-                    "props": [
-                      "nombre",
-                      "imagen",
-                      "alt",
-                      "tono"
-                    ],
+                    "props": ["nombre", "imagen", "alt", "tono"],
                     "children": [],
                     "repeat": "integrantes.map"
                   },
@@ -299,13 +241,7 @@
                     "file": "src/components/MemberAvatar/MemberAvatar.jsx",
                     "componentRef": "member-avatar",
                     "description": "Muestra el avatar del integrante seleccionado junto con sus datos.",
-                    "props": [
-                      "nombre",
-                      "imagen",
-                      "alt",
-                      "tono",
-                      "tamano"
-                    ],
+                    "props": ["nombre", "imagen", "alt", "tono", "tamano"],
                     "children": []
                   }
                 ],
@@ -351,10 +287,7 @@
                 "type": "Componentes",
                 "componentRef": "page-header",
                 "description": "Presenta el título y la descripción de la bitácora.",
-                "props": [
-                  "title",
-                  "description"
-                ],
+                "props": ["title", "description"],
                 "children": []
               },
               {
@@ -363,12 +296,7 @@
                 "type": "Componentes",
                 "componentRef": "filter-bar",
                 "description": "Agrupa los filtros, el botón para restablecerlos y el contador de resultados.",
-                "props": [
-                  "ariaLabel",
-                  "onReset",
-                  "hayCambios",
-                  "contador"
-                ],
+                "props": ["ariaLabel", "onReset", "hayCambios", "contador"],
                 "children": [
                   {
                     "id": "bitacora-filtro-tp",
@@ -376,13 +304,7 @@
                     "type": "Componentes",
                     "componentRef": "filter-select",
                     "description": "Filtra los registros por trabajo práctico: TP1, TP2 o todos.",
-                    "props": [
-                      "label",
-                      "value",
-                      "onChange",
-                      "todos",
-                      "options"
-                    ],
+                    "props": ["label", "value", "onChange", "todos", "options"],
                     "children": []
                   },
                   {
@@ -391,13 +313,7 @@
                     "type": "Componentes",
                     "componentRef": "filter-select",
                     "description": "Filtra los registros por categoría.",
-                    "props": [
-                      "label",
-                      "value",
-                      "onChange",
-                      "todos",
-                      "options"
-                    ],
+                    "props": ["label", "value", "onChange", "todos", "options"],
                     "children": []
                   },
                   {
@@ -406,12 +322,7 @@
                     "type": "Componentes",
                     "componentRef": "filter-select",
                     "description": "Ordena los registros desde los más antiguos hasta los más recientes, o a la inversa.",
-                    "props": [
-                      "label",
-                      "value",
-                      "onChange",
-                      "options"
-                    ],
+                    "props": ["label", "value", "onChange", "options"],
                     "children": []
                   }
                 ]
@@ -422,10 +333,7 @@
                 "type": "Componentes",
                 "componentRef": "status-message",
                 "description": "Informa que no hay registros para los filtros seleccionados y ofrece restablecerlos.",
-                "props": [
-                  "accion",
-                  "children"
-                ],
+                "props": ["accion", "children"],
                 "conditional": "entradasFiltradas.length === 0",
                 "children": []
               },
@@ -435,11 +343,7 @@
                 "type": "Componentes",
                 "componentRef": "accordion-item",
                 "description": "Muestra el título, la fecha, la categoría, el trabajo práctico y el texto de cada registro en un acordeón.",
-                "props": [
-                  "title",
-                  "headerContent",
-                  "children"
-                ],
+                "props": ["title", "headerContent", "children"],
                 "repeat": "entradasFiltradas.map",
                 "children": [],
                 "conditional": "entradasFiltradas.length > 0"
@@ -467,9 +371,7 @@
                 "type": "Componentes",
                 "file": "src/pages/Perfil/Perfil.jsx",
                 "description": "Arma el perfil: identidad, habilidades, favoritos destacados, gadget propio y navegación.",
-                "props": [
-                  "integrante"
-                ],
+                "props": ["integrante"],
                 "conditional": "integrante existe",
                 "hooks": [
                   {
@@ -488,9 +390,7 @@
                     "type": "Componentes",
                     "file": "src/components/ProfileIdentity/ProfileIdentity.jsx",
                     "description": "Presenta la identidad del integrante.",
-                    "props": [
-                      "integrante"
-                    ],
+                    "props": ["integrante"],
                     "children": [
                       {
                         "id": "perfil-identidad-avatar",
@@ -498,12 +398,7 @@
                         "type": "Componentes",
                         "file": "src/components/MemberAvatar/MemberAvatar.jsx",
                         "description": "Avatar grande del integrante (imagen o iniciales).",
-                        "props": [
-                          "nombre",
-                          "imagen",
-                          "tono",
-                          "tamano"
-                        ],
+                        "props": ["nombre", "imagen", "tono", "tamano"],
                         "componentRef": "member-avatar",
                         "children": []
                       }
@@ -515,9 +410,7 @@
                     "type": "Componentes",
                     "file": "src/components/SkillsList/SkillsList.jsx",
                     "description": "Muestra las habilidades del integrante.",
-                    "props": [
-                      "habilidades"
-                    ],
+                    "props": ["habilidades"],
                     "children": []
                   },
                   {
@@ -526,9 +419,7 @@
                     "type": "Componentes",
                     "file": "src/components/FavoriteItemCard/FavoriteItemCard.jsx",
                     "description": "Muestra la información de un favorito individual.",
-                    "props": [
-                      "favorito"
-                    ],
+                    "props": ["favorito"],
                     "children": [],
                     "conditional": "grupo.reales.length > 0",
                     "repeat": "grupos.map → grupo.reales.map"
@@ -579,10 +470,7 @@
                     "type": "Componentes",
                     "file": "src/components/ProfileNavigation/ProfileNavigation.jsx",
                     "description": "Permite navegar entre los perfiles de los integrantes desde el pie de la página.",
-                    "props": [
-                      "integrantes",
-                      "currentSlug"
-                    ],
+                    "props": ["integrantes", "currentSlug"],
                     "children": []
                   }
                 ]
@@ -626,10 +514,7 @@
                 "type": "Componentes",
                 "componentRef": "page-header",
                 "description": "Presenta el título Favoritos y la descripción de la colección.",
-                "props": [
-                  "title",
-                  "description"
-                ],
+                "props": ["title", "description"],
                 "children": []
               },
               {
@@ -638,12 +523,7 @@
                 "type": "Componentes",
                 "componentRef": "filter-bar",
                 "description": "Agrupa la búsqueda, los filtros, la acción para restablecerlos y el contador de resultados.",
-                "props": [
-                  "ariaLabel",
-                  "onReset",
-                  "hayCambios",
-                  "contador"
-                ],
+                "props": ["ariaLabel", "onReset", "hayCambios", "contador"],
                 "children": [
                   {
                     "id": "recursos-busqueda",
@@ -651,11 +531,7 @@
                     "type": "Componentes",
                     "componentRef": "search-input",
                     "description": "Permite buscar favoritos por título, artista, comentario o sinopsis.",
-                    "props": [
-                      "value",
-                      "onChange",
-                      "placeholder"
-                    ],
+                    "props": ["value", "onChange", "placeholder"],
                     "children": []
                   },
                   {
@@ -664,13 +540,7 @@
                     "type": "Componentes",
                     "componentRef": "filter-select",
                     "description": "Filtra los favoritos por tipo de recurso, como álbum o película.",
-                    "props": [
-                      "label",
-                      "value",
-                      "onChange",
-                      "todos",
-                      "options"
-                    ],
+                    "props": ["label", "value", "onChange", "todos", "options"],
                     "children": []
                   },
                   {
@@ -679,13 +549,7 @@
                     "type": "Componentes",
                     "componentRef": "filter-select",
                     "description": "Filtra los favoritos por el integrante al que pertenecen.",
-                    "props": [
-                      "label",
-                      "value",
-                      "onChange",
-                      "todos",
-                      "options"
-                    ],
+                    "props": ["label", "value", "onChange", "todos", "options"],
                     "children": []
                   }
                 ]
@@ -696,10 +560,7 @@
                 "type": "Componentes",
                 "componentRef": "status-message",
                 "description": "Informa que no hay favoritos coincidentes y permite restablecer la búsqueda y los filtros.",
-                "props": [
-                  "accion",
-                  "children"
-                ],
+                "props": ["accion", "children"],
                 "conditional": "favoritosFiltrados.length === 0",
                 "children": []
               },
@@ -709,11 +570,7 @@
                 "type": "Componentes",
                 "componentRef": "accordion-item",
                 "description": "Un acordeón por favorito: metadatos en el encabezado y detalles en el panel.",
-                "props": [
-                  "title",
-                  "headerContent",
-                  "children"
-                ],
+                "props": ["title", "headerContent", "children"],
                 "repeat": "favoritosFiltrados.map",
                 "children": []
               }
@@ -745,10 +602,7 @@
                 "type": "Componentes",
                 "componentRef": "page-header",
                 "description": "Presenta el título y la descripción de la sección definidos en api.json.",
-                "props": [
-                  "title",
-                  "description"
-                ],
+                "props": ["title", "description"],
                 "children": []
               },
               {
@@ -757,9 +611,7 @@
                 "type": "Componentes",
                 "file": "src/components/InfoTabs/InfoTabs.jsx",
                 "description": "Presenta las secciones informativas de la página mediante pestañas.",
-                "props": [
-                  "secciones"
-                ],
+                "props": ["secciones"],
                 "children": [],
                 "componentRef": "info-tabs"
               },
@@ -769,9 +621,7 @@
                 "type": "Componentes",
                 "componentRef": "status-message",
                 "description": "Informa que se están consultando los álbumes cuando todavía no hay resultados disponibles.",
-                "props": [
-                  "children"
-                ],
+                "props": ["children"],
                 "conditional": "cargando && albumes.length === 0",
                 "children": []
               },
@@ -781,11 +631,7 @@
                 "type": "Componentes",
                 "componentRef": "status-message",
                 "description": "Muestra el error de la consulta y permite reintentarla.",
-                "props": [
-                  "error",
-                  "accion",
-                  "children"
-                ],
+                "props": ["error", "accion", "children"],
                 "conditional": "error",
                 "children": []
               },
@@ -795,9 +641,7 @@
                 "type": "Componentes",
                 "componentRef": "status-message",
                 "description": "Informa que no se encontraron álbumes para el artista consultado cuando la búsqueda finalizó sin errores.",
-                "props": [
-                  "children"
-                ],
+                "props": ["children"],
                 "conditional": "!cargando && !error && albumes.length === 0",
                 "children": []
               },
@@ -807,9 +651,7 @@
                 "type": "Componentes",
                 "file": "src/pages/Api/Api.jsx",
                 "description": "Portada y datos del álbum, enlace a YouTube y botón que abre el modal de canciones.",
-                "props": [
-                  "album"
-                ],
+                "props": ["album"],
                 "hooks": [
                   {
                     "name": "useState",
@@ -840,9 +682,7 @@
                     "type": "Componentes",
                     "file": "src/pages/Api/Api.jsx",
                     "description": "Muestra la portada del álbum desde Cover Art Archive o una alternativa cuando falla la carga de la imagen.",
-                    "props": [
-                      "album"
-                    ],
+                    "props": ["album"],
                     "hooks": [
                       {
                         "name": "useState",
@@ -857,10 +697,7 @@
                     "type": "Componentes",
                     "componentRef": "status-message",
                     "description": "Mensaje de carga dentro del modal de canciones.",
-                    "props": [
-                      "compacto",
-                      "children"
-                    ],
+                    "props": ["compacto", "children"],
                     "conditional": "cargando",
                     "children": []
                   },
@@ -870,12 +707,7 @@
                     "type": "Componentes",
                     "componentRef": "status-message",
                     "description": "Error dentro del modal de canciones, con botón para reintentar.",
-                    "props": [
-                      "error",
-                      "compacto",
-                      "accion",
-                      "children"
-                    ],
+                    "props": ["error", "compacto", "accion", "children"],
                     "conditional": "error",
                     "children": []
                   },
@@ -885,10 +717,7 @@
                     "type": "Componentes",
                     "componentRef": "status-message",
                     "description": "Aviso de que no hay canciones, dentro del modal.",
-                    "props": [
-                      "compacto",
-                      "children"
-                    ],
+                    "props": ["compacto", "children"],
                     "conditional": "!cargando && !error && tracks.length === 0",
                     "children": []
                   }
@@ -920,10 +749,7 @@
               {
                 "id": "arbol-encabezado",
                 "name": "PageHeader",
-                "props": [
-                  "title",
-                  "description"
-                ],
+                "props": ["title", "description"],
                 "componentRef": "page-header",
                 "children": [],
                 "type": "Componentes"
@@ -953,9 +779,7 @@
                 "type": "Componentes",
                 "file": "src/pages/Arbol/InspectorNodo.jsx",
                 "description": "Muestra los detalles del nodo seleccionado: tipo, archivo, descripción, padre, props e hijos.",
-                "props": [
-                  "seleccion"
-                ],
+                "props": ["seleccion"],
                 "children": []
               }
             ]
@@ -982,11 +806,7 @@
                 "type": "Componentes",
                 "file": "src/components/PageHeader/PageHeader.jsx",
                 "description": "Presenta el título y la descripción del error mediante el componente compartido PageHeader.",
-                "props": [
-                  "title",
-                  "description",
-                  "className"
-                ],
+                "props": ["title", "description", "className"],
                 "componentRef": "page-header",
                 "children": []
               },
@@ -996,10 +816,7 @@
                 "type": "Componentes",
                 "file": "src/components/Button/Button.jsx",
                 "description": "Ofrece un enlace con apariencia de botón para navegar a la ruta indicada mediante buttonTo.",
-                "props": [
-                  "to",
-                  "children"
-                ],
+                "props": ["to", "children"],
                 "children": []
               }
             ]
