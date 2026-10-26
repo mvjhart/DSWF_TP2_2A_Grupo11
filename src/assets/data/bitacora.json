@@ -161,10 +161,154 @@
   },
   {
     "id": 21,
+    "fecha": "2026-10-20",
+    "categoria": "Organización",
+    "titulo": "Elección de la API pública para la sección de consulta",
+    "texto": "Se evaluaron cuatro APIs públicas para el criterio 12. Deezer fue descartada por falta de headers CORS. TheAudioDB, porque retiró sus keys públicas de test. Last.fm, porque requiere una API key que quedaría expuesta en el frontend y la consigna prohíbe exponer claves. Quedaron MusicBrainz e iTunes: iTunes funciona sin key pero necesita tres queries separadas para el feature completo. Se decidió MusicBrainz por su alineación al tema musical del TP1. Su rate limit de 1 req/seg exige throttle y caché con sessionStorage. El alcance abarca artistas, álbumes y canciones con links externos a Youtube.",
+    "tp": "TP2"
+  },
+  {
+    "id": 22,
+    "fecha": "2026-10-21",
+    "categoria": "Estructura",
+    "titulo": "Organización de los componentes del visualizador del árbol",
+    "texto": "Se decidió mantener ArbolNodo e InspectorNodo dentro de pages/Arbol, junto con los archivos propios de la página, en lugar de ubicarlos inicialmente en components/. Esta decisión se basa en que ambos componentes responden a necesidades específicas del visualizador y, por el momento, no se identificaron otros lugares de la aplicación que requieran reutilizarlos. De esta manera, se mantiene agrupado el código relacionado con una misma funcionalidad y se evita incorporar componentes específicos al espacio compartido sin una necesidad concreta. En cambio, los componentes que tengan una utilidad transversal entre distintas páginas, como un posible Tag para representar etiquetas con estilos consistentes, podrán ubicarse en components/ si se confirma su reutilización. Esta organización no impide que ArbolNodo o InspectorNodo se trasladen posteriormente si cambian sus responsabilidades o necesidades de uso.",
+    "tp": "TP2"
+  },
+  {
+    "id": 23,
+    "fecha": "2026-10-21",
+    "categoria": "Estructura",
+    "titulo": "Control global de expansión desde el nodo raíz del árbol",
+    "texto": "Se decidió no incorporar botones independientes para expandir y contraer todo el árbol. En su lugar, el nodo raíz App cumplirá esa función, permitiendo desplegar o contraer la jerarquía desde el propio árbol. Esta decisión evita duplicar controles que cumplen una misma finalidad, reduce los elementos de la interfaz y mantiene la interacción vinculada al componente que representa la estructura global. De esta manera, la expansión general se integra en la navegación jerárquica y se conserva una interfaz más simple. El comportamiento deberá contemplar que, al activar el control de App, se expandan todos los nodos descendientes y, al volver a activarlo, se contraiga el árbol dejando solo los hijos directos de App visibles.",
+    "tp": "TP2"
+  },
+  {
+    "id": 24,
+    "fecha": "2026-10-21",
+    "categoria": "Accesibilidad",
+    "titulo": "Conservar información orientativa del árbol mediante sr-only",
+    "texto": "Se decidió ocultar visualmente la leyenda de tipos de nodos, el título de la sección Estructura y las instrucciones de uso del árbol de renderizado, conservándolos en el DOM mediante la clase utilitaria sr-only. Esta decisión permite reducir el espacio ocupado por información complementaria y priorizar la visualización del árbol y del inspector, sin eliminar las referencias semánticas ni las indicaciones destinadas a las personas que utilizan lectores de pantalla. La leyenda conserva descripciones de las categorías de nodos, el título mantiene su función como encabezado y nombre accesible de la sección mediante aria-labelledby, y las instrucciones se vinculan con ella mediante aria-describedby. De esta manera, se busca mantener una interfaz visual más compacta sin sacrificar información relevante para la accesibilidad.",
+    "tp": "TP2"
+  },
+  {
+    "id": 25,
     "fecha": "2026-10-21",
     "categoria": "Estructura",
     "titulo": "Definición de los esquemas JSON de integrantes y favoritos",
     "texto": "Se separaron los datos en dos archivos, integrantes.json y favoritos.json, relacionados por el slug de cada integrante (memberSlug), para reutilizar la información en la portada, los perfiles y la colección sin duplicarla. Se fijaron los slugs victoria, candelaria, federico y marcos, y se documentaron las propiedades obligatorias y opcionales en docs/esquemas-json.md. Se incorporó el campo github, que ya usaban el footer y el enlace de cada perfil. Se reemplazó la lista temporal integrantes.js por integrantes.json.",
+    "tp": "TP2"
+  },
+  {
+    "id": 26,
+    "fecha": "2026-10-21",
+    "categoria": "Organización",
+    "titulo": "Definición del mecanismo de mantenimiento de arbol.json",
+    "texto": "Se decidió mantener arbol.json de forma manual, ya que el alcance del TP2 requiere representar y explorar la jerarquía de componentes de React, pero no exige generar automáticamente el archivo a partir del código fuente. Se priorizó una solución simple para evitar complejidad técnica adicional. Para mantener la correspondencia entre el árbol y la estructura real de la aplicación, se verificará la actualización del JSON durante la revisión de los cambios que afecten a la jerarquía y se incorporará al checklist de los PR la pregunta: «¿Cambiaste la jerarquía de componentes? Actualizá arbol.json».",
+    "tp": "TP2"
+  },
+  {
+    "id": 27,
+    "fecha": "2026-10-22",
+    "categoria": "Estructura",
+    "titulo": "Listado dinámico de favoritos en Recursos",
+    "texto": "Se reemplazó el placeholder de Recursos por el listado dinámico de favoritos del equipo. Los registros se leen de favoritos.json y se renderizan con el componente AccordionItem existente, usando el id de cada registro como key, sin duplicar contenido en la página. Como el dataset todavía tiene datos pendientes de carga, se agregó un filtro en el render que oculta los registros y los campos marcados como PENDIENTE: hoy se muestran 13 de los 40 registros. El nombre de cada dueño se obtiene de integrantes.json a partir del memberSlug. La búsqueda, el filtro y el estado sin resultados quedan para una segunda etapa.",
+    "tp": "TP2"
+  },
+  {
+    "id": 28,
+    "fecha": "2026-10-22",
+    "categoria": "Estructura",
+    "titulo": "Búsqueda y filtros combinables en Recursos",
+    "texto": "Se incorporaron a Recursos la búsqueda por texto y dos filtros combinables, por tipo y por integrante. La búsqueda ignora mayúsculas y tildes y recorre título, artista, comentario y sinopsis, sin considerar los marcadores PENDIENTE. Las opciones de cada filtro se generan a partir de los registros visibles, evitando valores repetidos o sin resultados. Se sumaron además el contador de resultados, el aviso cuando ningún favorito coincide y el botón Restablecer, que limpia la búsqueda y los filtros. Todo el estado se mantiene dentro de la página, sin crear componentes nuevos.",
+    "tp": "TP2"
+  },
+  {
+    "id": 29,
+    "fecha": "2026-10-22",
+    "categoria": "Estructura",
+    "titulo": "Listado de favoritos con búsqueda, filtros y componentes compartidos",
+    "texto": "Se implementó la página /recursos con un listado dinámico de favoritos leídos de favoritos.json, filtrado por tipo e integrante y con búsqueda por texto que ignora mayúsculas y tildes. Se agregaron el contador de resultados, el botón Restablecer y el estado sin resultados. Como la UI de filtros y estados se repetía en Bitácora, Recursos y Api, se extrajeron los componentes FilterBar, FilterSelect, SearchInput y StatusMessage a components/ControlesFil/, y se refactorizaron las tres páginas para usarlos. La lógica de filtrado se mantuvo en cada página porque cada una filtra cosas distintas.",
+    "tp": "TP2"
+  },
+  {
+    "id": 30,
+    "fecha": "2026-10-22",
+    "categoria": "Estructura",
+    "titulo": "Creación del componente reutilizable InfoTabs con datos desacoplados en JSON",
+    "texto": "Se extrajo el bloque explicativo a un componente genérico InfoTabs ubicado en components/InfoTabs/ con su archivo de estilos. El contenido textual y las URLs se desacoplaron a un archivo JSON externo (api.json en assets/data/), cumpliendo con la organización de recursos estáticos del proyecto. Además, se robusteció la accesibilidad web implementando atributos ARIA completos (tablist, tab, tabpanel, aria-selected y useId para IDs únicos dinámicos).",
+    "tp": "TP2"
+  },
+  {
+    "id": 31,
+    "fecha": "2026-10-22",
+    "categoria": "Diseño",
+    "titulo": "Migración del listado de canciones a modal nativo () y unificación de alturas en tarjetas",
+    "texto": "Se refactorizó el componente de álbumes para reemplazar el panel desplegable (toggle en línea) por un modal flotante nativo (), mejorando sustancialmente la experiencia táctil en dispositivos móviles y eliminando la asimetría visual en la grilla. Se unificaron las alturas de las tarjetas mediante una estructura Flexbox estricta y se optimizó el buscador adaptándolo a pantallas reducidas (hasta 350px) con un botón principal prominente y etiquetas superiores.",
+    "tp": "TP2"
+  },
+  {
+    "id": 32,
+    "fecha": "2026-10-23",
+    "categoria": "Estructura",
+    "titulo": "Creación de componentes reutilizables para los perfiles",
+    "texto": "Se implementó la estructura base de los perfiles (F.1) dividiéndola en componentes reutilizables: ProfileIdentity, SkillsList y FavoriteItemCard. Se creó la utilidad compartida esPendiente en utils/ para filtrar datos que aún no están cargados. Además, se unificó el layout de presentación de los integrantes, optando por un diseño que pasa de columna en móvil a horizontal en escritorio.",
+    "tp": "TP2"
+  },
+  {
+    "id": 33,
+    "fecha": "2026-10-23",
+    "categoria": "Diseño",
+    "titulo": "Unificación de estética e interacciones en los perfiles",
+    "texto": "Para mantener una identidad visual consistente, se decidió tomar el perfil limpio como base para los cuatro integrantes, dejando de lado las estéticas aisladas. Se implementó un sistema de acentos de color asignando un campo 'tono' en el JSON a cada persona. Asimismo, se unificó la interacción de favoritos mediante un sistema de pestañas accesibles (WAI-ARIA) y tarjetas con soporte para portadas reales de películas y álbumes.",
+    "tp": "TP2"
+  },
+  {
+    "id": 34,
+    "fecha": "2026-10-23",
+    "categoria": "Organización",
+    "titulo": "Refactorización del selector de la portada (EquipoSelector)",
+    "texto": "Se simplificó el componente EquipoSelector para evitar la duplicación de información entre la portada y los perfiles. Se eliminaron las listas de habilidades y la ciudad, y se reemplazó la descripción por el 'rol' de cada integrante. De esta forma, la portada funciona como un resumen visual rápido, mientras que los detalles profundos quedan alojados en la página del perfil.",
+    "tp": "TP2"
+  },
+  {
+    "id": 35,
+    "fecha": "2026-10-23",
+    "categoria": "Migración",
+    "titulo": "Actualización de JSON y lógica de favoritos destacados",
+    "texto": "Se actualizaron los JSON con datos reales (incluyendo los favoritos, géneros y el campo tono). Siguiendo el esquema definido en la issue D, se implementó la lógica en el perfil para que solo se rendericen los favoritos con 'featured: true' y ordenados por el campo 'order'. También se ajustó la tarjeta de favoritos para aceptar imágenes locales mediante Vite y mostrar un overlay legible sobre las portadas.",
+    "tp": "TP2"
+  },
+  {
+    "id": 36,
+    "fecha": "2026-10-23",
+    "categoria": "Diseño",
+    "titulo": "Implementación de gadgets interactivos por integrante",
+    "texto": "Se completó la interactividad de los perfiles migrando los gadgets del TP1 a componentes funcionales de React. Para mantener la cohesión visual, todos los gadgets comparten un contenedor base que adopta el color de acento del integrante. Se implementaron interacciones únicas: la terminal interactiva (Fede), un test de personalidad de Halloween y la ruleta de películas (Cande), el diagnóstico QA (Marcos), y el generador de paletas junto a los chips de habilidades interactivos (Victoria). En Perfil.jsx se utilizó un objeto de mapeo para renderizar dinámicamente el gadget correspondiente a cada slug.",
+    "tp": "TP2"
+  },
+  {
+    "id": 37,
+    "fecha": "2026-10-23",
+    "categoria": "Navegación",
+    "titulo": "Botón flotante para volver arriba (Scroll to Top)",
+    "texto": "Se incorporó un botón flotante de 'Volver arriba' en la interfaz global para mejorar la experiencia de usuario en pantallas con mucho contenido vertical. El componente detecta cuándo el usuario ha scrolleado una distancia considerable y aparece dinámicamente. Al hacer clic, realiza un desplazamiento suave hacia el inicio de la página. Su diseño consume las variables de la paleta global (como el color de acento y sombras) para integrarse perfectamente con el sistema de temas claro y oscuro.",
+    "tp": "TP2"
+  },
+  {
+    "id": 38,
+    "fecha": "2026-10-25",
+    "categoria": "Estructura",
+    "titulo": "Limpieza de dataset en JSON",
+    "texto": "Se refactorizó la estructura del archivo arbol.json para acotar su propósito exclusivamente a los componentes de React, eliminando etiquetas HTML nativas y campos obsoletos que no se utilizaban en la aplicación.",
+    "tp": "TP2"
+  },
+  {
+    "id": 39,
+    "fecha": "2026-10-25",
+    "categoria": "UI",
+    "titulo": "Migración del inspector a modal en móviles",
+    "texto": "Se rediseñó la visualización del inspector de nodos para transformarlo en un componente modal en pantallas reducidas, optimizando el espacio útil y mejorando la experiencia táctil frente al layout vertical anterior. Asimismo, se refactorizó la estructura del archivo arbol.json para acotar su propósito exclusivamente a los componentes de React, eliminando etiquetas HTML nativas y campos obsoletos que no se utilizaban en la aplicación.",
     "tp": "TP2"
   }
 ]
