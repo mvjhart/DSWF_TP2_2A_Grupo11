@@ -3,7 +3,8 @@ import "./GadgetFederico.css";
 
 export default function GadgetFederico() {
   const [texto, setTexto] = useState("");
-  const comando = "federico acosta maneiro\nlíder de proyecto ~ estructuración, documentación y deploy\nbuenos aires, argentina";
+  const comando =
+    "federico acosta maneiro\n~ estructuración de datos ~\nbuenos aires, argentina";
 
   const ejecutar = () => {
     setTexto("");
@@ -20,7 +21,14 @@ export default function GadgetFederico() {
       <h2>Terminal</h2>
       <p>Ejecutá un comando y mirá qué responde.</p>
       <button onClick={ejecutar}>Ejecutar whoami</button>
-      {texto && <pre className="gadget__resultado" style={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}>{texto}</pre>}
+      {texto && (
+        <pre
+          className="gadget__resultado"
+          style={{ whiteSpace: "pre-wrap", fontFamily: "monospace" }}
+        >
+          {texto}
+        </pre>
+      )}
     </section>
   );
 }

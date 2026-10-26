@@ -1,3 +1,7 @@
+# Bitácora — funcionalidades (TP1)
+
+> **Nota:** Este documento describe la implementación de la bitácora en el TP1 (HTML/CSS/JS vanilla). Se conserva como referencia histórica. La implementación actual en React está documentada en el código (`src/pages/Bitacora/`) y en la bitácora del proyecto.
+
 ### Bitácora (`bitacora.html`)
 
 La bitácora utiliza JavaScript para transformar un modelo de datos en HTML real y para controlar la interacción de acordeón sobre las entradas ya renderizadas. A diferencia de la portada, acá el foco no está en animaciones sino en la separación entre datos, marcado semántico y comportamiento.
